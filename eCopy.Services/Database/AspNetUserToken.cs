@@ -8,7 +8,5 @@ namespace eCopy.Services
         public bool? Active { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
-
-        public virtual Database.IdentityUser User { get; set; } = null!;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,7 +58,10 @@
             this.txtPassw = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnS = new System.Windows.Forms.Button();
+            this.error = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ofd = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbPF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error)).BeginInit();
             this.SuspendLayout();
             // 
             // txtFirstName
@@ -189,8 +193,10 @@
             this.pbPF.Location = new System.Drawing.Point(373, 108);
             this.pbPF.Name = "pbPF";
             this.pbPF.Size = new System.Drawing.Size(347, 151);
+            this.pbPF.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbPF.TabIndex = 16;
             this.pbPF.TabStop = false;
+            this.pbPF.DoubleClick += new System.EventHandler(this.pbPF_DoubleClick);
             // 
             // label6
             // 
@@ -299,6 +305,15 @@
             this.btnS.TabIndex = 29;
             this.btnS.Text = "Save";
             this.btnS.UseVisualStyleBackColor = true;
+            this.btnS.Click += new System.EventHandler(this.btnS_Click);
+            // 
+            // error
+            // 
+            this.error.ContainerControl = this;
+            // 
+            // ofd
+            // 
+            this.ofd.FileName = "ofd";
             // 
             // frmAddEmp
             // 
@@ -335,8 +350,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtFirstName);
             this.Name = "frmAddEmp";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddEmp";
+            this.Load += new System.EventHandler(this.frmAddEmp_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbPF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,5 +391,7 @@
         private System.Windows.Forms.TextBox txtPassw;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnS;
+        private System.Windows.Forms.ErrorProvider error;
+        private System.Windows.Forms.OpenFileDialog ofd;
     }
 }

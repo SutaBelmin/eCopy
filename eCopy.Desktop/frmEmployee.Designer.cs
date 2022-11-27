@@ -28,24 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvLofRequests = new System.Windows.Forms.DataGridView();
+            this.dgvReq = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnTrn = new System.Windows.Forms.Button();
             this.btnTopC = new System.Windows.Forms.Button();
             this.btnTforLY = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLofRequests)).BeginInit();
+            this.btnLogO = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReq)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvLofRequests
+            // dgvReq
             // 
-            this.dgvLofRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLofRequests.Location = new System.Drawing.Point(12, 82);
-            this.dgvLofRequests.Name = "dgvLofRequests";
-            this.dgvLofRequests.RowHeadersWidth = 51;
-            this.dgvLofRequests.RowTemplate.Height = 24;
-            this.dgvLofRequests.Size = new System.Drawing.Size(922, 306);
-            this.dgvLofRequests.TabIndex = 0;
+            this.dgvReq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReq.Location = new System.Drawing.Point(12, 82);
+            this.dgvReq.Name = "dgvReq";
+            this.dgvReq.RowHeadersWidth = 51;
+            this.dgvReq.RowTemplate.Height = 24;
+            this.dgvReq.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvReq.Size = new System.Drawing.Size(922, 306);
+            this.dgvReq.TabIndex = 0;
+            this.dgvReq.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReq_CellDoubleClick);
             // 
             // label1
             // 
@@ -74,6 +77,7 @@
             this.btnTopC.TabIndex = 3;
             this.btnTopC.Text = "Top 5 customers";
             this.btnTopC.UseVisualStyleBackColor = true;
+            this.btnTopC.Click += new System.EventHandler(this.btnTopC_Click);
             // 
             // btnTforLY
             // 
@@ -94,20 +98,33 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Reports:";
             // 
+            // btnLogO
+            // 
+            this.btnLogO.Location = new System.Drawing.Point(816, 21);
+            this.btnLogO.Name = "btnLogO";
+            this.btnLogO.Size = new System.Drawing.Size(118, 32);
+            this.btnLogO.TabIndex = 9;
+            this.btnLogO.Text = "Logout";
+            this.btnLogO.UseVisualStyleBackColor = true;
+            this.btnLogO.Click += new System.EventHandler(this.btnLogO_Click);
+            // 
             // frmEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 501);
+            this.Controls.Add(this.btnLogO);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnTforLY);
             this.Controls.Add(this.btnTopC);
             this.Controls.Add(this.btnTrn);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgvLofRequests);
+            this.Controls.Add(this.dgvReq);
             this.Name = "frmEmployee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmEmployee";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLofRequests)).EndInit();
+            this.Load += new System.EventHandler(this.frmEmployee_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReq)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,11 +132,12 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvLofRequests;
+        private System.Windows.Forms.DataGridView dgvReq;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnTrn;
         private System.Windows.Forms.Button btnTopC;
         private System.Windows.Forms.Button btnTforLY;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnLogO;
     }
 }

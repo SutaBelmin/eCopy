@@ -20,6 +20,7 @@ namespace eCopy.Services
         public int ClientId { get; set; }
         public int CopierId { get; set; }
         public DateTime RequestDate { get; set; }
+        public double Price { get; set; }
 
         public virtual Client Client { get; set; } = null!;
         public virtual Copier Copier { get; set; } = null!;

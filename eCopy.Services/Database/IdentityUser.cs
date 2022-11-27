@@ -16,8 +16,6 @@ namespace eCopy.Services.Database
 
         public ICollection<ApplicationUserProfilePhoto> ApplicationUserProfilePhotos { get; set; }
 
-        public ICollection<Company> Companies { get; set; }
-
         public ICollection<Employee> Employees { get; set; }
 
         public ICollection<IdentityUserRole> AspNetUserRoles { get; set; }

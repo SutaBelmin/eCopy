@@ -12,8 +12,8 @@ using eCopy.Services;
 namespace eCopy.Services.Migrations
 {
     [DbContext(typeof(eCopyContext))]
-    [Migration("20221106101542_FixRelat")]
-    partial class FixRelat
+    [Migration("20221127103731_price")]
+    partial class price
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,33 +28,24 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<int>("ApplicationUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PersonId")
-                        .HasColumnType("int")
-                        .HasColumnName("PersonID");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -69,29 +60,21 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<int>("ApplicationUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProfilePhotoId")
                         .HasColumnType("int");
@@ -105,73 +88,25 @@ namespace eCopy.Services.Migrations
                     b.ToTable("ApplicationUserProfilePhotos");
                 });
 
-            modelBuilder.Entity("eCopy.Services.ApplicationUserToken", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TokenType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ApplicationUserTokens");
-                });
-
             modelBuilder.Entity("eCopy.Services.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<int>("CountryId")
-                        .HasColumnType("int")
-                        .HasColumnName("CountryID");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -193,29 +128,21 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<int>("ApplicationUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
@@ -233,16 +160,12 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -254,23 +177,16 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("IdentityUserId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Jib")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -282,8 +198,6 @@ namespace eCopy.Services.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex("IdentityUserId");
-
                     b.ToTable("Companies");
                 });
 
@@ -291,16 +205,12 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<int>("ApplicationUserId")
                         .HasColumnType("int");
@@ -312,9 +222,7 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -323,9 +231,7 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("time");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -352,26 +258,18 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -429,15 +327,23 @@ namespace eCopy.Services.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
@@ -454,22 +360,17 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("ChangePassword")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -479,9 +380,7 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
@@ -504,9 +403,7 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValueSql("(N'2a9cc242-94ad-4098-a27f-976765f2583a')");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -516,6 +413,14 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -548,7 +453,9 @@ namespace eCopy.Services.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserClaims");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("eCopy.Services.Database.IdentityUserRole", b =>
@@ -560,14 +467,10 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -580,16 +483,12 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<int>("ApplicationUserId")
                         .HasColumnType("int");
@@ -598,14 +497,10 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
@@ -633,15 +528,10 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -658,16 +548,12 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -679,9 +565,7 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -696,9 +580,7 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -711,21 +593,15 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Extension")
                         .HasColumnType("nvarchar(max)");
@@ -734,9 +610,7 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -761,21 +635,15 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Extension")
                         .HasColumnType("nvarchar(max)");
@@ -790,9 +658,7 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -810,12 +676,10 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Xresolution")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("XResolution");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Yresolution")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("YResolution");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -826,16 +690,12 @@ namespace eCopy.Services.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
@@ -847,9 +707,7 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getutcdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FilePath")
                         .HasColumnType("nvarchar(max)");
@@ -858,9 +716,7 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Options")
                         .HasColumnType("nvarchar(max)");
@@ -870,6 +726,9 @@ namespace eCopy.Services.Migrations
 
                     b.Property<string>("Pages")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2");
@@ -908,24 +767,28 @@ namespace eCopy.Services.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoleClaims");
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.Property<string>("ProviderKey")
+                    b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProviderKey", "UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
@@ -935,12 +798,13 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.Database.IdentityUser", "ApplicationUser")
                         .WithMany("Administrators")
                         .HasForeignKey("ApplicationUserId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Companies_Administrators");
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("eCopy.Services.Person", "Person")
                         .WithMany("Administrators")
                         .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
@@ -953,12 +817,13 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.Database.IdentityUser", "ApplicationUser")
                         .WithMany("ApplicationUserProfilePhotos")
                         .HasForeignKey("ApplicationUserId")
-                        .IsRequired()
-                        .HasConstraintName("FK_ApplicationUserProfilePhotos_AspNetUsers");
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("eCopy.Services.ProfilePhoto", "ProfilePhoto")
                         .WithMany("ApplicationUserProfilePhotos")
                         .HasForeignKey("ProfilePhotoId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
@@ -966,22 +831,12 @@ namespace eCopy.Services.Migrations
                     b.Navigation("ProfilePhoto");
                 });
 
-            modelBuilder.Entity("eCopy.Services.ApplicationUserToken", b =>
-                {
-                    b.HasOne("eCopy.Services.Database.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("eCopy.Services.City", b =>
                 {
                     b.HasOne("eCopy.Services.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -992,12 +847,13 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.Database.IdentityUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("eCopy.Services.Person", "Person")
                         .WithMany("Clients")
                         .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
@@ -1010,11 +866,8 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.City", "City")
                         .WithMany("Companies")
                         .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("eCopy.Services.Database.IdentityUser", null)
-                        .WithMany("Companies")
-                        .HasForeignKey("IdentityUserId");
 
                     b.Navigation("City");
                 });
@@ -1024,11 +877,13 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.City", "City")
                         .WithMany("Copiers")
                         .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("eCopy.Services.Company", "Company")
-                        .WithMany("Copiers")
+                        .WithMany()
                         .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("City");
@@ -1041,10 +896,19 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.Database.IdentityUser", "AspNetUser")
                         .WithMany()
                         .HasForeignKey("AspNetUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("AspNetUser");
+                });
+
+            modelBuilder.Entity("eCopy.Services.Database.IdentityUserClaim", b =>
+                {
+                    b.HasOne("eCopy.Services.Database.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("eCopy.Services.Database.IdentityUserRole", b =>
@@ -1052,13 +916,13 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.Database.IdentityRole", "Role")
                         .WithMany("AspNetUserRoles")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("eCopy.Services.Database.IdentityUser", "User")
                         .WithMany("AspNetUserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Role");
@@ -1071,17 +935,19 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.Database.IdentityUser", "ApplicationUser")
                         .WithMany("Employees")
                         .HasForeignKey("ApplicationUserId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Companies_Employees");
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("eCopy.Services.Copier", "Copier")
                         .WithMany("Employees")
                         .HasForeignKey("CopierId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("eCopy.Services.Person", "Person")
                         .WithMany("Employees")
                         .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
@@ -1093,13 +959,11 @@ namespace eCopy.Services.Migrations
 
             modelBuilder.Entity("eCopy.Services.IdentityUserToken", b =>
                 {
-                    b.HasOne("eCopy.Services.Database.IdentityUser", "User")
+                    b.HasOne("eCopy.Services.Database.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("eCopy.Services.Person", b =>
@@ -1107,6 +971,7 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.City", "City")
                         .WithMany("People")
                         .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("City");
@@ -1117,7 +982,7 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.Request", "Request")
                         .WithMany()
                         .HasForeignKey("RequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Request");
@@ -1128,16 +993,36 @@ namespace eCopy.Services.Migrations
                     b.HasOne("eCopy.Services.Client", "Client")
                         .WithMany("Requests")
                         .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("eCopy.Services.Copier", "Copier")
                         .WithMany("Requests")
                         .HasForeignKey("CopierId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Client");
 
                     b.Navigation("Copier");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("eCopy.Services.Database.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.HasOne("eCopy.Services.Database.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("eCopy.Services.City", b =>
@@ -1152,11 +1037,6 @@ namespace eCopy.Services.Migrations
             modelBuilder.Entity("eCopy.Services.Client", b =>
                 {
                     b.Navigation("Requests");
-                });
-
-            modelBuilder.Entity("eCopy.Services.Company", b =>
-                {
-                    b.Navigation("Copiers");
                 });
 
             modelBuilder.Entity("eCopy.Services.Copier", b =>
@@ -1183,8 +1063,6 @@ namespace eCopy.Services.Migrations
                     b.Navigation("ApplicationUserProfilePhotos");
 
                     b.Navigation("AspNetUserRoles");
-
-                    b.Navigation("Companies");
 
                     b.Navigation("Employees");
                 });

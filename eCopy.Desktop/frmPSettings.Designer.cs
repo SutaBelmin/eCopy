@@ -40,10 +40,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtSidePO = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtSt = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnUStatus = new System.Windows.Forms.Button();
+            this.cmbSt = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -148,13 +148,6 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "Side pages options";
             // 
-            // txtSt
-            // 
-            this.txtSt.Location = new System.Drawing.Point(332, 314);
-            this.txtSt.Name = "txtSt";
-            this.txtSt.Size = new System.Drawing.Size(265, 24);
-            this.txtSt.TabIndex = 13;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -184,14 +177,22 @@
             this.btnUStatus.Text = "Update status";
             this.btnUStatus.UseVisualStyleBackColor = true;
             // 
+            // cmbSt
+            // 
+            this.cmbSt.FormattingEnabled = true;
+            this.cmbSt.Location = new System.Drawing.Point(332, 314);
+            this.cmbSt.Name = "cmbSt";
+            this.cmbSt.Size = new System.Drawing.Size(265, 26);
+            this.cmbSt.TabIndex = 16;
+            // 
             // frmPSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 419);
+            this.Controls.Add(this.cmbSt);
             this.Controls.Add(this.btnUStatus);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtSt);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtColl);
             this.Controls.Add(this.label4);
@@ -207,7 +208,9 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Name = "frmPSettings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmPSettings";
+            this.Load += new System.EventHandler(this.frmPSettings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,9 +230,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtSidePO;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtSt;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnUStatus;
+        private System.Windows.Forms.ComboBox cmbSt;
     }
 }

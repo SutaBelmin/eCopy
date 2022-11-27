@@ -32,6 +32,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddSingleton(typeof(IPasswordHasher<>), typeof(PasswordHasher<>));
 builder.Services.AddScoped<IErrorService, ErrorService>();
+builder.Services.AddScoped<IReportService, ReportService>();
+
 
 
 
