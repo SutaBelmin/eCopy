@@ -61,6 +61,7 @@
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.dgvTop5Customers);
             this.Name = "frmTop5Customers";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmTop5Customers";
             this.Load += new System.EventHandler(this.frmTop5Customers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTop5Customers)).EndInit();

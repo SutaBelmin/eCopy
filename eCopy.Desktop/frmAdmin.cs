@@ -98,5 +98,6 @@ namespace eCopy.Desktop
             this.logout = true;
             this.Close();
         }
+
     }
 }

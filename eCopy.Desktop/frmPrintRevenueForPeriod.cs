@@ -12,21 +12,20 @@ using System.Windows.Forms;
 
 namespace eCopy.Desktop
 {
-    public partial class frmPrintTop5Customer : Form
+    public partial class frmPrintRevenueForPeriod : Form
     {
-        private readonly IEnumerable<Top5CustomerResponse> _data;
-        public frmPrintTop5Customer(IEnumerable<Top5CustomerResponse> data)
+        List<RevenueForPeriodResponse> _data;
+        public frmPrintRevenueForPeriod(List<RevenueForPeriodResponse> data)
         {
             InitializeComponent();
-
             _data = data;
         }
 
-        private void frmPrintTop5Customer_Load(object sender, EventArgs e)
-        {
+        private void frmPrintRevenueForPeriod_Load(object sender, EventArgs e)
+        { 
             LoadReport();
             this.reportViewer1.RefreshReport();
-        } 
+        }
         
         private void LoadReport()
         {

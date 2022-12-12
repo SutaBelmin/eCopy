@@ -1,6 +1,6 @@
 ﻿namespace eCopy.Desktop
 {
-    partial class frmPrintTop5Customer
+    partial class frmPrintRevenueForLastYear
     {
         /// <summary>
         /// Required designer variable.
@@ -34,23 +34,23 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "eCopy.Desktop.Reports.Top5Customer.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "eCopy.Desktop.Reports.RevenueForLastYear.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(799, 468);
+            this.reportViewer1.Size = new System.Drawing.Size(800, 450);
             this.reportViewer1.TabIndex = 0;
             // 
-            // frmPrintTop5Customer
+            // frmPrintRevenueForLastYear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 468);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.reportViewer1);
-            this.Name = "frmPrintTop5Customer";
+            this.Name = "frmPrintRevenueForLastYear";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmPrintTop5Customer";
-            this.Load += new System.EventHandler(this.frmPrintTop5Customer_Load);
+            this.Text = "frmPrintTurnoverLYear";
+            this.Load += new System.EventHandler(this.frmPrintRevenueForLastYear_Load);
             this.ResumeLayout(false);
 
         }

@@ -68,6 +68,7 @@
             this.btnTrn.TabIndex = 2;
             this.btnTrn.Text = "Turnover";
             this.btnTrn.UseVisualStyleBackColor = true;
+            this.btnTrn.Click += new System.EventHandler(this.btnTrn_Click);
             // 
             // btnTopC
             // 
@@ -87,6 +88,7 @@
             this.btnTforLY.TabIndex = 4;
             this.btnTforLY.Text = "Turnover for last year";
             this.btnTforLY.UseVisualStyleBackColor = true;
+            this.btnTforLY.Click += new System.EventHandler(this.btnTforLY_Click);
             // 
             // label2
             // 

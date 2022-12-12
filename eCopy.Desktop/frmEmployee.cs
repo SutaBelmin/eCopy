@@ -70,5 +70,17 @@ namespace eCopy.Desktop
             frmTop5Customers frm = new frmTop5Customers();
             frm.ShowDialog();
         }
+
+        private void btnTrn_Click(object sender, EventArgs e)
+        {
+            frmRevenueForPeriod frm = new frmRevenueForPeriod();
+            frm.ShowDialog();
+        }
+
+        private void btnTforLY_Click(object sender, EventArgs e)
+        {
+            frmRevenueForLastYear frm = new frmRevenueForLastYear();
+            frm.ShowDialog();
+        }
     }
 }

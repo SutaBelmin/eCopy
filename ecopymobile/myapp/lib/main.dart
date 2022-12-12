@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/providers/new_print_provider.dart';
+import 'package:myapp/providers/practice_page_provider.dart';
 import 'package:myapp/providers/print_list_provider.dart';
+import 'package:myapp/providers/user_provider.dart';
 import 'package:myapp/screens/new_print_screen.dart';
+import 'package:myapp/screens/practice_page.dart';
 import 'package:myapp/screens/print_list_screen.dart';
+import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => PrintListProvider()),
-        ChangeNotifierProvider(create: (_) => NewPrintProvider())
+        ChangeNotifierProvider(create: (_) => NewPrintProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => PracticePageProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: true,
@@ -18,14 +24,23 @@ void main() => runApp(MultiProvider(
             return MaterialPageRoute(builder: ((context) => PrintListScreen()));
           } else if (settings.name == NewPrintScreen.routeName) {
             return MaterialPageRoute(builder: ((context) => NewPrintScreen()));
+          } else if (settings.name == PracticeScreen.rotueName) {
+            return MaterialPageRoute(builder: ((context) => PracticeScreen()));
           }
         },
       ),
     ));
 
 class HomePage extends StatelessWidget {
+  late UserProvider _userProvider;
+
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    _userProvider = context.read<UserProvider>();
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Flutter Row Example"),
@@ -58,6 +73,7 @@ class HomePage extends StatelessWidget {
                           border:
                               Border(bottom: BorderSide(color: Colors.grey))),
                       child: TextField(
+                        controller: _usernameController,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Email or phone:",
@@ -67,6 +83,7 @@ class HomePage extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(8),
                       child: TextField(
+                        controller: _passwordController,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Password",
@@ -87,8 +104,29 @@ class HomePage extends StatelessWidget {
                       Color.fromARGB(143, 184, 184, 185)
                     ])),
                 child: InkWell(
-                  onTap: () {
+                  onTap: () /*async*/ {
                     Navigator.pushNamed(context, PrintListScreen.rotueName);
+
+                    /* try {
+                      Authorization.username = _usernameController.text;
+                      Authorization.password = _passwordController.text;
+
+                      await _userProvider.get();
+                      Navigator.pushNamed(context, PrintListScreen.rotueName);
+                    } catch (e) {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                                title: Text("Error"),
+                                content: Text(e.toString()),
+                                actions: [
+                                  TextButton(
+                                    child: Text("Ok"),
+                                    onPressed: () => Navigator.pop(context),
+                                  )
+                                ],
+                              ));
+                    }*/
                   },
                   child: Center(child: Text("Login")),
                 )),

@@ -31,6 +31,19 @@ namespace eCopy.Desktop
             return list;
         }
 
+        public async Task<T> Get<T>(string path, object search = null)
+        {
+            var query = "";
+            if (search != null)
+            {
+                query = await search.ToQueryString();
+            }
+
+            var list = await $"{_endpoint}{_resource}/{path}?{query}".GetJsonAsync<T>();
+
+            return list;
+        }
+
         public async Task<T> GetById<T>(object id)
         {
             var result = await $"{_endpoint}{_resource}/{id}".GetJsonAsync<T>();
