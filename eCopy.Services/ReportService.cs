@@ -28,7 +28,6 @@ namespace eCopy.Services
                 .ThenInclude(x => x.Person)
                 .Where(x=> x.Status == Status.Completed.ToString())
                 .GroupBy(x => new { x.ClientId, x.Client.Person.FirstName, x.Client.Person.LastName, x.Client.Person.Gender })
-                //sve sto nema agregatne funkcije ide u group by
                 .Select(x => new Top5CustomerResponse
                 {
                     ClientId = x.Key.ClientId,

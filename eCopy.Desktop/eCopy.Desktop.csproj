@@ -117,6 +117,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiIdentityServ.cs" />
     <Compile Include="APIServ.cs" />
     <Compile Include="EmployeeDetModel.cs" />
     <Compile Include="EmpModel.cs" />
@@ -199,7 +200,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="Usr.cs" />
     <Compile Include="Validacija.cs" />
     <EmbeddedResource Include="frmAddEmp.resx">
       <DependentUpon>frmAddEmp.cs</DependentUpon>

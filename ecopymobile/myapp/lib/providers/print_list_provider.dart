@@ -7,22 +7,14 @@ class PrintListProvider with ChangeNotifier {
 }*/
 
 //import 'package:myapp/model/request.dart';
+import 'package:myapp/model/printRequest.dart';
 import 'package:myapp/providers/base_provider.dart';
 
-import '../model/zahtjev.dart';
-
-class PrintListProvider extends BaseProvider<Zahtjev> {
+class PrintListProvider extends BaseProvider<PrintRequest> {
   PrintListProvider() : super("PrintRequest");
-
-  /*@override
-  Request fromJson(data) {
-    // TODO: implement fromJson
-    return Request.fromJson(data);
-  }*/
-
   @override
-  Zahtjev fromJson(data) {
+  PrintRequest fromJson(data) {
     // TODO: implement fromJson
-    return Zahtjev.fromJson(data);
+    return PrintRequest.fromJson(data);
   }
 }

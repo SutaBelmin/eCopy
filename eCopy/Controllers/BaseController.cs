@@ -18,6 +18,7 @@ namespace eCopy.Controllers
         [HttpGet]
         public virtual IEnumerable<T> Get([FromQuery] TSearch search)
         {
+            var user = User;
             return service.Get(search);
         }
 

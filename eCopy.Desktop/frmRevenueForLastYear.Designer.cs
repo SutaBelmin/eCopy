@@ -38,9 +38,9 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(797, 12);
+            this.btnPrint.Location = new System.Drawing.Point(839, 550);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(152, 29);
+            this.btnPrint.Size = new System.Drawing.Size(110, 33);
             this.btnPrint.TabIndex = 0;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
@@ -52,7 +52,7 @@
             this.chrtLastYearRevenue.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chrtLastYearRevenue.Legends.Add(legend1);
-            this.chrtLastYearRevenue.Location = new System.Drawing.Point(12, 47);
+            this.chrtLastYearRevenue.Location = new System.Drawing.Point(12, 12);
             this.chrtLastYearRevenue.Name = "chrtLastYearRevenue";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -69,12 +69,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(961, 591);
+            this.ClientSize = new System.Drawing.Size(961, 589);
             this.Controls.Add(this.chrtLastYearRevenue);
             this.Controls.Add(this.btnPrint);
             this.Name = "frmRevenueForLastYear";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmTurnoverLYear";
+            this.Text = "frmRevenueLYear";
             this.Load += new System.EventHandler(this.frmRevenueForLastYear_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chrtLastYearRevenue)).EndInit();
             this.ResumeLayout(false);

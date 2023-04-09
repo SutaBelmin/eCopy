@@ -21,12 +21,6 @@ namespace eCopy.Desktop
             InitializeComponent();
         }
 
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            frmPrintRevenueForLastYear frm = new frmPrintRevenueForLastYear(_data);
-            frm.ShowDialog();
-        }
-
         private async void frmRevenueForLastYear_Load(object sender, EventArgs e)
         {
             await loadData();
@@ -44,6 +38,12 @@ namespace eCopy.Desktop
                     YValues = new double[] { item.Revenue }
                 });
             }
+        }
+        
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            frmPrintRevenueForLastYear frm = new frmPrintRevenueForLastYear(_data);
+            frm.ShowDialog();
         }
     }
 }

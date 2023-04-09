@@ -1,6 +1,7 @@
 ﻿using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -17,17 +18,20 @@ namespace eCopy.Services
         private readonly IUserService userService;
         private readonly IPasswordHasher<Database.IdentityUser> passwordHasher;
         private readonly IConfiguration configuration;
+        protected readonly eCopyContext context;
 
         public AuthenticationService
         (
             IUserService userService,
             IPasswordHasher<Database.IdentityUser> passwordHasher,
-            IConfiguration configuration
+            IConfiguration configuration,
+            eCopyContext context
         )
         {
             this.userService = userService;
             this.passwordHasher = passwordHasher;
             this.configuration = configuration;
+            this.context = context;
         }
         public AuthenticationResponse Authenticate(AuthenticationRequest request)
         {
@@ -45,6 +49,8 @@ namespace eCopy.Services
             // Generisemo token
             var role = user.AspNetUserRoles.First();
 
+            var client = context.Clients.FirstOrDefault(x => x.ApplicationUserId == user.Id);
+
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -55,7 +61,8 @@ namespace eCopy.Services
                 Claims = new Dictionary<string, object> 
                 { 
                     { ClaimTypes.NameIdentifier, user.Id },
-                    { ClaimTypes.Role, role.RoleId }
+                    { ClaimTypes.Role, role.RoleId },
+                    { "ClientId", client?.Id }
                 },
                 Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"])), SecurityAlgorithms.HmacSha512Signature)

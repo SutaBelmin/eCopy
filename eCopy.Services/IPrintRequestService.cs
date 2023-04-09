@@ -12,5 +12,7 @@ namespace eCopy.Services
     public interface IPrintRequestService : ICRUDService<PrintRequestR, PrintRequestSearch, eCopy.Model.Requests.PrintRequest, eCopy.Model.Requests.PrintRequestUpdate>
 
     {
+        IEnumerable<PrintRequestR> GetAllR();
+        
     }
 }

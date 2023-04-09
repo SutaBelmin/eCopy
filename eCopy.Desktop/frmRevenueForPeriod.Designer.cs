@@ -45,12 +45,12 @@
             this.dgvTurnoverForPeriod.Name = "dgvTurnoverForPeriod";
             this.dgvTurnoverForPeriod.RowHeadersWidth = 51;
             this.dgvTurnoverForPeriod.RowTemplate.Height = 24;
-            this.dgvTurnoverForPeriod.Size = new System.Drawing.Size(756, 286);
+            this.dgvTurnoverForPeriod.Size = new System.Drawing.Size(692, 286);
             this.dgvTurnoverForPeriod.TabIndex = 0;
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(675, 370);
+            this.btnPrint.Location = new System.Drawing.Point(611, 372);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(93, 29);
             this.btnPrint.TabIndex = 1;
@@ -94,9 +94,9 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(609, 29);
+            this.btnSearch.Location = new System.Drawing.Point(629, 24);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.Size = new System.Drawing.Size(75, 32);
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -106,7 +106,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 413);
+            this.ClientSize = new System.Drawing.Size(716, 413);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -116,7 +116,7 @@
             this.Controls.Add(this.dgvTurnoverForPeriod);
             this.Name = "frmRevenueForPeriod";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmTurnoverForPeriod";
+            this.Text = "frmRevenueForPeriod";
             this.Load += new System.EventHandler(this.frmRevenueForPeriod_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnoverForPeriod)).EndInit();
             this.ResumeLayout(false);

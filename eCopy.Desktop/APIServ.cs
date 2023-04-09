@@ -26,7 +26,9 @@ namespace eCopy.Desktop
                 query = await search.ToQueryString();
             }
 
-            var list = await $"{_endpoint}{_resource}?{query}".GetJsonAsync<T>();
+            var list = await $"{_endpoint}{_resource}?{query}"
+                .WithHeader("Authorization", $"Bearer {User.Token}")
+                .GetJsonAsync<T>();
 
             return list;
         }
@@ -39,28 +41,38 @@ namespace eCopy.Desktop
                 query = await search.ToQueryString();
             }
 
-            var list = await $"{_endpoint}{_resource}/{path}?{query}".GetJsonAsync<T>();
+            var list = await $"{_endpoint}{_resource}/{path}?{query}"
+                .WithHeader("Authorization", $"Bearer {User.Token}")
+                .GetJsonAsync<T>();
 
             return list;
         }
 
         public async Task<T> GetById<T>(object id)
         {
-            var result = await $"{_endpoint}{_resource}/{id}".GetJsonAsync<T>();
+            var result = await $"{_endpoint}{_resource}/{id}"
+                .WithHeader("Authorization", User.Token)
+                .GetJsonAsync<T>();
 
             return result;
         }
 
         public async Task<T> Post<T>(object request)
         {
-            var result = await $"{_endpoint}{_resource}".PostJsonAsync(request).ReceiveJson<T>();
+            var result = await $"{_endpoint}{_resource}"
+                .WithHeader("Authorization", $"Bearer {User.Token}")
+                .PostJsonAsync(request)
+                .ReceiveJson<T>();
 
             return result;
         }
 
         public async Task<T> Put<T>(object id, object request)
         {
-            var result = await $"{_endpoint}{_resource}/{id}".PutJsonAsync(request).ReceiveJson<T>();
+            var result = await $"{_endpoint}{_resource}/{id}"
+                .WithHeader("Authorization", $"Bearer {User.Token}")
+                .PutJsonAsync(request)
+                .ReceiveJson<T>();
 
             return result;
         }

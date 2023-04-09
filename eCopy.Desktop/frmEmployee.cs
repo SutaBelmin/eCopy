@@ -65,19 +65,19 @@ namespace eCopy.Desktop
             this.Close();
         }
 
+        private void btnRevenue_Click(object sender, EventArgs e)
+        {
+            frmRevenueForPeriod frm = new frmRevenueForPeriod();
+            frm.ShowDialog();
+        }
+        
         private void btnTopC_Click(object sender, EventArgs e)
         {
             frmTop5Customers frm = new frmTop5Customers();
             frm.ShowDialog();
         }
 
-        private void btnTrn_Click(object sender, EventArgs e)
-        {
-            frmRevenueForPeriod frm = new frmRevenueForPeriod();
-            frm.ShowDialog();
-        }
-
-        private void btnTforLY_Click(object sender, EventArgs e)
+        private void btnRforLY_Click(object sender, EventArgs e)
         {
             frmRevenueForLastYear frm = new frmRevenueForLastYear();
             frm.ShowDialog();

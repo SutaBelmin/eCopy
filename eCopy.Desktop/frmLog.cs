@@ -19,6 +19,7 @@ namespace eCopy.Desktop
 {
     public partial class frmLog : Form
     {
+        //public ApiIdentityServ loginService = new ApiIdentityServ("Account/Login");
         public APIServ loginService = new APIServ("Authentication/Login");
         public Role Role { get; set; }
         public bool Success { get; set; } = false;

@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 //import 'package:eprodajamobile/model/product.dart';
+import 'package:myapp/model/storageService.dart';
 import 'package:myapp/utils/util.dart';
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
 import 'package:flutter/foundation.dart';
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? _baseUrl;
@@ -102,11 +105,10 @@ abstract class BaseProvider<T> with ChangeNotifier {
   }
 
   Map<String, String> createHeaders() {
-    String? username = Authorization.username;
-    String? password = Authorization.password;
+    var storage = FlutterSecureStorage();
+    String? token = StorageService.token;
 
-    String basicAuth =
-        "Basic ${base64Encode(utf8.encode('$username:$password'))}";
+    String basicAuth = "Bearer ${token}";
 
     var headers = {
       "Content-Type": "application/json",

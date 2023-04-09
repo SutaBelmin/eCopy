@@ -12,4 +12,4 @@ namespace eCopy.Model.Requests
         public PersonRequest Person { get; set; }
         public ApplicationUserRequest User { get; set; }
     }
-}
+} 

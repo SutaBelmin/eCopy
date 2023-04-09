@@ -16,9 +16,8 @@ namespace eCopy.Model.Requests
         public Letter Letter { get; set; }
         public PagePerSheet Pages { get; set; }
         public CollatedPrintOptions Collate { get; set; }
-        public int CopierId { get; set; }
         public PrintRequestFile PrintRequestFile { get; set; }
-        public string FilePath { get; set; }
-        public int ClientId { get; set; }
+        public byte[] File { get; set; }
+        public double Price { get; set; }
     }
 }

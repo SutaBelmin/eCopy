@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/model/storageService.dart';
+import 'package:myapp/providers/authentication_provider.dart';
+import 'package:myapp/providers/city_provider.dart';
+import 'package:myapp/providers/new_pr_provider.dart';
 import 'package:myapp/providers/new_print_provider.dart';
 import 'package:myapp/providers/practice_page_provider.dart';
 import 'package:myapp/providers/print_list_provider.dart';
@@ -6,15 +10,22 @@ import 'package:myapp/providers/user_provider.dart';
 import 'package:myapp/screens/new_print_screen.dart';
 import 'package:myapp/screens/practice_page.dart';
 import 'package:myapp/screens/print_list_screen.dart';
+import 'package:myapp/screens/registration_screen.dart';
 import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'package:jwt_decode/jwt_decode.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => PrintListProvider()),
         ChangeNotifierProvider(create: (_) => NewPrintProvider()),
+        ChangeNotifierProvider(create: (_) => NewPrProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
-        ChangeNotifierProvider(create: (_) => PracticePageProvider())
+        ChangeNotifierProvider(create: (_) => PracticePageProvider()),
+        ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
+        ChangeNotifierProvider(create: (_) => CityProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: true,
@@ -26,13 +37,21 @@ void main() => runApp(MultiProvider(
             return MaterialPageRoute(builder: ((context) => NewPrintScreen()));
           } else if (settings.name == PracticeScreen.rotueName) {
             return MaterialPageRoute(builder: ((context) => PracticeScreen()));
+          } else if (settings.name == RegistrationScreen.routeName) {
+            return MaterialPageRoute(
+                builder: ((context) => RegistrationScreen()));
+          } else if (settings.name == HomePage.routeName) {
+            return MaterialPageRoute(builder: ((context) => HomePage()));
           }
         },
       ),
     ));
 
 class HomePage extends StatelessWidget {
+  static const String routeName = "mainScreen";
   late UserProvider _userProvider;
+  late AuthenticationProvider _authenticationProvider;
+  var storage = FlutterSecureStorage();
 
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -40,6 +59,20 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _userProvider = context.read<UserProvider>();
+    _authenticationProvider = context.read<AuthenticationProvider>();
+
+    void _buildLoading(bool isLoading) {
+      if (isLoading == true) {
+        showDialog(
+            context: context,
+            builder: (BuildContext build) => AlertDialog(
+                  title: Text("Loading ..."),
+                  content: CircularProgressIndicator(),
+                ));
+      } else {
+        Navigator.pop(context);
+      }
+    }
 
     return Scaffold(
         appBar: AppBar(
@@ -83,6 +116,9 @@ class HomePage extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(8),
                       child: TextField(
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
                         controller: _passwordController,
                         decoration: InputDecoration(
                             border: InputBorder.none,
@@ -104,35 +140,63 @@ class HomePage extends StatelessWidget {
                       Color.fromARGB(143, 184, 184, 185)
                     ])),
                 child: InkWell(
-                  onTap: () /*async*/ {
-                    Navigator.pushNamed(context, PrintListScreen.rotueName);
-
-                    /* try {
-                      Authorization.username = _usernameController.text;
-                      Authorization.password = _passwordController.text;
-
-                      await _userProvider.get();
-                      Navigator.pushNamed(context, PrintListScreen.rotueName);
+                  onTap: () async {
+                    try {
+                      var result = await _authenticationProvider.insert({
+                        "Username": _usernameController.text,
+                        "Password": _passwordController.text
+                      });
+                      Map<String, dynamic> payload =
+                          Jwt.parseJwt(result!.Token);
+                      if (payload["role"] == 5 || payload["role"] == "User") {
+                        //storage.write(key: "token", value: result!.Token);
+                        StorageService.token = result.Token;
+                        Navigator.pushNamed(context, PrintListScreen.rotueName);
+                        _usernameController.text = "";
+                        _passwordController.text = "";
+                      } else {
+                        throw Exception("Invalid login");
+                      }
+                      //print(payload);
                     } catch (e) {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                                title: Text("Error"),
-                                content: Text(e.toString()),
-                                actions: [
-                                  TextButton(
-                                    child: Text("Ok"),
-                                    onPressed: () => Navigator.pop(context),
-                                  )
-                                ],
-                              ));
-                    }*/
+                      displayDialog(context, "An Error Occurred",
+                          "No account was found matching that username and password");
+                    }
                   },
-                  child: Center(child: Text("Login")),
+                  child: Center(
+                      child: Text(
+                    "Login",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )),
                 )),
             SizedBox(height: 30),
-            Text("Forgot password?")
+            Container(
+                height: 50,
+                margin: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: LinearGradient(colors: [
+                      Color.fromARGB(143, 146, 146, 148),
+                      Color.fromARGB(143, 184, 184, 185)
+                    ])),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, RegistrationScreen.routeName);
+                  },
+                  child: Center(
+                      child: Text("Don't have an account? Register here",
+                          style: TextStyle(
+                            fontSize: 16,
+                          ))),
+                )),
           ]),
         ));
   }
+
+  void displayDialog(BuildContext context, String title, String text) =>
+      showDialog(
+        context: context,
+        builder: (context) =>
+            AlertDialog(title: Text(title), content: Text(text)),
+      );
 }

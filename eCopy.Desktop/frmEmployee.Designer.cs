@@ -30,9 +30,9 @@
         {
             this.dgvReq = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnTrn = new System.Windows.Forms.Button();
+            this.btnRevenue = new System.Windows.Forms.Button();
             this.btnTopC = new System.Windows.Forms.Button();
-            this.btnTforLY = new System.Windows.Forms.Button();
+            this.btnRforLY = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnLogO = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReq)).BeginInit();
@@ -60,15 +60,15 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "List of active requests:";
             // 
-            // btnTrn
+            // btnRevenue
             // 
-            this.btnTrn.Location = new System.Drawing.Point(12, 438);
-            this.btnTrn.Name = "btnTrn";
-            this.btnTrn.Size = new System.Drawing.Size(108, 36);
-            this.btnTrn.TabIndex = 2;
-            this.btnTrn.Text = "Turnover";
-            this.btnTrn.UseVisualStyleBackColor = true;
-            this.btnTrn.Click += new System.EventHandler(this.btnTrn_Click);
+            this.btnRevenue.Location = new System.Drawing.Point(12, 438);
+            this.btnRevenue.Name = "btnRevenue";
+            this.btnRevenue.Size = new System.Drawing.Size(108, 36);
+            this.btnRevenue.TabIndex = 2;
+            this.btnRevenue.Text = "Revenue";
+            this.btnRevenue.UseVisualStyleBackColor = true;
+            this.btnRevenue.Click += new System.EventHandler(this.btnRevenue_Click);
             // 
             // btnTopC
             // 
@@ -80,15 +80,15 @@
             this.btnTopC.UseVisualStyleBackColor = true;
             this.btnTopC.Click += new System.EventHandler(this.btnTopC_Click);
             // 
-            // btnTforLY
+            // btnRforLY
             // 
-            this.btnTforLY.Location = new System.Drawing.Point(317, 438);
-            this.btnTforLY.Name = "btnTforLY";
-            this.btnTforLY.Size = new System.Drawing.Size(160, 36);
-            this.btnTforLY.TabIndex = 4;
-            this.btnTforLY.Text = "Turnover for last year";
-            this.btnTforLY.UseVisualStyleBackColor = true;
-            this.btnTforLY.Click += new System.EventHandler(this.btnTforLY_Click);
+            this.btnRforLY.Location = new System.Drawing.Point(317, 438);
+            this.btnRforLY.Name = "btnRforLY";
+            this.btnRforLY.Size = new System.Drawing.Size(160, 36);
+            this.btnRforLY.TabIndex = 4;
+            this.btnRforLY.Text = "Revenue for last year";
+            this.btnRforLY.UseVisualStyleBackColor = true;
+            this.btnRforLY.Click += new System.EventHandler(this.btnRforLY_Click);
             // 
             // label2
             // 
@@ -117,9 +117,9 @@
             this.ClientSize = new System.Drawing.Size(946, 501);
             this.Controls.Add(this.btnLogO);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnTforLY);
+            this.Controls.Add(this.btnRforLY);
             this.Controls.Add(this.btnTopC);
-            this.Controls.Add(this.btnTrn);
+            this.Controls.Add(this.btnRevenue);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvReq);
             this.Name = "frmEmployee";
@@ -136,9 +136,9 @@
 
         private System.Windows.Forms.DataGridView dgvReq;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnTrn;
+        private System.Windows.Forms.Button btnRevenue;
         private System.Windows.Forms.Button btnTopC;
-        private System.Windows.Forms.Button btnTforLY;
+        private System.Windows.Forms.Button btnRforLY;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnLogO;
     }

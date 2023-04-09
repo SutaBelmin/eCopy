@@ -2,14 +2,23 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:myapp/main.dart';
+import 'package:myapp/model/enum/letter.dart';
+import 'package:myapp/model/enum/orien.dart';
+import 'package:myapp/model/enum/printPagesOptions.dart';
+import 'package:myapp/model/enum/sidePrintOption.dart';
+import 'package:myapp/model/enum/status.dart';
+import 'package:myapp/model/printRequest.dart';
+import 'package:myapp/model/storageService.dart';
 import 'package:myapp/model/user.dart';
-import 'package:myapp/model/zahtjev.dart';
 import 'package:myapp/providers/new_print_provider.dart';
 import 'package:myapp/providers/print_list_provider.dart';
 import 'package:myapp/providers/user_provider.dart';
 //import 'package:myapp/providers/print_list_provider.dart';
 import 'package:myapp/screens/new_print_screen.dart';
 import 'package:provider/provider.dart';
+
+import 'package:myapp/model/enum/collate.dart';
 
 class PrintListScreen extends StatefulWidget {
   static const String rotueName = "printscreen";
@@ -23,7 +32,8 @@ class PrintListScreen extends StatefulWidget {
 class _PrintListScreenState extends State<PrintListScreen> {
   PrintListProvider? _printProvider = null;
   //dynamic data = {};
-  List<Zahtjev> data = [];
+  List<PrintRequest> data = [];
+  //List<Req> data = [];
 
   @override
   void initState() {
@@ -58,8 +68,21 @@ class _PrintListScreenState extends State<PrintListScreen> {
             )),
           ),
           Container(
-              height: 40,
-              margin: EdgeInsets.fromLTRB(220, 5, 5, 0),
+              margin: EdgeInsets.only(left: 300),
+              child: ElevatedButton.icon(
+                  onPressed: () {
+                    StorageService.token = "";
+                    Navigator.pushNamed(context, HomePage.routeName);
+                  },
+                  icon: Icon(
+                    Icons.logout,
+                  ),
+                  label: Text('Logout'))),
+          SizedBox(height: 20),
+          Container(
+              height: 50,
+              width: 250,
+              //margin: EdgeInsets.fromLTRB(220, 5, 5, 0),
               //margin: EdgeInsets.fromLTRB(left, top, right, bottom),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -104,18 +127,22 @@ class _PrintListScreenState extends State<PrintListScreen> {
                 rows: data
                     .map<DataRow>((data) => DataRow(cells: [
                           DataCell(Center(
-                            child: Text("${data.status ?? ""}"),
+                            child: Text(Status.map[data.status] ?? ""),
                           )),
                           DataCell(Center(
-                            child: Text("${data.options ?? ""}"),
+                            child:
+                                Text(PrintPagesOptions.map[data.options] ?? ""),
                           )),
                           DataCell(Center(
-                            child: Text("${data.orientation ?? ""}"),
+                            child: Text(Orien.map[data.orientation] ?? ""),
                           )),
-                          DataCell(Center(child: Text("${data.letter ?? ""}"))),
-                          DataCell(Center(child: Text("${data.side ?? ""}"))),
-                          DataCell(
-                              Center(child: Text("${data.collate ?? ""}"))),
+                          DataCell(Center(
+                              child: Text(Letter.map[data.letter] ?? ""))),
+                          DataCell(Center(
+                              child:
+                                  Text(SidePrintOption.map[data.side] ?? ""))),
+                          DataCell(Center(
+                              child: Text(Collated.map[data.collate] ?? ""))),
                         ]))
                     .toList(),
               ),
