@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -66,17 +67,27 @@ namespace eCopy.Services
             model.ClientId = clientId;
             model.CopierId = 1;
             context.Requests.Add(model);
+            context.SaveChanges();
 
             if (insert.File != null)
             {
-                var uploadedFile = fileService.Upload(insert.File, insert.PrintRequestFile.Extension);
+                var memoryStream = new MemoryStream();
+                insert.File.CopyTo(memoryStream);
+
+                string extension = insert.PrintRequestFile?.Extension ?? string.Empty;
+                if (string.IsNullOrEmpty(extension))
+                {
+                    extension = Path.GetExtension(insert.File.Name);
+                }
+
+                var uploadedFile = fileService.Upload(memoryStream.ToArray(), extension);
                 context.PrintRequestFiles.Add(new PrintRequestFile
                 {
                     Active = true,
                     CreatedDate = DateTime.Now,
-                    Extension = insert.PrintRequestFile.Extension,
+                    Extension = extension,
                     ModifiedDate = DateTime.Now,
-                    Name = insert.PrintRequestFile.Name,
+                    Name = Path.GetFileName(insert.File.Name),
                     Path = uploadedFile.Url,
                     RequestId = model.Id,
                 });

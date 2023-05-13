@@ -1,10 +1,6 @@
-﻿using Flurl.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using eCopy.Model;
+using Flurl.Http;
 using System.Threading.Tasks;
-using eCopy.Model;
 
 namespace eCopy.Desktop
 {

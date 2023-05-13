@@ -13,7 +13,8 @@ PrintRequest _$PrintRequestFromJson(Map<String, dynamic> json) => PrintRequest()
   ..orientation = json['orientation'] as int?
   ..letter = json['letter'] as int?
   ..collate = json['collate'] as int?
-  ..pagePerSheet = json['pagePerSheet'] as int?;
+  ..pagePerSheet = json['pagePerSheet'] as int?
+  ..price = (json['price'] as num?)?.toDouble();
 
 Map<String, dynamic> _$PrintRequestToJson(PrintRequest instance) =>
     <String, dynamic>{
@@ -24,4 +25,5 @@ Map<String, dynamic> _$PrintRequestToJson(PrintRequest instance) =>
       'letter': instance.letter,
       'collate': instance.collate,
       'pagePerSheet': instance.pagePerSheet,
+      'price': instance.price,
     };

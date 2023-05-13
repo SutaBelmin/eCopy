@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:myapp/model/enum/collate.dart';
 import 'package:myapp/model/enum/letter.dart';
 import 'package:myapp/model/enum/orien.dart';
 import 'package:myapp/model/enum2/proba.dart';
+import 'package:myapp/model/listItem.dart';
 import 'package:myapp/model/printRequest.dart';
 import 'package:myapp/providers/new_pr_provider.dart';
 import 'package:myapp/providers/practice_page_provider.dart';
-import 'package:myapp/screens/practice_page.dart';
+import 'package:myapp/screens/payment_screen.dart';
+import 'package:myapp/screens/print_list_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'dart:io';
@@ -26,6 +29,51 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
   NewPrProvider? _printProvider = null;
   //dynamic data = {};
   List<PrintRequest> data = [];
+  PrintRequest _printData = new PrintRequest();
+
+  TextEditingController _nmbrPageController = new TextEditingController();
+
+  static List<ListItem> sidePrintOption = [
+    ListItem(1, "PrintOneSided"),
+    ListItem(2, "PrintBothSides")
+  ];
+  ListItem sidePrintOptionValue = sidePrintOption.first;
+
+  static List<ListItem> printPagesOptions = [
+    ListItem(1, "All"),
+    ListItem(2, "Even"),
+    ListItem(3, "Odd"),
+    ListItem(4, "Custom")
+  ];
+  ListItem printPagesOptionsValue = printPagesOptions.first;
+
+  static List<ListItem> orientation = [
+    ListItem(1, "Portrait"),
+    ListItem(2, "Landscape")
+  ];
+  ListItem orientationValue = orientation.first;
+
+  static List<ListItem> letter = [
+    ListItem(1, "A1"),
+    ListItem(2, "A2"),
+    ListItem(3, "A3"),
+    ListItem(4, "A4"),
+    ListItem(5, "A5"),
+    ListItem(6, "A6")
+  ];
+  ListItem letterValue = letter.first;
+
+  static List<ListItem> collatedPrintOptions = [
+    ListItem(1, "Collated"),
+    ListItem(2, "Uncollated")
+  ];
+  ListItem collatedPrintOptionsValue = collatedPrintOptions.first;
+
+  static List<ListItem> pagePerSheet = [
+    ListItem(1, "OnePage"),
+    ListItem(2, "TwoPages")
+  ];
+  ListItem pagePerSheetValue = pagePerSheet.first;
 
   @override
   void initState() {
@@ -42,7 +90,7 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
       data = tmpData!;
     });
   }
-
+/*
   static const List<String> orientation = ["Portrait", "Landscape"];
   String orientationValue = orientation.first;
 
@@ -75,306 +123,466 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
 
   static const List<String> collatedPrintOptions = ["Collated", "Uncollated"];
   String collatedPrintOptionsValue = collatedPrintOptions.first;
+  */
 
   File? pdfFile;
+
+  final _formKey = GlobalKey<FormState>(); // form key for validation
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Column(
-        children: [
-          Container(
-            height: 100,
-            color: Colors.grey,
-            child: Center(
-                child: Text(
-              "eCopy",
-              style: TextStyle(fontSize: 50),
-            )),
-          ),
-          Container(
-              margin: EdgeInsets.only(top: 10),
-              height: 80,
-              width: 340,
-              child: ElevatedButton(
-                  onPressed: () async {
-                    final result = await FilePicker.platform.pickFiles(
-                      type: FileType.custom,
-                      allowedExtensions: ['pdf', 'doc'],
-                    );
-                    if (result != null) {
-                      final path = result.files.single.path!;
-                      setState(() {
-                        pdfFile = File(path);
-                        //pdfFile.readAsBytesSync()
-                      });
-                    }
-                  },
-                  child: const Text(
-                    'Upload file',
-                    style: TextStyle(fontSize: 20),
-                  ))),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-              color: Color.fromARGB(255, 204, 201, 201),
-              height: 250,
-              width: 340,
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
-                    child: Row(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                                child: Icon(
-                              Icons.print,
-                              size: 35,
-                            ))
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              child: Center(
-                                  child: Text(
-                                " Choose print options",
-                                style: TextStyle(fontSize: 20),
-                              )),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 30),
+            child: SingleChildScrollView(
+                child: Form(
+                    key: _formKey,
                     child: Column(
                       children: [
-                        SizedBox(height: 10),
                         Container(
-                          child: Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Container(
-                                    width: 130,
-                                    child: DropdownButton(
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                      value: lettValue,
-                                      onChanged: (String? value) {
-                                        // This is called when the user selects an item.
-                                        setState(() {
-                                          lettValue = value!;
-                                        });
-                                      },
-                                      items: lett.map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
+                          height: 100,
+                          color: Colors.grey,
+                          child: Center(
+                              child: Text(
+                            "eCopy",
+                            style: TextStyle(fontSize: 50),
+                          )),
+                        ),
+                        Container(
+                            margin: EdgeInsets.only(top: 10),
+                            height: 80,
+                            width: 340,
+                            child: ElevatedButton(
+                                onPressed: () async {
+                                  final result =
+                                      await FilePicker.platform.pickFiles(
+                                    type: FileType.custom,
+                                    allowedExtensions: ['pdf', 'doc', 'docx'],
+                                  );
+                                  if (result != null) {
+                                    final path = result.files.single.path!;
+                                    setState(() {
+                                      pdfFile = File(path);
+                                      //pdfFile.readAsBytesSync()
+                                    });
+                                  }
+                                },
+                                child: const Text(
+                                  'Upload file',
+                                  style: TextStyle(fontSize: 20),
+                                ))),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                            color: Color.fromARGB(255, 204, 201, 201),
+                            height: 250,
+                            //height: 300,
+                            width: 340,
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Container(
+                                              child: Icon(
+                                            Icons.print,
+                                            size: 35,
+                                          ))
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Container(
+                                            child: Center(
+                                                child: Text(
+                                              " Choose print options",
+                                              style: TextStyle(fontSize: 20),
+                                            )),
+                                          )
+                                        ],
+                                      )
+                                    ],
                                   ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Container(
-                                    child: DropdownButton(
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                      value: pagePerSheetValue,
-                                      onChanged: (String? value) {
-                                        // This is called when the user selects an item.
-                                        setState(() {
-                                          pagePerSheetValue = value!;
-                                        });
-                                      },
-                                      items: pagePerSheet
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: 30),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 10),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Container(
+                                                  width: 130,
+                                                  child: DropdownButton(
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge,
+                                                    value: letterValue,
+                                                    onChanged:
+                                                        (ListItem? value) {
+                                                      // This is called when the user selects an item.
+                                                      setState(() {
+                                                        letterValue = value!;
+                                                      });
+                                                    },
+                                                    items: letter.map<
+                                                            DropdownMenuItem<
+                                                                ListItem>>(
+                                                        (ListItem value) {
+                                                      return DropdownMenuItem<
+                                                          ListItem>(
+                                                        value: value,
+                                                        child:
+                                                            Text(value.name!),
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Container(
+                                                  child: DropdownButton(
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge,
+                                                    value: pagePerSheetValue,
+                                                    onChanged:
+                                                        (ListItem? value) {
+                                                      // This is called when the user selects an item.
+                                                      setState(() {
+                                                        pagePerSheetValue =
+                                                            value!;
+                                                      });
+                                                    },
+                                                    items: pagePerSheet.map<
+                                                            DropdownMenuItem<
+                                                                ListItem>>(
+                                                        (ListItem value) {
+                                                      return DropdownMenuItem<
+                                                          ListItem>(
+                                                        value: value,
+                                                        child:
+                                                            Text(value.name!),
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Container(
+                                                  width: 130,
+                                                  child: DropdownButton(
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge,
+                                                    value:
+                                                        printPagesOptionsValue,
+                                                    onChanged:
+                                                        (ListItem? value) {
+                                                      // This is called when the user selects an item.
+                                                      setState(() {
+                                                        printPagesOptionsValue =
+                                                            value!;
+                                                      });
+                                                    },
+                                                    items: printPagesOptions.map<
+                                                            DropdownMenuItem<
+                                                                ListItem>>(
+                                                        (ListItem value) {
+                                                      return DropdownMenuItem<
+                                                          ListItem>(
+                                                        value: value,
+                                                        child:
+                                                            Text(value.name!),
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Container(
+                                                  child: DropdownButton(
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge,
+                                                    value: sidePrintOptionValue,
+                                                    onChanged:
+                                                        (ListItem? value) {
+                                                      // This is called when the user selects an item.
+                                                      setState(() {
+                                                        sidePrintOptionValue =
+                                                            value!;
+                                                      });
+                                                    },
+                                                    items: sidePrintOption.map<
+                                                            DropdownMenuItem<
+                                                                ListItem>>(
+                                                        (ListItem value) {
+                                                      return DropdownMenuItem<
+                                                          ListItem>(
+                                                        value: value,
+                                                        child:
+                                                            Text(value.name!),
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Container(
+                                                  width: 130,
+                                                  child: DropdownButton(
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge,
+                                                    value:
+                                                        collatedPrintOptionsValue,
+                                                    onChanged:
+                                                        (ListItem? value) {
+                                                      // This is called when the user selects an item.
+                                                      setState(() {
+                                                        collatedPrintOptionsValue =
+                                                            value!;
+                                                      });
+                                                    },
+                                                    items: collatedPrintOptions
+                                                        .map<
+                                                                DropdownMenuItem<
+                                                                    ListItem>>(
+                                                            (ListItem value) {
+                                                      return DropdownMenuItem<
+                                                          ListItem>(
+                                                        value: value,
+                                                        child:
+                                                            Text(value.name!),
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Container(
+                                                  child: DropdownButton(
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge,
+                                                    value: orientationValue,
+                                                    onChanged:
+                                                        (ListItem? value) {
+                                                      // This is called when the user selects an item.
+                                                      setState(() {
+                                                        orientationValue =
+                                                            value!;
+                                                      });
+                                                    },
+                                                    items: orientation.map<
+                                                            DropdownMenuItem<
+                                                                ListItem>>(
+                                                        (ListItem value) {
+                                                      return DropdownMenuItem<
+                                                          ListItem>(
+                                                        value: value,
+                                                        child:
+                                                            Text(value.name!),
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              )
+                                )
+                              ],
+                            )),
+                        Container(
+                          color: Color.fromARGB(255, 204, 201, 201),
+                          margin: EdgeInsets.only(top: 15),
+                          width: 340,
+                          child: Center(
+                              child: TextFormField(
+                            controller: _nmbrPageController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'Number of pages',
+                                labelText: 'Enter number of pages',
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(10)),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
                             ],
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter some text';
+                              }
+                              return null;
+                            },
+                          )),
+                        ),
+                        Container(
+                          height: 40,
+                          //width: 100,
+                          //margin: EdgeInsets.fromLTRB(220, 10, 5, 40),
+                          margin: EdgeInsets.fromLTRB(100, 15, 100, 0),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: LinearGradient(colors: [
+                                Color.fromARGB(255, 65, 108, 235),
+                                Color.fromARGB(153, 77, 11, 220)
+                              ])),
+                          //child: Center(child: Text("Save", style: TextStyle(fontSize: 20))),
+                          child: InkWell(
+                            onTap: () async {
+                              if (_formKey.currentState!.validate()) {
+                                try {
+                                  _printData.status = 1;
+                                  _printData.side = sidePrintOptionValue.value;
+                                  _printData.options =
+                                      printPagesOptionsValue.value;
+                                  _printData.orientation =
+                                      orientationValue.value;
+                                  _printData.letter = letterValue.value;
+                                  _printData.collate =
+                                      collatedPrintOptionsValue.value;
+                                  _printData.pagePerSheet =
+                                      pagePerSheetValue.value;
+                                  _printData.price =
+                                      double.parse(_nmbrPageController.text) *
+                                          0.10;
+
+                                  var newPrintReq = await _printProvider!
+                                      .insertFile(
+                                          pdfFile, 'File', _printData.toJson());
+                                  /*var newPrintReq =
+                                      await _printProvider!.insert(_printData);*/
+                                  if (newPrintReq != null) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                              title: Text(
+                                                  "Print request successful!"),
+                                              content: Text(
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle2,
+                                                  "Successfully inserted new print request ${"" /*user.person!.firstName*/}"),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pushNamed(
+                                                            context,
+                                                            PrintListScreen
+                                                                .rotueName),
+                                                    child: Text("Ok"))
+                                              ],
+                                            ));
+                                  }
+                                } catch (e) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                            title: Text("Error"),
+                                            content: Text(
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle2,
+                                                e.toString()),
+                                            actions: [
+                                              TextButton(
+                                                  // onPressed: () => Navigator.pop(context),
+                                                  onPressed: () =>
+                                                      Navigator.pop(context),
+                                                  child: Text("Ok"))
+                                            ],
+                                          ));
+                                }
+                              }
+                            },
+                            child: Center(
+                                child: Text(
+                              "Save",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            )),
                           ),
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 20),
                         Container(
-                          child: Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Container(
-                                    width: 130,
-                                    child: DropdownButton(
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                      value: printPagesOptionsValue,
-                                      onChanged: (String? value) {
-                                        // This is called when the user selects an item.
-                                        setState(() {
-                                          printPagesOptionsValue = value!;
-                                        });
-                                      },
-                                      items: printPagesOptions
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Container(
-                                    child: DropdownButton(
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                      value: sidePrintOptionValue,
-                                      onChanged: (String? value) {
-                                        // This is called when the user selects an item.
-                                        setState(() {
-                                          sidePrintOptionValue = value!;
-                                        });
-                                      },
-                                      items: sidePrintOption
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
+                          height: 40,
+                          margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: LinearGradient(colors: [
+                                Color.fromARGB(255, 65, 108, 235),
+                                Color.fromARGB(153, 77, 11, 220)
+                              ])),
+                          child: InkWell(
+                            onTap: () => {
+                              Navigator.pushNamed(
+                                  context, PaymentScreen.rotueName)
+                            },
+                            child: Center(
+                                child: Text("Page for practice",
+                                    style: TextStyle(fontSize: 20))),
                           ),
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 20),
                         Container(
-                          child: Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Container(
-                                    width: 130,
-                                    child: DropdownButton(
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                      value: collatedPrintOptionsValue,
-                                      onChanged: (String? value) {
-                                        // This is called when the user selects an item.
-                                        setState(() {
-                                          collatedPrintOptionsValue = value!;
-                                        });
-                                      },
-                                      items: collatedPrintOptions
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Container(
-                                    child: DropdownButton(
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                      value: orientationValue,
-                                      onChanged: (String? value) {
-                                        // This is called when the user selects an item.
-                                        setState(() {
-                                          orientationValue = value!;
-                                        });
-                                      },
-                                      items: orientation
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
+                          height: 40,
+                          margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: LinearGradient(colors: [
+                                Color.fromARGB(255, 65, 108, 235),
+                                Color.fromARGB(153, 77, 11, 220)
+                              ])),
+                          child: InkWell(
+                            onTap: () => {},
+                            child: Center(
+                                child: Text("Payment",
+                                    style: TextStyle(fontSize: 20))),
                           ),
-                        )
+                        ),
                       ],
-                    ),
-                  )
-                ],
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            height: 40,
-            //width: 100,
-            //margin: EdgeInsets.fromLTRB(220, 10, 5, 40),
-            margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(colors: [
-                  Color.fromARGB(255, 65, 108, 235),
-                  Color.fromARGB(153, 77, 11, 220)
-                ])),
-            child: Center(child: Text("Save", style: TextStyle(fontSize: 20))),
-          ),
-          SizedBox(height: 20),
-          Container(
-            height: 40,
-            margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(colors: [
-                  Color.fromARGB(255, 65, 108, 235),
-                  Color.fromARGB(153, 77, 11, 220)
-                ])),
-            child: InkWell(
-              onTap: () =>
-                  {Navigator.pushNamed(context, PracticeScreen.rotueName)},
-              child: Center(
-                  child: Text("Page for practice",
-                      style: TextStyle(fontSize: 20))),
-            ),
-          ),
-        ],
-      ),
-    ));
+                    )))));
   }
 
   Widget _buildComboBox() {

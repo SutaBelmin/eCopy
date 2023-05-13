@@ -13,6 +13,7 @@ class PrintRequest {
   int? letter;
   int? collate;
   int? pagePerSheet;
+  double? price;
 
   PrintRequest() {}
 

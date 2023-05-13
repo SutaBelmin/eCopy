@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
 //import 'package:eprodajamobile/model/product.dart';
@@ -85,6 +86,32 @@ abstract class BaseProvider<T> with ChangeNotifier {
     } else {
       return null;
     }
+  }
+
+  Future<bool> insertFile(File? file,
+      [String fileParameterName = 'File', Map<String, dynamic>? model]) async {
+    var uri = Uri.parse("$_baseUrl$_endpoint");
+    Map<String, String> headers = createHeaders();
+
+    var request = MultipartRequest('POST', uri);
+    request.headers.addEntries(headers.entries);
+
+    if (model != null) {
+      Map<String, String> stringQueryParameters =
+          model.map((key, value) => MapEntry(key, value.toString()));
+      request.fields.addEntries(stringQueryParameters.entries);
+    }
+
+    if (file != null) {
+      request.files
+          .add(await MultipartFile.fromPath(fileParameterName, file.path));
+    }
+
+    var response = await http!.send(request);
+
+    log(response.statusCode.toString());
+
+    return true;
   }
 
   Future<T?> update(int id, [dynamic request]) async {

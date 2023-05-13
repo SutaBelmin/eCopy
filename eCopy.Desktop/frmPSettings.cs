@@ -1,12 +1,10 @@
 ﻿using eCopy.Model.Enum;
+using eCopy.Model.Requests;
+using eCopy.Model.Response;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace eCopy.Desktop
@@ -53,6 +51,18 @@ namespace eCopy.Desktop
             cmbSt.DisplayMember = "Name";
             cmbSt.ValueMember = "Value";
 
+        }
+
+        private async void btnUStatus_Click(object sender, EventArgs e)
+        {
+            await printRequestService.Put<PrintRequestR>(model.ID, new PrintRequest
+            {
+                Status = (Status)cmbSt.SelectedValue
+                //cmbStatus.SelectedValue je int jer smo gore rekli Value int
+            });
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

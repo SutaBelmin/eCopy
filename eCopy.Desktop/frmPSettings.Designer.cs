@@ -176,6 +176,7 @@
             this.btnUStatus.TabIndex = 15;
             this.btnUStatus.Text = "Update status";
             this.btnUStatus.UseVisualStyleBackColor = true;
+            this.btnUStatus.Click += new System.EventHandler(this.btnUStatus_Click);
             // 
             // cmbSt
             // 

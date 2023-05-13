@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:myapp/main.dart';
 import 'package:myapp/model/enum/letter.dart';
 import 'package:myapp/model/enum/orien.dart';
+import 'package:myapp/model/enum/pagePerSheet.dart';
 import 'package:myapp/model/enum/printPagesOptions.dart';
 import 'package:myapp/model/enum/sidePrintOption.dart';
 import 'package:myapp/model/enum/status.dart';
@@ -56,7 +57,8 @@ class _PrintListScreenState extends State<PrintListScreen> {
     print("called build $data");
     return Scaffold(
       body: SafeArea(
-          child: Column(
+          child: SingleChildScrollView(
+              child: Column(
         children: [
           Container(
             height: 100,
@@ -123,6 +125,8 @@ class _PrintListScreenState extends State<PrintListScreen> {
                   DataColumn(label: Text('Letter')),
                   DataColumn(label: Text('Side print options')),
                   DataColumn(label: Text('Collated print options')),
+                  /*DataColumn(label: Text('Page Per Sheet')),
+                  DataColumn(label: Text('Price')),*/
                 ],
                 rows: data
                     .map<DataRow>((data) => DataRow(cells: [
@@ -143,13 +147,18 @@ class _PrintListScreenState extends State<PrintListScreen> {
                                   Text(SidePrintOption.map[data.side] ?? ""))),
                           DataCell(Center(
                               child: Text(Collated.map[data.collate] ?? ""))),
+                          /*DataCell(Center(
+                              child: Text(
+                                  PagePerSheet.map[data.pagePerSheet] ?? ""))),
+                          DataCell(
+                              Center(child: Text(data.price.toString() ?? ""))),*/
                         ]))
                     .toList(),
               ),
             ),
           )
         ],
-      )),
+      ))),
     );
   }
 }

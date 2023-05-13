@@ -1,9 +1,5 @@
 ﻿using eCopy.Model.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace eCopy.Model.Requests
 {
@@ -17,7 +13,7 @@ namespace eCopy.Model.Requests
         public PagePerSheet Pages { get; set; }
         public CollatedPrintOptions Collate { get; set; }
         public PrintRequestFile PrintRequestFile { get; set; }
-        public byte[] File { get; set; }
+        public IFormFile File { get; set; }
         public double Price { get; set; }
     }
 }

@@ -28,6 +28,7 @@ namespace eCopy.Services
             Client model = mapper.Map<Client>(entity);
 
             entity.User.Role = Model.Enum.Role.User;
+            
             var user = userService.Insert(entity.User);
 
             var person = mapper.Map<Person>(entity.Person);

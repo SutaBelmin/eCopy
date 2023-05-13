@@ -57,11 +57,7 @@ namespace eCopy.Model.Enum
     public enum PagePerSheet
     {
         OnePage = 1,
-        TwoPages = 2,
-        FourPages = 3,
-        SixPages = 4,
-        EightPages = 5,
-        SixteenPages = 6
+        TwoPages = 2
     }
 
     public enum CollatedPrintOptions

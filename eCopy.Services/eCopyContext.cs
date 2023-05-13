@@ -55,6 +55,7 @@ namespace eCopy.Services
                 .HasOne(x => x.User)
                 .WithMany(x => x.AspNetUserRoles)
                 .HasForeignKey(x => x.UserId);
+
         }
     }
 }

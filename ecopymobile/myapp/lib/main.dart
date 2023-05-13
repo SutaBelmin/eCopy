@@ -8,7 +8,7 @@ import 'package:myapp/providers/practice_page_provider.dart';
 import 'package:myapp/providers/print_list_provider.dart';
 import 'package:myapp/providers/user_provider.dart';
 import 'package:myapp/screens/new_print_screen.dart';
-import 'package:myapp/screens/practice_page.dart';
+import 'package:myapp/screens/payment_screen.dart';
 import 'package:myapp/screens/print_list_screen.dart';
 import 'package:myapp/screens/registration_screen.dart';
 import 'package:myapp/utils/util.dart';
@@ -35,8 +35,8 @@ void main() => runApp(MultiProvider(
             return MaterialPageRoute(builder: ((context) => PrintListScreen()));
           } else if (settings.name == NewPrintScreen.routeName) {
             return MaterialPageRoute(builder: ((context) => NewPrintScreen()));
-          } else if (settings.name == PracticeScreen.rotueName) {
-            return MaterialPageRoute(builder: ((context) => PracticeScreen()));
+          } else if (settings.name == PaymentScreen.rotueName) {
+            return MaterialPageRoute(builder: ((context) => PaymentScreen()));
           } else if (settings.name == RegistrationScreen.routeName) {
             return MaterialPageRoute(
                 builder: ((context) => RegistrationScreen()));
@@ -109,7 +109,7 @@ class HomePage extends StatelessWidget {
                         controller: _usernameController,
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Email or phone:",
+                            hintText: "Username",
                             hintStyle: TextStyle(color: Colors.grey[400])),
                       ),
                     ),
@@ -152,6 +152,7 @@ class HomePage extends StatelessWidget {
                         //storage.write(key: "token", value: result!.Token);
                         StorageService.token = result.Token;
                         Navigator.pushNamed(context, PrintListScreen.rotueName);
+
                         _usernameController.text = "";
                         _passwordController.text = "";
                       } else {

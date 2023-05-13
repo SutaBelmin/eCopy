@@ -6,6 +6,12 @@ namespace eCopy.Services.Database
 {
     public class IdentityUser : IdentityUser<int>
     {
+        public IdentityUser()
+        {
+            SecurityStamp= Guid.NewGuid().ToString();
+            ConcurrencyStamp = Guid.NewGuid().ToString();
+        }
+
         public bool Active { get; set; }
 
         public DateTime CreatedDate { get; set; }
