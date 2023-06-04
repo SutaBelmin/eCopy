@@ -1,16 +1,16 @@
 Flutter:
 ----------
-Klijent:
- username: client
- password: client
+Klijent: <br />
+ username: client <br />
+ password: client <br />
 
 
 Win forms:
 -----------
-Zaposlenik:
- username: emp
- password: em
+Zaposlenik: <br />
+username: emp <br />
+password: em <br />
 
-Administrator:
- username: cc
- password: cc
+Administrator: <br />
+username: cc <br />
+password: cc <br />
