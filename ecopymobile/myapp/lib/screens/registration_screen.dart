@@ -55,10 +55,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     _tmpCity = tmpData?.first;
   }
 
-/*
-  static const List<String> gender = ["Male", "Female"];
-  String genderValue = gender.first;*/
-
   int role = 5;
 
   static List<ListItem> gender = [ListItem(0, "Male"), ListItem(1, "Female")];
@@ -427,13 +423,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       _personData.firstName = _firstNameController.text;
                       _personData.lastName = _lastNameController.text;
                       _personData.middleName = _middleNameController.text;
-                      /*
-                  _personData.gender = int.parse(_genderController.text);
-                  _personData.cityId = int.parse(_cityController.text);
-                  */
                       _personData.gender = genderValue.value;
                       _personData.cityId = _tmpCity?.id;
-
                       _personData.address = _addressController.text;
                       _personData.birthDate =
                           DateTime.parse(_birthDateController.text);

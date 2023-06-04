@@ -11,7 +11,6 @@ import 'package:myapp/screens/new_print_screen.dart';
 import 'package:myapp/screens/payment_screen.dart';
 import 'package:myapp/screens/print_list_screen.dart';
 import 'package:myapp/screens/registration_screen.dart';
-import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -35,13 +34,22 @@ void main() => runApp(MultiProvider(
             return MaterialPageRoute(builder: ((context) => PrintListScreen()));
           } else if (settings.name == NewPrintScreen.routeName) {
             return MaterialPageRoute(builder: ((context) => NewPrintScreen()));
-          } else if (settings.name == PaymentScreen.rotueName) {
+          } /*else if (settings.name == PaymentScreen.routeName) {
             return MaterialPageRoute(builder: ((context) => PaymentScreen()));
-          } else if (settings.name == RegistrationScreen.routeName) {
+          }*/
+          else if (settings.name == RegistrationScreen.routeName) {
             return MaterialPageRoute(
                 builder: ((context) => RegistrationScreen()));
           } else if (settings.name == HomePage.routeName) {
             return MaterialPageRoute(builder: ((context) => HomePage()));
+          }
+
+          var uri = Uri.parse(settings.name!);
+          if (uri.pathSegments.length == 2 &&
+              "${uri.pathSegments.first}" == PaymentScreen.routeName) {
+            String amount = uri.pathSegments[1];
+            return MaterialPageRoute(
+                builder: (context) => PaymentScreen(amount));
           }
         },
       ),
@@ -149,7 +157,6 @@ class HomePage extends StatelessWidget {
                       Map<String, dynamic> payload =
                           Jwt.parseJwt(result!.Token);
                       if (payload["role"] == 5 || payload["role"] == "User") {
-                        //storage.write(key: "token", value: result!.Token);
                         StorageService.token = result.Token;
                         Navigator.pushNamed(context, PrintListScreen.rotueName);
 
@@ -158,7 +165,6 @@ class HomePage extends StatelessWidget {
                       } else {
                         throw Exception("Invalid login");
                       }
-                      //print(payload);
                     } catch (e) {
                       displayDialog(context, "An Error Occurred",
                           "No account was found matching that username and password");

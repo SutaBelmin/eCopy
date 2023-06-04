@@ -12,8 +12,8 @@ using eCopy.Services;
 namespace eCopy.Services.Migrations
 {
     [DbContext(typeof(eCopyContext))]
-    [Migration("20221127100941_removeFields")]
-    partial class removeFields
+    [Migration("20230604110422_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -726,6 +726,9 @@ namespace eCopy.Services.Migrations
 
                     b.Property<string>("Pages")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2");

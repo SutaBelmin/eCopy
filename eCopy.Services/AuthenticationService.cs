@@ -35,18 +35,18 @@ namespace eCopy.Services
         }
         public AuthenticationResponse Authenticate(AuthenticationRequest request)
         {
-            // Dohvatimo user-a po username ili email
+            
             var user = userService.GetUserByUsername(request.Username);
             if(user == null)
             {
                 return null;
             }
-            // Provjerimo password
+            
             if(passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) != PasswordVerificationResult.Success)
             {
                 return null;
             }
-            // Generisemo token
+            
             var role = user.AspNetUserRoles.First();
 
             var client = context.Clients.FirstOrDefault(x => x.ApplicationUserId == user.Id);
@@ -68,7 +68,7 @@ namespace eCopy.Services
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"])), SecurityAlgorithms.HmacSha512Signature)
             };
             var token = jwtSecurityTokenHandler.CreateJwtSecurityToken(tokenDescriptor);
-            // Vratimo token
+            
             return new AuthenticationResponse
             {
                 Token = jwtSecurityTokenHandler.WriteToken(token)

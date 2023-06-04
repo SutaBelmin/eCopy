@@ -51,6 +51,10 @@ namespace eCopy.Services
                 entity = entity.Where(x => x.ClientId == clientId);
             }
             
+            if(!string.IsNullOrEmpty(search.Status))
+            {
+                entity = entity.Where(x=> x.Status == search.Status);
+            }
 
             var list = entity.ToList();
 
@@ -96,24 +100,5 @@ namespace eCopy.Services
             return mapper.Map<PrintRequestR>(model); 
         }
 
-
-
-        /* public override IEnumerable<PrintRequestR> Get(PrintRequestSearch search = null)
-         {
-             return base.Get(search);
-
-             var entity = context.Requests.AsQueryable();
-
-             var list = entity.Include(x => x.Status)
-                              .Include(x => x.Options)
-                              .Include(x => x.Side)
-                              .Include(x => x.Orientation)
-                              .Include(x => x.Letter)
-                              .Include(x => x.Pages)
-                              .Include(x => x.Collate).ToList();
-
-             return mapper.Map<List<PrintRequestR>>(list);
-
-         }*/
     }
 }

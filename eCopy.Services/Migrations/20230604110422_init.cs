@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCopy.Services.Migrations
 {
-    public partial class Create : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -120,30 +120,6 @@ namespace eCopy.Services.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApplicationUserTokens",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    TokenType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ApplicationUserTokens", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ApplicationUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -194,9 +170,7 @@ namespace eCopy.Services.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     RoleId = table.Column<int>(type: "int", nullable: false),
                     Active = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId1 = table.Column<int>(type: "int", nullable: true),
-                    RoleId1 = table.Column<int>(type: "int", nullable: true)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -208,20 +182,8 @@ namespace eCopy.Services.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId1",
-                        column: x => x.RoleId1,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -237,7 +199,6 @@ namespace eCopy.Services.Migrations
                     Active = table.Column<bool>(type: "bit", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UserId1 = table.Column<int>(type: "int", nullable: true),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -246,12 +207,6 @@ namespace eCopy.Services.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -349,18 +304,11 @@ namespace eCopy.Services.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CityId = table.Column<int>(type: "int", nullable: false),
-                    IdentityUserId = table.Column<int>(type: "int", nullable: true)
+                    CityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Companies", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Companies_AspNetUsers_IdentityUserId",
-                        column: x => x.IdentityUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Companies_Cities_CityId",
                         column: x => x.CityId,
@@ -546,7 +494,8 @@ namespace eCopy.Services.Migrations
                     Collate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClientId = table.Column<int>(type: "int", nullable: false),
                     CopierId = table.Column<int>(type: "int", nullable: false),
-                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -613,11 +562,6 @@ namespace eCopy.Services.Migrations
                 column: "ProfilePhotoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplicationUserTokens_UserId",
-                table: "ApplicationUserTokens",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -645,16 +589,6 @@ namespace eCopy.Services.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId1",
-                table: "AspNetUserRoles",
-                column: "RoleId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_UserId1",
-                table: "AspNetUserRoles",
-                column: "UserId1");
-
-            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -665,11 +599,6 @@ namespace eCopy.Services.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserTokens_UserId1",
-                table: "AspNetUserTokens",
-                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_CountryId",
@@ -690,11 +619,6 @@ namespace eCopy.Services.Migrations
                 name: "IX_Companies_CityId",
                 table: "Companies",
                 column: "CityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Companies_IdentityUserId",
-                table: "Companies",
-                column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Copiers_CityId",
@@ -756,9 +680,6 @@ namespace eCopy.Services.Migrations
                 name: "ApplicationUserProfilePhotos");
 
             migrationBuilder.DropTable(
-                name: "ApplicationUserTokens");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -798,13 +719,13 @@ namespace eCopy.Services.Migrations
                 name: "Copiers");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Persons");
 
             migrationBuilder.DropTable(
                 name: "Companies");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Cities");

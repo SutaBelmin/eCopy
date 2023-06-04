@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
-//import 'package:eprodajamobile/model/product.dart';
 import 'package:myapp/model/storageService.dart';
-import 'package:myapp/utils/util.dart';
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
 import 'package:flutter/foundation.dart';
@@ -18,11 +16,8 @@ abstract class BaseProvider2<T> with ChangeNotifier {
   IOClient? http;
 
   BaseProvider2(String endpoint) {
-    //_baseUrl = "https://10.0.2.2:7192/"; //ovo ce radiit samo na local jer smo hard kodirali 10.0.2.2
-    _baseUrl = const String.fromEnvironment(
-        "baseUrl", //procitat ce se iz enviroment varijable baseUrl
-        defaultValue:
-            "https://10.0.2.2:7179/"); //ali mozemo postaviti defaultnu vrijednost
+    _baseUrl = const String.fromEnvironment("baseUrl",
+        defaultValue: "https://10.0.2.2:7179/");
     print("baseurl: $_baseUrl");
 
     if (_baseUrl!.endsWith("/") == false) {

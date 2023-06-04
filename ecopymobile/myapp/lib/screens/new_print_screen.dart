@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:myapp/model/enum/collate.dart';
-import 'package:myapp/model/enum/letter.dart';
-import 'package:myapp/model/enum/orien.dart';
-import 'package:myapp/model/enum2/proba.dart';
 import 'package:myapp/model/listItem.dart';
 import 'package:myapp/model/printRequest.dart';
 import 'package:myapp/providers/new_pr_provider.dart';
-import 'package:myapp/providers/practice_page_provider.dart';
-import 'package:myapp/screens/payment_screen.dart';
 import 'package:myapp/screens/print_list_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 class NewPrintScreen extends StatefulWidget {
   static const String routeName = "newPrintScreen";
@@ -30,6 +23,8 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
   //dynamic data = {};
   List<PrintRequest> data = [];
   PrintRequest _printData = new PrintRequest();
+  double? printPrice = 45;
+  String? value = "40";
 
   TextEditingController _nmbrPageController = new TextEditingController();
 
@@ -90,40 +85,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
       data = tmpData!;
     });
   }
-/*
-  static const List<String> orientation = ["Portrait", "Landscape"];
-  String orientationValue = orientation.first;
-
-  static const List<String> sidePrintOption = [
-    "PrintOneSided",
-    "PrintBothSides"
-  ];
-  String sidePrintOptionValue = sidePrintOption.first;
-
-  static const List<String> lett = ["A1", "A2", "A3", "A4", "A5", "A6"];
-  String lettValue = lett.first;
-
-  static const List<String> printPagesOptions = [
-    "All",
-    "Even",
-    "Odd",
-    "Custom"
-  ];
-  String printPagesOptionsValue = printPagesOptions.first;
-
-  static const List<String> pagePerSheet = [
-    "OnePage",
-    "TwoPages",
-    "FourPages",
-    "SixPages",
-    "EightPages",
-    "SixteenPages"
-  ];
-  String pagePerSheetValue = pagePerSheet.first;
-
-  static const List<String> collatedPrintOptions = ["Collated", "Uncollated"];
-  String collatedPrintOptionsValue = collatedPrintOptions.first;
-  */
 
   File? pdfFile;
 
@@ -176,7 +137,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                         Container(
                             color: Color.fromARGB(255, 204, 201, 201),
                             height: 250,
-                            //height: 300,
                             width: 340,
                             child: Column(
                               children: [
@@ -455,8 +415,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                         ),
                         Container(
                           height: 40,
-                          //width: 100,
-                          //margin: EdgeInsets.fromLTRB(220, 10, 5, 40),
                           margin: EdgeInsets.fromLTRB(100, 15, 100, 0),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -464,7 +422,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                 Color.fromARGB(255, 65, 108, 235),
                                 Color.fromARGB(153, 77, 11, 220)
                               ])),
-                          //child: Center(child: Text("Save", style: TextStyle(fontSize: 20))),
                           child: InkWell(
                             onTap: () async {
                               if (_formKey.currentState!.validate()) {
@@ -525,7 +482,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                                 e.toString()),
                                             actions: [
                                               TextButton(
-                                                  // onPressed: () => Navigator.pop(context),
                                                   onPressed: () =>
                                                       Navigator.pop(context),
                                                   child: Text("Ok"))
@@ -545,47 +501,7 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                           ),
                         ),
                         SizedBox(height: 20),
-                        Container(
-                          height: 40,
-                          margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              gradient: LinearGradient(colors: [
-                                Color.fromARGB(255, 65, 108, 235),
-                                Color.fromARGB(153, 77, 11, 220)
-                              ])),
-                          child: InkWell(
-                            onTap: () => {
-                              Navigator.pushNamed(
-                                  context, PaymentScreen.rotueName)
-                            },
-                            child: Center(
-                                child: Text("Page for practice",
-                                    style: TextStyle(fontSize: 20))),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          height: 40,
-                          margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              gradient: LinearGradient(colors: [
-                                Color.fromARGB(255, 65, 108, 235),
-                                Color.fromARGB(153, 77, 11, 220)
-                              ])),
-                          child: InkWell(
-                            onTap: () => {},
-                            child: Center(
-                                child: Text("Payment",
-                                    style: TextStyle(fontSize: 20))),
-                          ),
-                        ),
                       ],
                     )))));
-  }
-
-  Widget _buildComboBox() {
-    return Container();
   }
 }

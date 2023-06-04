@@ -56,6 +56,7 @@
             this.txtFN.Location = new System.Drawing.Point(365, 29);
             this.txtFN.Multiline = true;
             this.txtFN.Name = "txtFN";
+            this.txtFN.ReadOnly = true;
             this.txtFN.Size = new System.Drawing.Size(225, 29);
             this.txtFN.TabIndex = 1;
             // 
@@ -64,6 +65,7 @@
             this.txtLN.Location = new System.Drawing.Point(365, 80);
             this.txtLN.Multiline = true;
             this.txtLN.Name = "txtLN";
+            this.txtLN.ReadOnly = true;
             this.txtLN.Size = new System.Drawing.Size(225, 29);
             this.txtLN.TabIndex = 3;
             // 
@@ -82,6 +84,7 @@
             this.txtMN.Location = new System.Drawing.Point(365, 128);
             this.txtMN.Multiline = true;
             this.txtMN.Name = "txtMN";
+            this.txtMN.ReadOnly = true;
             this.txtMN.Size = new System.Drawing.Size(225, 29);
             this.txtMN.TabIndex = 5;
             // 
@@ -100,6 +103,7 @@
             this.txtGen.Location = new System.Drawing.Point(365, 178);
             this.txtGen.Multiline = true;
             this.txtGen.Name = "txtGen";
+            this.txtGen.ReadOnly = true;
             this.txtGen.Size = new System.Drawing.Size(225, 29);
             this.txtGen.TabIndex = 7;
             // 
@@ -118,6 +122,7 @@
             this.txtCN.Location = new System.Drawing.Point(365, 225);
             this.txtCN.Multiline = true;
             this.txtCN.Name = "txtCN";
+            this.txtCN.ReadOnly = true;
             this.txtCN.Size = new System.Drawing.Size(225, 29);
             this.txtCN.TabIndex = 9;
             // 

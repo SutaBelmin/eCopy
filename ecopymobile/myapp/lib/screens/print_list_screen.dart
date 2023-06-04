@@ -1,22 +1,17 @@
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:myapp/main.dart';
 import 'package:myapp/model/enum/letter.dart';
 import 'package:myapp/model/enum/orien.dart';
-import 'package:myapp/model/enum/pagePerSheet.dart';
 import 'package:myapp/model/enum/printPagesOptions.dart';
 import 'package:myapp/model/enum/sidePrintOption.dart';
 import 'package:myapp/model/enum/status.dart';
+import 'package:myapp/model/listItem.dart';
 import 'package:myapp/model/printRequest.dart';
 import 'package:myapp/model/storageService.dart';
-import 'package:myapp/model/user.dart';
-import 'package:myapp/providers/new_print_provider.dart';
 import 'package:myapp/providers/print_list_provider.dart';
-import 'package:myapp/providers/user_provider.dart';
-//import 'package:myapp/providers/print_list_provider.dart';
 import 'package:myapp/screens/new_print_screen.dart';
+import 'package:myapp/screens/payment_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'package:myapp/model/enum/collate.dart';
@@ -32,9 +27,18 @@ class PrintListScreen extends StatefulWidget {
 
 class _PrintListScreenState extends State<PrintListScreen> {
   PrintListProvider? _printProvider = null;
-  //dynamic data = {};
+
   List<PrintRequest> data = [];
-  //List<Req> data = [];
+
+  String payAmount = (25).toString();
+
+  static List<ListItem> status = [
+    ListItem(1, "OnHold"),
+    ListItem(2, "InProgress"),
+    ListItem(3, "Completed"),
+    ListItem(4, "Rejected")
+  ];
+  ListItem statusValue = status.first;
 
   @override
   void initState() {
@@ -42,6 +46,9 @@ class _PrintListScreenState extends State<PrintListScreen> {
     super.initState();
     _printProvider = context.read<PrintListProvider>();
     loadData();
+    WidgetsFlutterBinding.ensureInitialized();
+    Stripe.publishableKey =
+        "pk_test_51N5rVYFxWkxWPkD2lPcJ6nG0JmT0i2tKFEjyOVbfN5tIIuhsC7gPuYl7o79wk80EzwEDGDaOs3P3PCXOMRONXqVL00NvliLcMV";
   }
 
   Future loadData() async {
@@ -84,8 +91,6 @@ class _PrintListScreenState extends State<PrintListScreen> {
           Container(
               height: 50,
               width: 250,
-              //margin: EdgeInsets.fromLTRB(220, 5, 5, 0),
-              //margin: EdgeInsets.fromLTRB(left, top, right, bottom),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   gradient: LinearGradient(colors: [
@@ -101,8 +106,27 @@ class _PrintListScreenState extends State<PrintListScreen> {
                         style: TextStyle(fontSize: 20))),
               )),
           SizedBox(
-            height: 30,
+            height: 15,
           ),
+          /*Container(
+            height: 40,
+            margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                gradient: LinearGradient(colors: [
+                  Color.fromARGB(255, 65, 108, 235),
+                  Color.fromARGB(153, 77, 11, 220)
+                ])),
+            child: InkWell(
+              onTap: () =>
+                  {Navigator.pushNamed(context, PaymentScreen.routeName)},
+              child: Center(
+                  child: Text("Pay now", style: TextStyle(fontSize: 20))),
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),*/
           Container(
             child: Center(
               child: Text(
@@ -112,7 +136,67 @@ class _PrintListScreenState extends State<PrintListScreen> {
             ),
           ),
           SizedBox(
-            height: 30,
+            height: 15,
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 130,
+                  child: DropdownButton(
+                    style: Theme.of(context).textTheme.titleLarge,
+                    value: statusValue,
+                    onChanged: (ListItem? value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        statusValue = value!;
+                      });
+                    },
+                    items: status
+                        .map<DropdownMenuItem<ListItem>>((ListItem value) {
+                      return DropdownMenuItem<ListItem>(
+                        value: value,
+                        child: Text(value.name!),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Container(
+                    height: 30,
+                    width: 90,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        gradient: LinearGradient(colors: [
+                          Color.fromARGB(255, 65, 108, 235),
+                          Color.fromARGB(153, 77, 11, 220)
+                        ])),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Center(
+                          child:
+                              Text("Search", style: TextStyle(fontSize: 20))),
+                    )),
+                Container(
+                    height: 30,
+                    width: 90,
+                    margin: EdgeInsets.only(left: 5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        gradient: LinearGradient(colors: [
+                          Color.fromARGB(255, 65, 108, 235),
+                          Color.fromARGB(153, 77, 11, 220)
+                        ])),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Center(
+                          child: Text("Reset", style: TextStyle(fontSize: 20))),
+                    )),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -125,6 +209,7 @@ class _PrintListScreenState extends State<PrintListScreen> {
                   DataColumn(label: Text('Letter')),
                   DataColumn(label: Text('Side print options')),
                   DataColumn(label: Text('Collated print options')),
+                  DataColumn(label: Text('Payment Service')),
                   /*DataColumn(label: Text('Page Per Sheet')),
                   DataColumn(label: Text('Price')),*/
                 ],
@@ -147,6 +232,28 @@ class _PrintListScreenState extends State<PrintListScreen> {
                                   Text(SidePrintOption.map[data.side] ?? ""))),
                           DataCell(Center(
                               child: Text(Collated.map[data.collate] ?? ""))),
+                          DataCell(
+                            Container(
+                              margin: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  gradient: LinearGradient(colors: [
+                                    Color.fromARGB(255, 65, 108, 235),
+                                    Color.fromARGB(153, 77, 11, 220)
+                                  ])),
+                              child: InkWell(
+                                onTap: () => {
+                                  Navigator.pushNamed(
+                                      //context, PaymentScreen.routeName)
+                                      context,
+                                      "${PaymentScreen.routeName}/${payAmount}")
+                                },
+                                child: Center(
+                                    child: Text("Pay now",
+                                        style: TextStyle(fontSize: 20))),
+                              ),
+                            ),
+                          ),
                           /*DataCell(Center(
                               child: Text(
                                   PagePerSheet.map[data.pagePerSheet] ?? ""))),

@@ -19,12 +19,6 @@ namespace eCopy.Controllers
             this.service = service;
         }
 
-        /*[HttpGet]
-        public IEnumerable<PrintRequestR> GetAllReq()
-        {
-            return service.GetAllR();
-        }*/
-
         [HttpPost]
         public override PrintRequestR Insert([FromForm] eCopy.Model.Requests.PrintRequest model)
         {

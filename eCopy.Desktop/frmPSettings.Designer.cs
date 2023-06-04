@@ -60,6 +60,7 @@
             // 
             this.txtPrintPO.Location = new System.Drawing.Point(19, 99);
             this.txtPrintPO.Name = "txtPrintPO";
+            this.txtPrintPO.ReadOnly = true;
             this.txtPrintPO.Size = new System.Drawing.Size(265, 24);
             this.txtPrintPO.TabIndex = 1;
             // 
@@ -67,6 +68,7 @@
             // 
             this.txtOrie.Location = new System.Drawing.Point(19, 159);
             this.txtOrie.Name = "txtOrie";
+            this.txtOrie.ReadOnly = true;
             this.txtOrie.Size = new System.Drawing.Size(265, 24);
             this.txtOrie.TabIndex = 3;
             // 
@@ -84,6 +86,7 @@
             // 
             this.txtPagePS.Location = new System.Drawing.Point(19, 225);
             this.txtPagePS.Name = "txtPagePS";
+            this.txtPagePS.ReadOnly = true;
             this.txtPagePS.Size = new System.Drawing.Size(265, 24);
             this.txtPagePS.TabIndex = 5;
             // 
@@ -101,6 +104,7 @@
             // 
             this.txtColl.Location = new System.Drawing.Point(332, 225);
             this.txtColl.Name = "txtColl";
+            this.txtColl.ReadOnly = true;
             this.txtColl.Size = new System.Drawing.Size(265, 24);
             this.txtColl.TabIndex = 11;
             // 
@@ -118,6 +122,7 @@
             // 
             this.txtLett.Location = new System.Drawing.Point(332, 159);
             this.txtLett.Name = "txtLett";
+            this.txtLett.ReadOnly = true;
             this.txtLett.Size = new System.Drawing.Size(265, 24);
             this.txtLett.TabIndex = 9;
             // 
@@ -135,6 +140,7 @@
             // 
             this.txtSidePO.Location = new System.Drawing.Point(332, 99);
             this.txtSidePO.Name = "txtSidePO";
+            this.txtSidePO.ReadOnly = true;
             this.txtSidePO.Size = new System.Drawing.Size(265, 24);
             this.txtSidePO.TabIndex = 7;
             // 

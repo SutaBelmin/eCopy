@@ -1,0 +1,33 @@
+version: '3'
+services:
+#mssql docker
+  ecopy-sql:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=QWElkj132!
+      - MSSQL_PID=Developer
+    ports:
+      - 1401:1433
+    networks:
+      - ecopynet
+
+  ecopy-api:
+    restart: unless-stopped
+    build:
+      context: .
+    environment:
+      - ConnectionStrings:eCopy=Server=ecopy-sql,1433;Database=IB190053;User=sa;Password=QWElkj132!;ConnectRetryCount=0
+    ports:
+      - 5000:80
+    networks:
+      - ecopynet      
+    links:
+      - ecopy-sql
+    depends_on:
+      - ecopy-sql
+      
+networks:
+  ecopynet:
+    driver: bridge      

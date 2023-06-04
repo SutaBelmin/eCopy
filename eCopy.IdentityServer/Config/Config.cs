@@ -32,20 +32,17 @@ namespace eCopy.IdentityServer.Config
             new Client
             {
                 ClientId = "client",
-
-                // no interactive user, use the clientid/secret for authentication
+                
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                // secret for authentication
+               
                 ClientSecrets =
                 {
                     new Secret("deb5059b-d97a-46d8-97ea-581cad4a4ac1".Sha256())
                 },
 
-                // scopes that client has access to
                 AllowedScopes = { "api1" }
             },
-            // resource owner password grant client
+            
             new Client
             {
                 ClientId = "ro.client",
@@ -57,7 +54,7 @@ namespace eCopy.IdentityServer.Config
                 },
                 AllowedScopes = { "api1" }
             },
-            // OpenID Connect hybrid flow client (MVC)
+            
             new Client
             {
                 ClientId = "mvc",
@@ -81,7 +78,7 @@ namespace eCopy.IdentityServer.Config
 
                 AllowOfflineAccess = true
             },
-            // JavaScript Client
+            
             new Client
             {
                 ClientId = "js",

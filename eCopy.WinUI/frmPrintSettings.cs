@@ -42,8 +42,7 @@ namespace eCopy.WinUI
             txtPage.Text = model.Pages.ToString();
             txtCollate.Text = model.Collate.ToString();
             cmbStatus.SelectedIndex = status.IndexOf(Enum.Parse<Status>(model.Status));
-            //(model.Status) je string i mora se parsirati u Enum,
-            //IndexOf prima enum tj Status a Status je Enum
+            
         }
 
         void loadStatus()
@@ -64,7 +63,6 @@ namespace eCopy.WinUI
             await printRequestService.Put<PrintRequestR>(model.ID, new PrintRequest
             {
                  Status = (Status)cmbStatus.SelectedValue
-                //cmbStatus.SelectedValue je int jer smo gore rekli Value int
             });
 
             this.DialogResult = DialogResult.OK;

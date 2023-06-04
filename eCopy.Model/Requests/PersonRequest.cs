@@ -15,9 +15,6 @@ namespace eCopy.Model
         public Gender Gender { get; set; }
         public int? CityId { get; set; }
         public string Address { get; set; }
-
-        //[DataType(DataType.Date, ErrorMessage = "ErrDateWrongFormat")]
-        //[DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
        
     }
