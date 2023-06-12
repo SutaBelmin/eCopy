@@ -3,8 +3,6 @@ import 'package:myapp/model/paymentArguments.dart';
 import 'package:myapp/model/storageService.dart';
 import 'package:myapp/providers/authentication_provider.dart';
 import 'package:myapp/providers/city_provider.dart';
-import 'package:myapp/providers/new_pr_provider.dart';
-import 'package:myapp/providers/new_print_provider.dart';
 import 'package:myapp/providers/practice_page_provider.dart';
 import 'package:myapp/providers/print_list_provider.dart';
 import 'package:myapp/providers/user_provider.dart';
@@ -20,8 +18,6 @@ import 'package:jwt_decode/jwt_decode.dart';
 void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => PrintListProvider()),
-        ChangeNotifierProvider(create: (_) => NewPrintProvider()),
-        ChangeNotifierProvider(create: (_) => NewPrProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => PracticePageProvider()),
         ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
