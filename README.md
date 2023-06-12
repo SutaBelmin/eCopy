@@ -1,16 +1,16 @@
 Flutter:
 ----------
 Klijent: <br />
- username: client <br />
- password: client <br />
-
+Korisnicko ime: mobile <br />
+Lozinka: test <br />
 
 Win forms:
 -----------
-Zaposlenik: <br />
-username: emp <br />
-password: em <br />
+Administartor: <br />
+Korisnicko ime: admin <br />
+Lozinka: test <br /> 
 
-Administrator: <br />
-username: cc <br />
-password: cc <br />
+Zaposlesnik <br />
+Korisnicko ime: employee <br />
+Lozinka: test <br />
+
