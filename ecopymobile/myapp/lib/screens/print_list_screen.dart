@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:myapp/main.dart';
 import 'package:myapp/model/enum/letter.dart';
 import 'package:myapp/model/enum/orien.dart';
 import 'package:myapp/model/enum/printPagesOptions.dart';
 import 'package:myapp/model/enum/sidePrintOption.dart';
 import 'package:myapp/model/enum/status.dart';
 import 'package:myapp/model/listItem.dart';
+import 'package:myapp/model/paymentArguments.dart';
 import 'package:myapp/model/printRequest.dart';
 import 'package:myapp/model/storageService.dart';
 import 'package:myapp/providers/print_list_provider.dart';
@@ -30,7 +30,7 @@ class _PrintListScreenState extends State<PrintListScreen> {
 
   List<PrintRequest> data = [];
 
-  String payAmount = (25).toString();
+  String payAmount = (45).toString();
 
   static List<ListItem> status = [
     ListItem(1, "OnHold"),
@@ -81,7 +81,7 @@ class _PrintListScreenState extends State<PrintListScreen> {
               child: ElevatedButton.icon(
                   onPressed: () {
                     StorageService.token = "";
-                    Navigator.pushNamed(context, HomePage.routeName);
+                    Navigator.popUntil(context, (route) => route.isFirst);
                   },
                   icon: Icon(
                     Icons.logout,
@@ -108,29 +108,10 @@ class _PrintListScreenState extends State<PrintListScreen> {
           SizedBox(
             height: 15,
           ),
-          /*Container(
-            height: 40,
-            margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(colors: [
-                  Color.fromARGB(255, 65, 108, 235),
-                  Color.fromARGB(153, 77, 11, 220)
-                ])),
-            child: InkWell(
-              onTap: () =>
-                  {Navigator.pushNamed(context, PaymentScreen.routeName)},
-              child: Center(
-                  child: Text("Pay now", style: TextStyle(fontSize: 20))),
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),*/
           Container(
             child: Center(
               child: Text(
-                'Broj zahtjeva: ${data!.length.toString()}',
+                'Request number: ${data.length.toString()}',
                 style: TextStyle(fontSize: 18),
               ),
             ),
@@ -148,7 +129,6 @@ class _PrintListScreenState extends State<PrintListScreen> {
                     style: Theme.of(context).textTheme.titleLarge,
                     value: statusValue,
                     onChanged: (ListItem? value) {
-                      // This is called when the user selects an item.
                       setState(() {
                         statusValue = value!;
                       });
@@ -172,7 +152,13 @@ class _PrintListScreenState extends State<PrintListScreen> {
                           Color.fromARGB(153, 77, 11, 220)
                         ])),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () async {
+                        var tmpData = await _printProvider
+                            ?.get({'Status': statusValue.name});
+                        setState(() {
+                          data = tmpData!;
+                        });
+                      },
                       child: Center(
                           child:
                               Text("Search", style: TextStyle(fontSize: 20))),
@@ -188,7 +174,12 @@ class _PrintListScreenState extends State<PrintListScreen> {
                           Color.fromARGB(153, 77, 11, 220)
                         ])),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () async {
+                        var tmpData = await _printProvider?.get();
+                        setState(() {
+                          data = tmpData!;
+                        });
+                      },
                       child: Center(
                           child: Text("Reset", style: TextStyle(fontSize: 20))),
                     )),
@@ -203,18 +194,22 @@ class _PrintListScreenState extends State<PrintListScreen> {
             child: SingleChildScrollView(
               child: DataTable(
                 columns: [
+                  DataColumn(label: Text('Id')),
                   DataColumn(label: Text('Status')),
                   DataColumn(label: Text('Print pages options')),
                   DataColumn(label: Text('Orientation')),
                   DataColumn(label: Text('Letter')),
                   DataColumn(label: Text('Side print options')),
                   DataColumn(label: Text('Collated print options')),
+                  /*DataColumn(label: Text('Page Per Sheet')),*/
+                  DataColumn(label: Text('Price')),
                   DataColumn(label: Text('Payment Service')),
-                  /*DataColumn(label: Text('Page Per Sheet')),
-                  DataColumn(label: Text('Price')),*/
                 ],
                 rows: data
                     .map<DataRow>((data) => DataRow(cells: [
+                          DataCell(Center(
+                            child: Text(data.id ?? ""),
+                          )),
                           DataCell(Center(
                             child: Text(Status.map[data.status] ?? ""),
                           )),
@@ -232,6 +227,9 @@ class _PrintListScreenState extends State<PrintListScreen> {
                                   Text(SidePrintOption.map[data.side] ?? ""))),
                           DataCell(Center(
                               child: Text(Collated.map[data.collate] ?? ""))),
+                          DataCell(Center(
+                              child:
+                                  Text(data.price?.toStringAsFixed(2) ?? ""))),
                           DataCell(
                             Container(
                               margin: EdgeInsets.all(5),
@@ -244,9 +242,9 @@ class _PrintListScreenState extends State<PrintListScreen> {
                               child: InkWell(
                                 onTap: () => {
                                   Navigator.pushNamed(
-                                      //context, PaymentScreen.routeName)
-                                      context,
-                                      "${PaymentScreen.routeName}/${payAmount}")
+                                      context, PaymentScreen.routeName,
+                                      arguments: PaymentArguments(
+                                          '${data.id}', data.price))
                                 },
                                 child: Center(
                                     child: Text("Pay now",
@@ -256,9 +254,7 @@ class _PrintListScreenState extends State<PrintListScreen> {
                           ),
                           /*DataCell(Center(
                               child: Text(
-                                  PagePerSheet.map[data.pagePerSheet] ?? ""))),
-                          DataCell(
-                              Center(child: Text(data.price.toString() ?? ""))),*/
+                                  PagePerSheet.map[data.pagePerSheet] ?? ""))),*/
                         ]))
                     .toList(),
               ),

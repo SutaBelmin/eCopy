@@ -1,9 +1,5 @@
 ﻿using eCopy.Model.Enum;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eCopy.Desktop
 {
@@ -18,5 +14,8 @@ namespace eCopy.Desktop
         public PagePerSheet Pages { get; set; }
         public CollatedPrintOptions Collate { get; set; }
         public DateTime RequestDate { get; set; }
+        public bool IsPaid { get; set; }
+        public string ClientName { get; set; }
+        public double Price { get; set; }
     }
 }

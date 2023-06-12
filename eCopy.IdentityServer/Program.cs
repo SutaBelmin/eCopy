@@ -1,7 +1,6 @@
 using eCopy.IdentityServer;
 using eCopy.IdentityServer.Config;
 using eCopy.Services;
-using eCopy.Services.Database;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

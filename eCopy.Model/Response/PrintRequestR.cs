@@ -1,9 +1,5 @@
 ﻿using eCopy.Model.Enum;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eCopy.Model.Response
 {
@@ -18,6 +14,7 @@ namespace eCopy.Model.Response
         public Letter Letter { get; set; }
         public PagePerSheet Pages { get; set; }
         public CollatedPrintOptions Collate { get; set; }
+        public double Price { get; set; }
 
         public int ClientId { get; set; }
 
@@ -26,5 +23,7 @@ namespace eCopy.Model.Response
 
         public CopierResponse Copier { get; set; }
         public DateTime RequestDate { get; set; }
+        public bool IsPaid { get; set; }
+        public string ClientName { get; set; }
     }
 }

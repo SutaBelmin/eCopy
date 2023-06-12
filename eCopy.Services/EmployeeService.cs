@@ -2,10 +2,8 @@
 using eCopy.Model;
 using eCopy.Model.Enum;
 using eCopy.Model.Requests;
-using eCopy.Model.Response;
 using eCopy.Model.SearchObjects;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -60,7 +58,6 @@ namespace eCopy.Services
 
         public override IQueryable<Employee> AddFilter(IQueryable<Employee> query, EmployeeSearch search = null)
         {
-            //var filteredQuery = base.AddFilter(query, search);
 
             query = query
                 .Include(x => x.Person)

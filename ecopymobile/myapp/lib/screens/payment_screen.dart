@@ -5,21 +5,34 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:myapp/screens/print_list_screen.dart';
 import 'package:myapp/utils/Constants.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/print_list_provider.dart';
 
 class PaymentScreen extends StatefulWidget {
   static const String routeName = "paymentscreen";
-  String amount;
 
-  PaymentScreen(this.amount, {Key? key}) : super(key: key);
-  //const PaymentScreen({Key? key}) : super(key: key);
+  final String id;
+  final double amount;
+
+  PaymentScreen({Key? key, required this.id, required this.amount})
+      : super(key: key);
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+  PrintListProvider? _printProvider = null;
   Map<String, dynamic>? paymentIntent;
   String payAmount = (15).toString();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _printProvider = context.read<PrintListProvider>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +40,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       appBar: AppBar(
         title: const Text('Stripe Payment'),
       ),
-      body:
-          /*Center(
-          child: Text(this.widget.podaci ?? ""),
-        )*/
-          Center(
+      body: Center(
         child: TextButton(
           child: const Text('Make Payment'),
           onPressed: () async {
@@ -44,7 +53,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   Future<void> makePayment() async {
     try {
-      paymentIntent = await createPaymentIntent(this.widget.amount, 'BAM');
+      String price = this.widget.amount.toString();
+      paymentIntent = await createPaymentIntent(price, 'BAM');
       //Payment Sheet
       await Stripe.instance
           .initPaymentSheet(
@@ -65,20 +75,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
   displayPaymentSheet() async {
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) => AlertDialog(
-                  title: Text("Payment successful!"),
-                  content: Text(
-                      style: Theme.of(context).textTheme.subtitle2,
-                      "Successfully added new payment"),
-                  actions: [
-                    TextButton(
-                        onPressed: () => Navigator.pushNamed(
-                            context, PrintListScreen.rotueName),
-                        child: Text("Ok"))
-                  ],
-                ));
+        _printProvider?.pay(this.widget.id).then((value) => {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                        title: Text("Payment successful!"),
+                        content: Text(
+                            style: Theme.of(context).textTheme.subtitle2,
+                            "Successfully added new payment"),
+                        actions: [
+                          TextButton(
+                              onPressed: () => Navigator.pushNamed(
+                                  context, PrintListScreen.rotueName),
+                              child: Text("Ok"))
+                        ],
+                      ))
+            });
+
         // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("paid successfully")));
 
         paymentIntent = null;
@@ -124,7 +137,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   calculateAmount(String amount) {
-    final calculatedAmout = (int.parse(amount)) * 100;
+    final calculatedAmout = ((double.parse(amount)) * 100).toInt();
     return calculatedAmout.toString();
   }
 }

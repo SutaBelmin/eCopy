@@ -8,9 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eCopy.Services
 {
@@ -44,7 +41,7 @@ namespace eCopy.Services
             var clientIdClaim = httpContextAccessor.HttpContext.User.Claims
                 .FirstOrDefault(x => x.Type == "ClientId");
 
-            var entity = context.Requests.AsQueryable();
+            var entity = context.Requests.Include(x=> x.Client).ThenInclude(x=> x.Person).AsQueryable();
 
             if (int.TryParse(clientIdClaim?.Value, out int clientId))
             {
@@ -100,5 +97,13 @@ namespace eCopy.Services
             return mapper.Map<PrintRequestR>(model); 
         }
 
+        public PrintRequestR Pay(int id)
+        {
+            var request = context.Requests.FirstOrDefault(x => x.Id == id);
+            request.IsPaid = true;
+            context.SaveChanges();
+
+            return mapper.Map<PrintRequestR>(request);
+        }
     }
 }

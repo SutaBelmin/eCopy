@@ -1,5 +1,4 @@
 using eCopy;
-using eCopy.Model.Response;
 using eCopy.Services;
 using eCopy.Services.Database.Seed;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

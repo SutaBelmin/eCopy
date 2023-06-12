@@ -3,12 +3,7 @@ using eCopy.Model;
 using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using eCopy.Services.Database;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eCopy.Services
 {
@@ -36,7 +31,9 @@ namespace eCopy.Services
 
 
             CreateMap<PrintRequest, Request>().ReverseMap();
-            CreateMap<PrintRequestR, Request>().ReverseMap();
+            CreateMap<PrintRequestR, Request>()
+                .ReverseMap()
+                .ForMember(x => x.ClientName, opt => opt.MapFrom(x => x.Client != null && x.Client.Person != null ? string.Concat(x.Client.Person.FirstName, " ", x.Client.Person.LastName) : null));
             CreateMap<PrintRequestUpdate, Request>().ReverseMap();
 
 

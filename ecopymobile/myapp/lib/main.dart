@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/model/paymentArguments.dart';
 import 'package:myapp/model/storageService.dart';
 import 'package:myapp/providers/authentication_provider.dart';
 import 'package:myapp/providers/city_provider.dart';
@@ -34,22 +35,18 @@ void main() => runApp(MultiProvider(
             return MaterialPageRoute(builder: ((context) => PrintListScreen()));
           } else if (settings.name == NewPrintScreen.routeName) {
             return MaterialPageRoute(builder: ((context) => NewPrintScreen()));
-          } /*else if (settings.name == PaymentScreen.routeName) {
-            return MaterialPageRoute(builder: ((context) => PaymentScreen()));
-          }*/
-          else if (settings.name == RegistrationScreen.routeName) {
+          } else if (settings.name == RegistrationScreen.routeName) {
             return MaterialPageRoute(
                 builder: ((context) => RegistrationScreen()));
+          } else if (settings.name == PaymentScreen.routeName) {
+            final args = settings.arguments as PaymentArguments;
+            return MaterialPageRoute(
+              builder: (context) {
+                return PaymentScreen(id: args.id, amount: args.amount ?? 0);
+              },
+            );
           } else if (settings.name == HomePage.routeName) {
             return MaterialPageRoute(builder: ((context) => HomePage()));
-          }
-
-          var uri = Uri.parse(settings.name!);
-          if (uri.pathSegments.length == 2 &&
-              "${uri.pathSegments.first}" == PaymentScreen.routeName) {
-            String amount = uri.pathSegments[1];
-            return MaterialPageRoute(
-                builder: (context) => PaymentScreen(amount));
           }
         },
       ),
@@ -84,7 +81,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Flutter Row Example"),
+          title: Text("eCopy"),
         ),
         body: SingleChildScrollView(
           child: Column(children: [
@@ -150,6 +147,7 @@ class HomePage extends StatelessWidget {
                 child: InkWell(
                   onTap: () async {
                     try {
+                      _buildLoading(true);
                       var result = await _authenticationProvider.insert({
                         "Username": _usernameController.text,
                         "Password": _passwordController.text
@@ -158,6 +156,7 @@ class HomePage extends StatelessWidget {
                           Jwt.parseJwt(result!.Token);
                       if (payload["role"] == 5 || payload["role"] == "User") {
                         StorageService.token = result.Token;
+                        _buildLoading(false);
                         Navigator.pushNamed(context, PrintListScreen.rotueName);
 
                         _usernameController.text = "";
@@ -166,6 +165,7 @@ class HomePage extends StatelessWidget {
                         throw Exception("Invalid login");
                       }
                     } catch (e) {
+                      _buildLoading(false);
                       displayDialog(context, "An Error Occurred",
                           "No account was found matching that username and password");
                     }

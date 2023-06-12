@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace eCopy.Desktop
@@ -39,6 +35,9 @@ namespace eCopy.Desktop
                 RequestDate = x.RequestDate,
                 Status = x.Status.ToString(),
                 Side = x.Side.ToString(),
+                IsPaid = x.IsPaid,
+                ClientName = x.ClientName,
+                Price = x.Price.ToString("F2") 
             }).ToList();
         }
 

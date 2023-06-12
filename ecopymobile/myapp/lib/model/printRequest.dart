@@ -6,6 +6,7 @@ part 'printRequest.g.dart';
 
 @JsonSerializable()
 class PrintRequest {
+  String? id;
   int? status;
   int? side;
   int? options;
@@ -14,6 +15,7 @@ class PrintRequest {
   int? collate;
   int? pagePerSheet;
   double? price;
+  bool? isPaid;
 
   PrintRequest() {}
 

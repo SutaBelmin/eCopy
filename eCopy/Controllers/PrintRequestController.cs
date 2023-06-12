@@ -1,11 +1,8 @@
-﻿using eCopy.Model.Requests;
-using eCopy.Model.Response;
+﻿using eCopy.Model.Response;
 using eCopy.Model.SearchObjects;
 using eCopy.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace eCopy.Controllers
 {
@@ -23,6 +20,12 @@ namespace eCopy.Controllers
         public override PrintRequestR Insert([FromForm] eCopy.Model.Requests.PrintRequest model)
         {
             return base.Insert(model);
+        }
+
+        [HttpPost("pay/{id}")]
+        public PrintRequestR Pay(int id)
+        {
+            return service.Pay(id);
         }
     }
 }

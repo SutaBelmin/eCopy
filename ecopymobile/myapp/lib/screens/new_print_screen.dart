@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:myapp/model/listItem.dart';
 import 'package:myapp/model/printRequest.dart';
-import 'package:myapp/providers/new_pr_provider.dart';
+import 'package:myapp/providers/print_list_provider.dart';
 import 'package:myapp/screens/print_list_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 
 class NewPrintScreen extends StatefulWidget {
   static const String routeName = "newPrintScreen";
@@ -19,8 +18,8 @@ class NewPrintScreen extends StatefulWidget {
 }
 
 class _NewPrintScreenState extends State<NewPrintScreen> {
-  NewPrProvider? _printProvider = null;
-  //dynamic data = {};
+  PrintListProvider? _printProvider = null;
+
   List<PrintRequest> data = [];
   PrintRequest _printData = new PrintRequest();
   double? printPrice = 45;
@@ -74,7 +73,7 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _printProvider = context.read<NewPrProvider>();
+    _printProvider = context.read<PrintListProvider>();
     loadData();
   }
 
@@ -88,7 +87,7 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
 
   File? pdfFile;
 
-  final _formKey = GlobalKey<FormState>(); // form key for validation
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +185,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                                     value: letterValue,
                                                     onChanged:
                                                         (ListItem? value) {
-                                                      // This is called when the user selects an item.
                                                       setState(() {
                                                         letterValue = value!;
                                                       });
@@ -216,7 +214,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                                     value: pagePerSheetValue,
                                                     onChanged:
                                                         (ListItem? value) {
-                                                      // This is called when the user selects an item.
                                                       setState(() {
                                                         pagePerSheetValue =
                                                             value!;
@@ -256,7 +253,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                                         printPagesOptionsValue,
                                                     onChanged:
                                                         (ListItem? value) {
-                                                      // This is called when the user selects an item.
                                                       setState(() {
                                                         printPagesOptionsValue =
                                                             value!;
@@ -287,7 +283,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                                     value: sidePrintOptionValue,
                                                     onChanged:
                                                         (ListItem? value) {
-                                                      // This is called when the user selects an item.
                                                       setState(() {
                                                         sidePrintOptionValue =
                                                             value!;
@@ -327,7 +322,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                                         collatedPrintOptionsValue,
                                                     onChanged:
                                                         (ListItem? value) {
-                                                      // This is called when the user selects an item.
                                                       setState(() {
                                                         collatedPrintOptionsValue =
                                                             value!;
@@ -359,7 +353,6 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                                     value: orientationValue,
                                                     onChanged:
                                                         (ListItem? value) {
-                                                      // This is called when the user selects an item.
                                                       setState(() {
                                                         orientationValue =
                                                             value!;
@@ -457,7 +450,7 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .subtitle2,
-                                                  "Successfully inserted new print request ${"" /*user.person!.firstName*/}"),
+                                                  "Successfully inserted new print request"),
                                               actions: [
                                                 TextButton(
                                                     onPressed: () =>

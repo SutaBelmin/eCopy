@@ -1,7 +1,6 @@
 ﻿using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;

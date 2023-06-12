@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace eCopy.Desktop
@@ -21,7 +18,6 @@ namespace eCopy.Desktop
             do
             {
                 var loginForm = new frmLog();
-                //Application.Run(new frmEmp());
                 Application.Run(loginForm);
                 if (loginForm.Success)
                 {

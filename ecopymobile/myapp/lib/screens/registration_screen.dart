@@ -35,7 +35,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController _passwordConfirmController =
       new TextEditingController();
 
-  final _formKey = GlobalKey<FormState>(); // form key for validation
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -171,7 +171,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         style: Theme.of(context).textTheme.titleLarge,
                         value: genderValue,
                         onChanged: (ListItem? value) {
-                          // This is called when the user selects an item.
                           setState(() {
                             genderValue = value!;
                           });
@@ -452,7 +451,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   content: Text(
                                       style:
                                           Theme.of(context).textTheme.subtitle2,
-                                      "Successfully registered user ${"" /*user.person!.firstName*/}"),
+                                      "Successfully registered user"),
                                   actions: [
                                     TextButton(
                                         onPressed: () => Navigator.popUntil(

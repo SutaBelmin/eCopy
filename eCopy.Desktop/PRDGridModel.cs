@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eCopy.Desktop
 {
@@ -17,5 +13,10 @@ namespace eCopy.Desktop
         public string Pages { get; set; }
         public string Collate { get; set; }
         public DateTime RequestDate { get; set; }
+        public bool IsPaid { get; set; }
+
+        public string ClientName { get; set; }
+        public string Price { get; set; }
+
     }
 }

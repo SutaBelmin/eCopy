@@ -7,7 +7,6 @@ class UserProvider extends BaseProvider<ClientResponse> {
   @override
   ClientResponse fromJson(data) {
     // TODO: implement fromJson
-    //return ClientResponse();
     return ClientResponse.fromJson(data);
   }
 }

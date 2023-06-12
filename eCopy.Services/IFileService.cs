@@ -1,5 +1,4 @@
 ﻿using eCopy.Model.Response;
-using Microsoft.AspNetCore.Http;
 
 namespace eCopy.Services
 {

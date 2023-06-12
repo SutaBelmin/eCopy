@@ -3,16 +3,9 @@ using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using Flurl.Http;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace eCopy.Desktop

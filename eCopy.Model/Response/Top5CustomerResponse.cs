@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace eCopy.Model.Response
 {
     public class Top5CustomerResponse

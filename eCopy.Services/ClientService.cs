@@ -3,11 +3,8 @@ using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using eCopy.Model.SearchObjects;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eCopy.Services
 {

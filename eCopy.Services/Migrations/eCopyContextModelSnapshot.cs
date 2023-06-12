@@ -710,6 +710,9 @@ namespace eCopy.Services.Migrations
                     b.Property<string>("FilePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Letter")
                         .HasColumnType("nvarchar(max)");
 
