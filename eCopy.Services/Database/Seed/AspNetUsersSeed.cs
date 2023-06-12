@@ -10,20 +10,20 @@ namespace eCopy.Services.Database.Seed
     {
         public static void Seed(eCopyContext context)
         {
-            if (!context.Users.Any(x => x.UserName == "client"))
+            if (!context.Users.Any(x => x.UserName == "mobile"))
             {
                 context.Users.Add(new IdentityUser
                 {
-                    UserName = "client",
+                    UserName = "mobile",
                     Active = false,
                     CreatedDate = DateTime.Now,
                     ChangePassword = false,
-                    NormalizedUserName = "CLIENT",
-                    Email = "client@hotmail.com",
-                    NormalizedEmail = "CLIENT@HOTMAIL.COM",
+                    NormalizedUserName = "MOBILE",
+                    Email = "mobile@hotmail.com",
+                    NormalizedEmail = "MOBILE@HOTMAIL.COM",
                     EmailConfirmed = false,
-                    PasswordHash = "AQAAAAEAACcQAAAAED9ivvrENebu0rTr4rxcNH/bcOPa6QvstBM7euQbklr9ggWX8VjzEJQdDPBDtzRZWg==",
-                    SecurityStamp = "9C697B15-CBB3-4FD5-9C4A-C6384992A90C",
+                    PasswordHash = "AQAAAAEAACcQAAAAEDViG9MTpPn++4EbgR7CuZ2x3HUze5kZDELTnY7w7ntZK7PWNkqOk+1cENLfGBsLng==",
+                    SecurityStamp = "074f4478-5665-44fc-9298-0bb22fec026d",
                     ConcurrencyStamp = "d6253cdd-776c-41de-a3e4-4d80109c591c",
                     PhoneNumber = "123321",
                     PhoneNumberConfirmed = false,
@@ -33,20 +33,20 @@ namespace eCopy.Services.Database.Seed
                     AccessFailedCount = 0
                 });
             }
-            if (!context.Users.Any(x => x.UserName == "emp"))
+            if (!context.Users.Any(x => x.UserName == "employee"))
             {
                 context.Users.Add(new IdentityUser
                 {
-                    UserName = "emp",
+                    UserName = "employee",
                     Active = false,
                     CreatedDate = DateTime.Now,
                     ChangePassword = false,
-                    NormalizedUserName = "EMP",
-                    Email = "emp@hotmail.com",
+                    NormalizedUserName = "EMPLOYEE",
+                    Email = "employee@hotmail.com",
                     NormalizedEmail = "EMP@HOTMAIL.COM",
                     EmailConfirmed = false,
-                    PasswordHash = "AQAAAAEAACcQAAAAEBhPl925AtAnFbvFfDkRfw5sZXvt92WSmggDH+kb/CMSAwr1pmLzcSkwAJ0tBcpuUg==",
-                    SecurityStamp = "5BE5BF74-3D0C-4773-BB0B-90AE4B82CEFA",
+                    PasswordHash = "AQAAAAEAACcQAAAAENFWq1Fn368QIeIGakMvvHLODaOzAiGrkNkG6weEKn88rrl/4JuH6YhCy0q8R3rN0A==",
+                    SecurityStamp = "707821bc-4667-4fc1-9ee3-677f83bc8acc",
                     ConcurrencyStamp = "7be355da-98d9-4a63-be3b-e550a433ac48",
                     PhoneNumber = "123321",
                     PhoneNumberConfirmed = false,
@@ -56,20 +56,20 @@ namespace eCopy.Services.Database.Seed
                     AccessFailedCount = 0
                 });
             }
-            if (!context.Users.Any(x => x.UserName == "cc"))
+            if (!context.Users.Any(x => x.UserName == "admin"))
             {
                 context.Users.Add(new IdentityUser
                 {
-                    UserName = "cc",
+                    UserName = "admin",
                     Active = false,
                     CreatedDate = DateTime.Now,
                     ChangePassword = false,
-                    NormalizedUserName = "CC",
-                    Email = "cc@hotmail.com",
-                    NormalizedEmail = "CC@HOTMAIL.COM",
+                    NormalizedUserName = "ADMIN",
+                    Email = "admin@hotmail.com",
+                    NormalizedEmail = "ADMIN@HOTMAIL.COM",
                     EmailConfirmed = false,
-                    PasswordHash = "AQAAAAEAACcQAAAAEEAxziNvt168Bce8kzNwoV7iSAMSyUAfv05PqtXltij6wsPZEUHwZf3gZrmbIEZc6A==",
-                    SecurityStamp = "2a9cc242-94ad-4098-a27f-976765f2583a",
+                    PasswordHash = "AQAAAAEAACcQAAAAEFyAiQ5TjKnf8uVQODSWq9h+do6j7LVIBaE/D5Ve5hhpjvkNkaosvNVf5Ftr9omdVw==",
+                    SecurityStamp = "8a3206fc-36a4-4597-a067-45460c91a174",
                     ConcurrencyStamp = "569e499c-9f91-4957-b331-e4b818ea3c65",
                     PhoneNumber = "123321",
                     PhoneNumberConfirmed = false,

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eCopy.Services.Migrations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,8 @@ namespace eCopy.Services.Database.Seed
                     ClientId = 1,
                     CopierId = 1,
                     RequestDate = DateTime.Now,
-                    Price = 50
+                    Price = 50,
+                    IsPaid = true
                 });
 
                 context.Requests.Add(new Request
@@ -47,7 +49,8 @@ namespace eCopy.Services.Database.Seed
                     ClientId = 1,
                     CopierId = 1,
                     RequestDate = DateTime.Now,
-                    Price = 50
+                    Price = 50,
+                    IsPaid = false
                 });
             }
             context.SaveChanges();

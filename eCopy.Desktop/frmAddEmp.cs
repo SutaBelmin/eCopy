@@ -117,7 +117,9 @@ namespace eCopy.Desktop
             Validacija.ObaveznoPolje(txtPh, error, "Obavezan unos") &&
             Validacija.ObaveznoPolje(txtPassw, error, "Obavezan unos") &&
             Validacija.ObaveznoPolje(txtPassCon, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(pbPF, error, "Obavezan unos");
+            Validacija.ObaveznoPolje(pbPF, error, "Obavezan unos") &&
+            Validacija.JednakoPolje(txtPassw, txtPassCon, error, "Password mora biti jednako Password Confirm");
+            
         }
     }
 }

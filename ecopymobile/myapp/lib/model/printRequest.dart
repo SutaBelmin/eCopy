@@ -13,7 +13,7 @@ class PrintRequest {
   int? orientation;
   int? letter;
   int? collate;
-  int? pagePerSheet;
+  int? pages;
   double? price;
   bool? isPaid;
 

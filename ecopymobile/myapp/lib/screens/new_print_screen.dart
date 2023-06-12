@@ -428,8 +428,7 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                   _printData.letter = letterValue.value;
                                   _printData.collate =
                                       collatedPrintOptionsValue.value;
-                                  _printData.pagePerSheet =
-                                      pagePerSheetValue.value;
+                                  _printData.pages = pagePerSheetValue.value;
                                   _printData.price =
                                       double.parse(_nmbrPageController.text) *
                                           0.10;
@@ -437,8 +436,7 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                   var newPrintReq = await _printProvider!
                                       .insertFile(
                                           pdfFile, 'File', _printData.toJson());
-                                  /*var newPrintReq =
-                                      await _printProvider!.insert(_printData);*/
+
                                   if (newPrintReq != null) {
                                     showDialog(
                                         context: context,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:myapp/model/enum/letter.dart';
 import 'package:myapp/model/enum/orien.dart';
+import 'package:myapp/model/enum/pagePerSheet.dart';
 import 'package:myapp/model/enum/printPagesOptions.dart';
 import 'package:myapp/model/enum/sidePrintOption.dart';
 import 'package:myapp/model/enum/status.dart';
@@ -201,7 +202,7 @@ class _PrintListScreenState extends State<PrintListScreen> {
                   DataColumn(label: Text('Letter')),
                   DataColumn(label: Text('Side print options')),
                   DataColumn(label: Text('Collated print options')),
-                  /*DataColumn(label: Text('Page Per Sheet')),*/
+                  DataColumn(label: Text('Page Per Sheet')),
                   DataColumn(label: Text('Price')),
                   DataColumn(label: Text('Payment Service')),
                 ],
@@ -252,9 +253,8 @@ class _PrintListScreenState extends State<PrintListScreen> {
                               ),
                             ),
                           ),
-                          /*DataCell(Center(
-                              child: Text(
-                                  PagePerSheet.map[data.pagePerSheet] ?? ""))),*/
+                          DataCell(Center(
+                              child: Text(PagePerSheet.map[data.pages] ?? ""))),
                         ]))
                     .toList(),
               ),
