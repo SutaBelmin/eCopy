@@ -229,6 +229,8 @@ class _PrintListScreenState extends State<PrintListScreen> {
                           DataCell(Center(
                               child: Text(Collated.map[data.collate] ?? ""))),
                           DataCell(Center(
+                              child: Text(PagePerSheet.map[data.pages] ?? ""))),
+                          DataCell(Center(
                               child:
                                   Text(data.price?.toStringAsFixed(2) ?? ""))),
                           DataCell(
@@ -253,8 +255,6 @@ class _PrintListScreenState extends State<PrintListScreen> {
                               ),
                             ),
                           ),
-                          DataCell(Center(
-                              child: Text(PagePerSheet.map[data.pages] ?? ""))),
                         ]))
                     .toList(),
               ),
