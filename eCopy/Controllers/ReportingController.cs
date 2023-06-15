@@ -1,5 +1,6 @@
 ﻿using eCopy.Model.Response;
 using eCopy.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ namespace eCopy.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ReportingController : ControllerBase
     {
         private readonly IReportService reportService;
