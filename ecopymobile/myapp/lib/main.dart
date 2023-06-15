@@ -38,7 +38,10 @@ void main() => runApp(MultiProvider(
             final args = settings.arguments as PaymentArguments;
             return MaterialPageRoute(
               builder: (context) {
-                return PaymentScreen(id: args.id, amount: args.amount ?? 0);
+                return PaymentScreen(
+                    id: args.id,
+                    amount: args.amount ?? 0,
+                    isPaid: args.isPaid ?? false);
               },
             );
           } else if (settings.name == HomePage.routeName) {

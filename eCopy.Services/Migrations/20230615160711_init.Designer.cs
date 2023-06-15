@@ -12,8 +12,8 @@ using eCopy.Services;
 namespace eCopy.Services.Migrations
 {
     [DbContext(typeof(eCopyContext))]
-    [Migration("20230611100732_isPayed")]
-    partial class isPayed
+    [Migration("20230615160711_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -712,7 +712,7 @@ namespace eCopy.Services.Migrations
                     b.Property<string>("FilePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsPayed")
+                    b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
 
                     b.Property<string>("Letter")

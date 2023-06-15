@@ -36,10 +36,7 @@ namespace eCopy.Desktop
                 FirstName = x.Person.FirstName,
                 LastName = x.Person.LastName,
                 MiddleName = x.Person.MiddleName,
-                //Active = x.Active,
-                //CopierName = x.Copier.Name,
                 Gender = x.Person.Gender,
-                //ProfilePhoto = x.ProfilePhoto
             }).ToList();
         }
 
@@ -68,10 +65,7 @@ namespace eCopy.Desktop
                 FirstName = x.Person.FirstName,
                 LastName = x.Person.LastName,
                 MiddleName = x.Person.MiddleName,
-                //Active = x.Active,
-                //CopierName = x.Copier.Name,
                 Gender = x.Person.Gender,
-                //ProfilePhoto = x.ProfilePhoto
             }).ToList();
         }
 

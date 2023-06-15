@@ -14,8 +14,10 @@ class PaymentScreen extends StatefulWidget {
 
   final String id;
   final double amount;
+  final bool isPaid;
 
-  PaymentScreen({Key? key, required this.id, required this.amount})
+  PaymentScreen(
+      {Key? key, required this.id, required this.amount, required this.isPaid})
       : super(key: key);
 
   @override
@@ -52,16 +54,31 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   Future<void> makePayment() async {
+    if (this.widget.isPaid == true) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                title: Text("Already paid"),
+                content: Text(
+                    style: Theme.of(context).textTheme.subtitle2,
+                    "Print request already paid"),
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.pushNamed(
+                          context, PrintListScreen.rotueName),
+                      child: Text("Ok"))
+                ],
+              ));
+      return;
+    }
     try {
       String price = this.widget.amount.toString();
       paymentIntent = await createPaymentIntent(price, 'BAM');
-      //Payment Sheet
+
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
                   paymentIntentClientSecret: paymentIntent!['client_secret'],
-                  // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92',),
-                  // googlePay: const PaymentSheetGooglePay(testEnv: true, currencyCode: "US", merchantCountryCode: "+92"),
                   style: ThemeMode.dark,
                   merchantDisplayName: 'Name'))
           .then((value) {});
@@ -110,7 +127,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
     }
   }
 
-  //  Future<Map<String, dynamic>>
   createPaymentIntent(String amount, String currency) async {
     try {
       Map<String, dynamic> body = {

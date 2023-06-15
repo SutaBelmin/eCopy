@@ -246,8 +246,8 @@ class _PrintListScreenState extends State<PrintListScreen> {
                                 onTap: () => {
                                   Navigator.pushNamed(
                                       context, PaymentScreen.routeName,
-                                      arguments: PaymentArguments(
-                                          '${data.id}', data.price))
+                                      arguments: PaymentArguments('${data.id}',
+                                          data.price, data.isPaid))
                                 },
                                 child: Center(
                                     child: Text("Pay now",
