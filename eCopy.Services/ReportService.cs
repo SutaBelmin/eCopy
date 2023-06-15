@@ -64,7 +64,7 @@ namespace eCopy.Services
 
             var result = context.Requests
                 .Where(x => x.Status == Status.Completed.ToString()
-                && x.RequestDate >= lastYear)
+                && x.RequestDate.Year == lastYear.Year)
                 .GroupBy(x => new { x.RequestDate.Month })
                 .Select(x => new RevenueForLastYearResponse
                 { 

@@ -58,6 +58,87 @@ namespace eCopy.Services.Database.Seed
                     BirthDate = DateTime.Now
                 });
             }
+            if (!context.Persons.Any(x => x.FirstName == "cliuser"))
+            {
+                context.Persons.Add(new Person
+                {
+                    FirstName = "cliuser",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = null,
+                    Active = true,
+                    LastName = "cliuser",
+                    MiddleName = "cliuser",
+                    Gender = "Male",
+                    CityId = 1,
+                    Address = "adress",
+                    BirthDate = DateTime.Now
+                });
+            }
+            if (!context.Persons.Any(x => x.FirstName == "cliuser2"))
+            {
+                context.Persons.Add(new Person
+                {
+                    FirstName = "cliuser2",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = null,
+                    Active = true,
+                    LastName = "cliuser2",
+                    MiddleName = "cliuser2",
+                    Gender = "Male",
+                    CityId = 1,
+                    Address = "adress",
+                    BirthDate = DateTime.Now
+                });
+            }
+            if (!context.Persons.Any(x => x.FirstName == "cliuser3"))
+            {
+                context.Persons.Add(new Person
+                {
+                    FirstName = "cliuser3",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = null,
+                    Active = true,
+                    LastName = "cliuser3",
+                    MiddleName = "cliuser3",
+                    Gender = "Male",
+                    CityId = 1,
+                    Address = "adress",
+                    BirthDate = DateTime.Now
+                });
+            }
+            if (!context.Persons.Any(x => x.FirstName == "cliuser4"))
+            {
+                context.Persons.Add(new Person
+                {
+                    FirstName = "cliuser4",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = null,
+                    Active = true,
+                    LastName = "cliuser4",
+                    MiddleName = "cliuser4",
+                    Gender = "Male",
+                    CityId = 1,
+                    Address = "adress",
+                    BirthDate = DateTime.Now
+                });
+            }
+
+            if (!context.Persons.Any(x => x.FirstName == "cliuser5"))
+            {
+                context.Persons.Add(new Person
+                {
+                    FirstName = "cliuser5",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = null,
+                    Active = true,
+                    LastName = "cliuser5",
+                    MiddleName = "cliuser5",
+                    Gender = "Male",
+                    CityId = 1,
+                    Address = "adress",
+                    BirthDate = DateTime.Now
+                });
+            }
             context.SaveChanges();
         }
     }

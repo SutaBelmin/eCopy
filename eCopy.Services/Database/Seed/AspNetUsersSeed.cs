@@ -79,6 +79,121 @@ namespace eCopy.Services.Database.Seed
                     AccessFailedCount = 0
                 });
             }
+            if (!context.Users.Any(x => x.UserName == "cliuser"))
+            {
+                context.Users.Add(new IdentityUser
+                {
+                    UserName = "cliuser",
+                    Active = false,
+                    CreatedDate = DateTime.Now,
+                    ChangePassword = false,
+                    NormalizedUserName = "CLIUSER",
+                    Email = "cliuser@hotmail.com",
+                    NormalizedEmail = "CLIUSER@HOTMAIL.COM",
+                    EmailConfirmed = false,
+                    PasswordHash = "AQAAAAEAACcQAAAAEPAZEzgvqHrYA7bCPLHzLTJmHuai6aRLIFNW+8znB4P0z8UxMpgw/+NnBis4QWZeEg==",
+                    SecurityStamp = "def5c8b2-1388-4ff8-ae8a-28904546f4ca",
+                    ConcurrencyStamp = "23dcc790-b56c-4c1f-ad62-b9a8e0c848ab",
+                    PhoneNumber = "123321",
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnd = null,
+                    LockoutEnabled = true,
+                    AccessFailedCount = 0
+                });
+            }
+            if (!context.Users.Any(x => x.UserName == "cliuser2"))
+            {
+                context.Users.Add(new IdentityUser
+                {
+                    UserName = "cliuser2",
+                    Active = false,
+                    CreatedDate = DateTime.Now,
+                    ChangePassword = false,
+                    NormalizedUserName = "CLIUSER2",
+                    Email = "cliuser2@hotmail.com",
+                    NormalizedEmail = "CLIUSER2@HOTMAIL.COM",
+                    EmailConfirmed = false,
+                    PasswordHash = "AQAAAAEAACcQAAAAEGzeXL6UYZkPATZxNyJD5zasZuKsw8kq3N8de3ISbqIx54bbfTPulHFQ5LYJBbUXhw==",
+                    SecurityStamp = "3263fbaa-589e-49cd-9f64-41d32e36a031",
+                    ConcurrencyStamp = "e1eb123e-0596-4ec0-aa4c-14c2fd68a0d9",
+                    PhoneNumber = "123321",
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnd = null,
+                    LockoutEnabled = true,
+                    AccessFailedCount = 0
+                });
+            }
+            if (!context.Users.Any(x => x.UserName == "cliuser3"))
+            {
+                context.Users.Add(new IdentityUser
+                {
+                    UserName = "cliuser3",
+                    Active = false,
+                    CreatedDate = DateTime.Now,
+                    ChangePassword = false,
+                    NormalizedUserName = "CLIUSER3",
+                    Email = "cliuser3@hotmail.com",
+                    NormalizedEmail = "CLIUSER3@HOTMAIL.COM",
+                    EmailConfirmed = false,
+                    PasswordHash = "AQAAAAEAACcQAAAAEIYEmQWXyAG8oLjQGb3Cc6+ISgcCWn4+D1nkOcTXEa1gJkK/klxnwFe8QC9fRKFRgw==",
+                    SecurityStamp = "a371f551-239c-49c8-9071-5e2fcaaeb97a",
+                    ConcurrencyStamp = "5d6d38d7-1bd8-422e-80d7-8575e16be94a",
+                    PhoneNumber = "123321",
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnd = null,
+                    LockoutEnabled = true,
+                    AccessFailedCount = 0
+                });
+            }
+            if (!context.Users.Any(x => x.UserName == "cliuser4"))
+            {
+                context.Users.Add(new IdentityUser
+                {
+                    UserName = "cliuser4",
+                    Active = false,
+                    CreatedDate = DateTime.Now,
+                    ChangePassword = false,
+                    NormalizedUserName = "CLIUSER4",
+                    Email = "cliuser4@hotmail.com",
+                    NormalizedEmail = "CLIUSER4@HOTMAIL.COM",
+                    EmailConfirmed = false,
+                    PasswordHash = "AQAAAAEAACcQAAAAEO+ah9J8DXgv0k1cTZ+aD4tQ/+WMuyUWNvB7J0trG8FLQf4uDFuPrSAwYFwgydji9Q==",
+                    SecurityStamp = "8ff43133-fac2-4780-aac4-970690bb1c22",
+                    ConcurrencyStamp = "a5f47d05-8c4b-491a-8fb8-d9cc2f9d6631",
+                    PhoneNumber = "123321",
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnd = null,
+                    LockoutEnabled = true,
+                    AccessFailedCount = 0
+                });
+            }
+            if (!context.Users.Any(x => x.UserName == "cliuser5"))
+            {
+                context.Users.Add(new IdentityUser
+                {
+                    UserName = "cliuser5",
+                    Active = false,
+                    CreatedDate = DateTime.Now,
+                    ChangePassword = false,
+                    NormalizedUserName = "CLIUSER5",
+                    Email = "cliuser5@hotmail.com",
+                    NormalizedEmail = "CLIUSER5@HOTMAIL.COM",
+                    EmailConfirmed = false,
+                    PasswordHash = "AQAAAAEAACcQAAAAEKnpc7R6PeDF/9C6u9bOLTUGW+Y7mHzX0zbGiqLuPcvpJPBo0NP6WkCwvmykIubhDQ==",
+                    SecurityStamp = "f84b1632-432f-416f-8b27-ab493e04cb60",
+                    ConcurrencyStamp = "2167c985-a24b-4628-8157-869f0201a469",
+                    PhoneNumber = "123321",
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnd = null,
+                    LockoutEnabled = true,
+                    AccessFailedCount = 0
+                });
+            }
             context.SaveChanges();
 
         }
