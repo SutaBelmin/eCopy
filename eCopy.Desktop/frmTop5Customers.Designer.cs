@@ -40,12 +40,12 @@
             this.dgvTop5Customers.Name = "dgvTop5Customers";
             this.dgvTop5Customers.RowHeadersWidth = 51;
             this.dgvTop5Customers.RowTemplate.Height = 24;
-            this.dgvTop5Customers.Size = new System.Drawing.Size(763, 320);
+            this.dgvTop5Customers.Size = new System.Drawing.Size(737, 320);
             this.dgvTop5Customers.TabIndex = 0;
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(681, 347);
+            this.btnPrint.Location = new System.Drawing.Point(655, 350);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(94, 32);
             this.btnPrint.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 394);
+            this.ClientSize = new System.Drawing.Size(761, 394);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.dgvTop5Customers);
             this.Name = "frmTop5Customers";

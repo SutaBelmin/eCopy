@@ -47,7 +47,7 @@ namespace eCopy.Desktop
         public async Task<T> GetById<T>(object id)
         {
             var result = await $"{_endpoint}{_resource}/{id}"
-                .WithHeader("Authorization", User.Token)
+                .WithHeader("Authorization", $"Bearer {User.Token}")
                 .GetJsonAsync<T>();
 
             return result;

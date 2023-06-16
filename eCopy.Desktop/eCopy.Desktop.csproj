@@ -258,6 +258,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\eCopy.Model.Response.RevenueForLastYearResponse.datasource" />
     <None Include="Properties\DataSources\eCopy.Model.Response.Top5CustomerResponse.datasource" />
+    <None Include="Properties\DataSources\EmpModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

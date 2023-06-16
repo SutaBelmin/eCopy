@@ -66,7 +66,7 @@ namespace eCopy.Desktop
                     {
                         FirstName = txtFirstName.Text,
                         LastName = txtLastName.Text,
-                        MiddleName = txtMiddleName.Text,
+                        MiddleName = txtMidName.Text,
                         Address = txtAdr.Text,
                         BirthDate = dtpBD.Value,
                         CityId = (int)cmbCi.SelectedValue,
@@ -105,20 +105,20 @@ namespace eCopy.Desktop
 
         private bool ValidirajUnos()
         {
-            return Validacija.ObaveznoPolje(txtFirstName, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(txtLastName, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(txtMiddleName, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(cmbGe, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(cmbCi, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(txtAdr, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(cbAct, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(txtUsrnm, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(txtEm, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(txtPh, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(txtPassw, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(txtPassCon, error, "Obavezan unos") &&
-            Validacija.ObaveznoPolje(pbPF, error, "Obavezan unos") &&
-            Validacija.JednakoPolje(txtPassw, txtPassCon, error, "Password mora biti jednako Password Confirm");
+            return Validacija.ObaveznoPolje(txtFirstName, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(txtLastName, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(txtMiddleName, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(cmbGe, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(cmbCi, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(txtAdr, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(cbAct, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(txtUsrnm, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(txtEm, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(txtPh, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(txtPassw, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(txtPassCon, error, "Enter some text") &&
+            Validacija.ObaveznoPolje(pbPF, error, "Enter some text") &&
+            Validacija.JednakoPolje(txtPassw, txtPassCon, error, "Password is not equal to Password Confirm");
             
         }
     }

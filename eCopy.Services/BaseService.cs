@@ -19,7 +19,6 @@ namespace eCopy.Services
         {
             var entity = context.Set<TDb>().AsQueryable();
 
-            //entity = AddFilter(entity, search);
 
             var list = entity.ToList();
             
@@ -29,7 +28,6 @@ namespace eCopy.Services
         public virtual IQueryable<TDb> AddFilter(IQueryable<TDb> query , TSearch search = null)
         {
             return query;
-            //throw new System.Exception();
         }
 
         public virtual T GetById(int id)
