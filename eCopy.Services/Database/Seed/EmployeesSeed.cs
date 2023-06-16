@@ -19,10 +19,21 @@ namespace eCopy.Services.Database.Seed
                     Active = true,
                     PersonId = 1,
                     CopierId = 1,
-                    ApplicationUserId = 2                    
+                    ApplicationUserId = 2
+                });
+                context.Employees.Add(new Employee
+                {
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = null,
+                    Active = true,
+                    PersonId = 9,
+                    CopierId = 1,
+                    ApplicationUserId = 9
                 });
                 context.SaveChanges();
             }
+
+
         }
     }
 }

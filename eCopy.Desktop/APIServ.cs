@@ -72,5 +72,13 @@ namespace eCopy.Desktop
 
             return result;
         }
+
+        public async Task Delete(int id)
+        {
+            var result = await $"{_endpoint}{_resource}/{id}"
+                .WithHeader("Authorization", $"Bearer {User.Token}")
+                .DeleteAsync();
+                
+        }
     }
 }

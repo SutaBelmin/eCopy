@@ -75,6 +75,13 @@ namespace eCopy.Services.Database.Seed
                     Active = true,
                     CreatedDate = DateTime.Now,
                 });
+                context.UserRoles.Add(new Database.IdentityUserRole
+                {
+                    UserId = 9,
+                    RoleId = 4,
+                    Active = true,
+                    CreatedDate = DateTime.Now,
+                });
                 context.SaveChanges();
             }
         }

@@ -140,5 +140,22 @@ namespace eCopy.Services
             return mapper.Map<EmployeeResponse>(employee);
         }
 
+        public override void Delete(int id)
+        {
+            var employee = context.Employees.Find(id);
+            var person = context.Persons.Find(employee.PersonId);
+            var user = context.Users.Find(employee.ApplicationUserId);
+            var userRoles = context.UserRoles.Where(x => x.UserId == user.Id).ToList();
+            var profilePhtotos = context.ApplicationUserProfilePhotos.Where(x=> x.ApplicationUserId == user.Id).ToList();
+
+            context.Employees.Remove(employee);
+            context.Persons.Remove(person);
+            context.ApplicationUserProfilePhotos.RemoveRange(profilePhtotos);
+            context.UserRoles.RemoveRange(userRoles);
+            context.Users.Remove(user);
+           
+            context.SaveChanges();
+
+        }
     }
 }

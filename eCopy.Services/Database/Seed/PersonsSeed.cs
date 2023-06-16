@@ -139,6 +139,22 @@ namespace eCopy.Services.Database.Seed
                     BirthDate = DateTime.Now
                 });
             }
+            if (!context.Persons.Any(x => x.FirstName == "emp2"))
+            {
+                context.Persons.Add(new Person
+                {
+                    FirstName = "emp2",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = null,
+                    Active = true,
+                    LastName = "emp2",
+                    MiddleName = "Middle name",
+                    Gender = "Male",
+                    CityId = 1,
+                    Address = "adress",
+                    BirthDate = DateTime.Now
+                });
+            }
             context.SaveChanges();
         }
     }

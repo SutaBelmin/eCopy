@@ -44,5 +44,22 @@ namespace eCopy.Services
             return mapper.Map<T>(entity);
 
         }
+
+        
+        public virtual void Delete(int id)
+        {
+            TDb model =  context.Set<TDb>().Find(id);
+            try
+            {
+                context.Set<TDb>().Remove(model);
+                context.SaveChanges();
+               
+            }
+            catch (Exception e)
+            {
+               
+                throw e;
+            }
+        }
     }
 }

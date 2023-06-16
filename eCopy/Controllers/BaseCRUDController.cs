@@ -31,5 +31,12 @@ namespace eCopy.Controllers
 
             return result;
         }
+        
+        [HttpDelete("{id}")]
+        public virtual IActionResult Delete(int id)
+        {
+            service.Delete(id);
+            return Ok();
+        }
     }
 }

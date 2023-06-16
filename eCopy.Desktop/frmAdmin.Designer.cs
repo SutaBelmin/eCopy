@@ -44,6 +44,7 @@
             this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.middleNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.genderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListEmp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +58,8 @@
             this.firstNameDataGridViewTextBoxColumn,
             this.lastNameDataGridViewTextBoxColumn,
             this.middleNameDataGridViewTextBoxColumn,
-            this.genderDataGridViewTextBoxColumn});
+            this.genderDataGridViewTextBoxColumn,
+            this.Delete});
             this.dgvListEmp.DataSource = this.empModelBindingSource;
             this.dgvListEmp.Location = new System.Drawing.Point(12, 146);
             this.dgvListEmp.Name = "dgvListEmp";
@@ -66,6 +68,7 @@
             this.dgvListEmp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListEmp.Size = new System.Drawing.Size(776, 316);
             this.dgvListEmp.TabIndex = 0;
+            this.dgvListEmp.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListEmp_CellContentClick);
             this.dgvListEmp.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListEmp_CellDoubleClick);
             // 
             // btnSearch
@@ -184,6 +187,15 @@
             this.genderDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.genderDataGridViewTextBoxColumn.Name = "genderDataGridViewTextBoxColumn";
             // 
+            // Delete
+            // 
+            this.Delete.DataPropertyName = "Id";
+            this.Delete.HeaderText = "Delete";
+            this.Delete.MinimumWidth = 6;
+            this.Delete.Name = "Delete";
+            this.Delete.Text = "";
+            this.Delete.Width = 125;
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -226,5 +238,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn middleNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn genderDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn Delete;
     }
 }

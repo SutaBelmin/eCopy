@@ -194,6 +194,29 @@ namespace eCopy.Services.Database.Seed
                     AccessFailedCount = 0
                 });
             }
+            if (!context.Users.Any(x => x.UserName == "emp2"))
+            {
+                context.Users.Add(new IdentityUser
+                {
+                    UserName = "emp2",
+                    Active = false,
+                    CreatedDate = DateTime.Now,
+                    ChangePassword = false,
+                    NormalizedUserName = "EMP2",
+                    Email = "emp2@hotmail.com",
+                    NormalizedEmail = "EMP2@HOTMAIL.COM",
+                    EmailConfirmed = false,
+                    PasswordHash = "AQAAAAEAACcQAAAAECZyaV66fzVCxvRMng0MECYfqkvK8vh2XWwaWWJRHjjZ8SQe63Oh8VmCl0rnKB5yMw==",
+                    SecurityStamp = "5f5274d5-2c2e-4bc1-98ea-854cbe623289",
+                    ConcurrencyStamp = "47c3ec2d-5a7f-4455-82b8-14e569610681",
+                    PhoneNumber = "123321",
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnd = null,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0
+                });
+            }
             context.SaveChanges();
 
         }

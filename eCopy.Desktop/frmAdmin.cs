@@ -87,5 +87,34 @@ namespace eCopy.Desktop
             this.Close();
         }
 
+        private async void dgvListEmp_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string message = "Do you want do delete employee";
+            string title = "Delete employee";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if(result == DialogResult.Yes)
+            {
+                var senderGrid = (DataGridView)sender;
+
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                    e.RowIndex >= 0)
+                {
+                    var employeeId = senderGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+
+                    if(Convert.ToInt32(employeeId) != 1)
+                    {
+                        await employeeService.Delete(Convert.ToInt32(employeeId)); 
+                        btnSearch_Click(null, null);
+                    }
+                    
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 }

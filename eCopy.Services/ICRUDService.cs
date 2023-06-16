@@ -6,5 +6,7 @@
         T Insert(TInsert insert);
 
         T Update(int id, TUpdate update);
+
+        void Delete(int id);
     }
 }
