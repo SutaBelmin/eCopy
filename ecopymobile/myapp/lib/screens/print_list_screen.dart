@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:myapp/model/enum/letter.dart';
 import 'package:myapp/model/enum/orien.dart';
 import 'package:myapp/model/enum/pagePerSheet.dart';
@@ -47,9 +46,6 @@ class _PrintListScreenState extends State<PrintListScreen> {
     super.initState();
     _printProvider = context.read<PrintListProvider>();
     loadData();
-    WidgetsFlutterBinding.ensureInitialized();
-    Stripe.publishableKey =
-        "pk_test_51N5rVYFxWkxWPkD2lPcJ6nG0JmT0i2tKFEjyOVbfN5tIIuhsC7gPuYl7o79wk80EzwEDGDaOs3P3PCXOMRONXqVL00NvliLcMV";
   }
 
   Future loadData() async {
@@ -78,7 +74,7 @@ class _PrintListScreenState extends State<PrintListScreen> {
             )),
           ),
           Container(
-              margin: EdgeInsets.only(left: 300),
+              margin: EdgeInsets.only(left: 230),
               child: ElevatedButton.icon(
                   onPressed: () {
                     StorageService.token = "";

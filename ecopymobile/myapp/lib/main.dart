@@ -175,7 +175,7 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   )),
                 )),
-            SizedBox(height: 30),
+            SizedBox(height: 15),
             Container(
                 height: 50,
                 margin: EdgeInsets.fromLTRB(40, 0, 40, 0),

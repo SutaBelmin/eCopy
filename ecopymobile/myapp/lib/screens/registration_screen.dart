@@ -159,8 +159,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 Column(
                   children: [
                     Container(
-                      child: Text("    Choose your gender  ",
-                          style: TextStyle(fontSize: 20)),
+                      child:
+                          Text("    Gender  ", style: TextStyle(fontSize: 20)),
                     )
                   ],
                 ),
@@ -207,8 +207,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 Column(
                   children: [
                     Container(
-                      child: Text("    Choose your city   ",
-                          style: TextStyle(fontSize: 20)),
+                      child: Text("    City  ", style: TextStyle(fontSize: 20)),
                     )
                   ],
                 ),

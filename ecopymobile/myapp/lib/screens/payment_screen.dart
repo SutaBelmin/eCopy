@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:myapp/.env';
 import 'package:myapp/screens/print_list_screen.dart';
-import 'package:myapp/utils/Constants.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/print_list_provider.dart';
@@ -16,9 +15,20 @@ class PaymentScreen extends StatefulWidget {
   final double amount;
   final bool isPaid;
 
+  String? stripe_sk;
+  late String stripe_pk;
+
   PaymentScreen(
       {Key? key, required this.id, required this.amount, required this.isPaid})
-      : super(key: key);
+      : super(key: key) {
+    stripe_pk = const String.fromEnvironment("stripePublishableKey",
+        defaultValue: stripePublishableKey);
+
+    stripe_sk = const String.fromEnvironment("stripeSecretKey",
+        defaultValue: stripeSecretKey);
+
+    print("secret $stripe_pk");
+  }
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -29,11 +39,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Map<String, dynamic>? paymentIntent;
   String payAmount = (15).toString();
 
+  String? stripe_sk = null;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _printProvider = context.read<PrintListProvider>();
+    loadData();
+  }
+
+  Future loadData() async {
+    Stripe.publishableKey = widget.stripe_pk;
+    Stripe.merchantIdentifier = 'any string works';
+    await Stripe.instance.applySettings();
+
+    stripe_sk = widget.stripe_sk;
+
+    print("secret $stripe_sk");
+    print("secret ${widget.stripe_pk}");
   }
 
   @override
@@ -109,8 +133,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ))
             });
 
-        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("paid successfully")));
-
         paymentIntent = null;
       }).onError((error, stackTrace) {
         print('Error is:--->$error $stackTrace');
@@ -138,7 +160,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       var response = await http.post(
         Uri.parse('https://api.stripe.com/v1/payment_intents'),
         headers: {
-          'Authorization': 'Bearer $SECRET_KEY',
+          'Authorization': 'Bearer $stripe_sk',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: body,

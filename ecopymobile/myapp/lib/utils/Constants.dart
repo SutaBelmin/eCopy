@@ -1,2 +1,0 @@
-String SECRET_KEY =
-    "sk_test_51N5rVYFxWkxWPkD2SWgBcH0tuSr8Qw60q67x9mvnpIqEeekXrnwlutTEucx4q8nCSwq13x3bNPvveFLfwb8EWML300fkwLqYfS";
