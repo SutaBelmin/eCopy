@@ -195,6 +195,7 @@ class HomePage extends StatelessWidget {
                             fontSize: 16,
                           ))),
                 )),
+            SizedBox(height: 15),
           ]),
         ));
   }

@@ -430,8 +430,8 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                                       collatedPrintOptionsValue.value;
                                   _printData.pages = pagePerSheetValue.value;
                                   _printData.price =
-                                      double.parse(_nmbrPageController.text) *
-                                          0.10;
+                                      double.parse(_nmbrPageController.text) /
+                                          10;
 
                                   var newPrintReq = await _printProvider!
                                       .insertFile(
