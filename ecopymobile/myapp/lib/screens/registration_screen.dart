@@ -416,6 +416,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               child: InkWell(
                 onTap: () async {
                   if (_formKey.currentState!.validate()) {
+                    var userna = _usernameController.text;
+                    var client = await _userProvider?.getByUsername(userna);
+                    if (client != null) {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                                title: Text("User already exist"),
+                                content: Text(
+                                    style:
+                                        Theme.of(context).textTheme.subtitle2,
+                                    "User already exist"),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () => Navigator.popUntil(
+                                          context, (route) => route.isFirst),
+                                      child: Text("Ok"))
+                                ],
+                              ));
+                      return;
+                    }
                     try {
                       PersonRequest _personData = new PersonRequest();
                       _personData.firstName = _firstNameController.text;

@@ -399,8 +399,9 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter some text';
+                              if (value!.isEmpty ||
+                                  int.parse(_nmbrPageController.text) <= 0) {
+                                return 'Please enter some number, higher than 0';
                               }
                               return null;
                             },

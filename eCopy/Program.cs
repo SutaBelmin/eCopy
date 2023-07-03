@@ -112,12 +112,10 @@ using (var scope = app.Services.CreateScope())
     RequestsSeed.Seed(context);
 }
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseExceptionHandlerMiddleware();
 app.UseStaticFiles();
 app.UseAuthentication();

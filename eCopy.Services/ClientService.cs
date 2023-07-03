@@ -69,5 +69,16 @@ namespace eCopy.Services
 
             return mapper.Map<ClientResponse>(client);
         }
+
+        public ClientResponse GetByUsername(string username)
+        {
+            var entity = context.Clients.AsQueryable();
+
+            var list = entity
+                .Include(x => x.ApplicationUser)
+                .FirstOrDefault(x => x.ApplicationUser.UserName == username);
+
+            return mapper.Map<ClientResponse>(list);
+        }
     }
 }

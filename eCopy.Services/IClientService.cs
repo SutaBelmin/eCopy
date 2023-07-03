@@ -6,6 +6,6 @@ namespace eCopy.Services
 {
     public interface IClientService : ICRUDService<ClientResponse, ClientSearch, ClientRequest, ClientRequestUpdate>
     {
-
+        ClientResponse GetByUsername(string username);
     }
 }
