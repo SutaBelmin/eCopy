@@ -186,6 +186,7 @@
             // 
             // cmbSt
             // 
+            this.cmbSt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSt.FormattingEnabled = true;
             this.cmbSt.Location = new System.Drawing.Point(332, 314);
             this.cmbSt.Name = "cmbSt";
