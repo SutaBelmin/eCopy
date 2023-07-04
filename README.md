@@ -10,7 +10,19 @@ Administartor: <br />
 Korisnicko ime: admin <br />
 Lozinka: test <br /> 
 
-Zaposlesnik <br />
+Zaposlenik <br />
 Korisnicko ime: employee <br />
 Lozinka: test <br />
+
+<br /> <br />
+
+Open a terminal inside the solution folder and use following commands (API+DB): <br />
+
+docker-compose build docker-compose up <br />
+
+If not chosen choose inside visual studio:  eCopy.Desktop
+
+flutter pub get flutter run <br />
+Stripe test card number:
+4242 4242 4242 4242
 
