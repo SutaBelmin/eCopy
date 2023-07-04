@@ -114,6 +114,7 @@
             // 
             // cmbGe
             // 
+            this.cmbGe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGe.FormattingEnabled = true;
             this.cmbGe.Location = new System.Drawing.Point(128, 235);
             this.cmbGe.Name = "cmbGe";
@@ -140,6 +141,7 @@
             // 
             // cmbCi
             // 
+            this.cmbCi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCi.FormattingEnabled = true;
             this.cmbCi.Location = new System.Drawing.Point(128, 279);
             this.cmbCi.Name = "cmbCi";
