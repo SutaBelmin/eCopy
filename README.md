@@ -6,7 +6,7 @@ Lozinka: test <br />
 
 Win forms:
 -----------
-Administartor: <br />
+Administrator: <br />
 Korisnicko ime: admin <br />
 Lozinka: test <br /> 
 
