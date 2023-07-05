@@ -26,3 +26,7 @@ flutter pub get flutter run <br />
 Stripe test card number:
 4242 4242 4242 4242
 
+<br /> 
+If you want to use your own stripe keys use the following command: <br />
+flutter run --dart-define stripePublishableKey=yourSpKey --dart-define stripeSecretKey=yourSsKey
+
