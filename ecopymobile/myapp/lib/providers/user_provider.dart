@@ -14,7 +14,7 @@ class UserProvider extends BaseProvider<ClientResponse> {
 
   Future<ClientResponse?> getByUsername(String username) async {
     var url =
-        "https://10.0.2.2:7284/Client/GetByUsername?" + "username=" + username;
+        "http://10.0.2.2:5000/Client/GetByUsername?" + "username=" + username;
     var uri = Uri.parse(url);
 
     Map<String, String> headers = createHeaders();

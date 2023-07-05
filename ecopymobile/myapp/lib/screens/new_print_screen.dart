@@ -400,8 +400,8 @@ class _NewPrintScreenState extends State<NewPrintScreen> {
                             ],
                             validator: (value) {
                               if (value!.isEmpty ||
-                                  int.parse(_nmbrPageController.text) <= 0) {
-                                return 'Please enter some number, higher than 0';
+                                  int.parse(_nmbrPageController.text) < 10) {
+                                return 'Please enter some number, higher than 9';
                               }
                               return null;
                             },

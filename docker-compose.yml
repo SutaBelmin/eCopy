@@ -18,7 +18,7 @@ services:
     build:
       context: .
     environment:
-      - ConnectionStrings:eCopy=Server=ecopy-sql,1433;Database=IB190053;User=sa;Password=QWElkj132!;ConnectRetryCount=0
+      - ConnectionStrings:eCopy=Server=ecopy-sql,1433;Database=190053;User=sa;Password=QWElkj132!;ConnectRetryCount=0
     ports:
       - 5000:80
     networks:
