@@ -10,8 +10,6 @@ class City {
   String? name;
   String? shortName;
   int? postalCode;
-/*CountryResponse Country
-int? CountryID;*/
   bool? active;
 
   City() {}

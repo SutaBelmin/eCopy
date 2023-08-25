@@ -6,6 +6,13 @@ namespace eCopy.Services
 {
     public interface IClientService : ICRUDService<ClientResponse, ClientSearch, ClientRequest, ClientRequestUpdate>
     {
-        ClientResponse GetByUsername(string username);
+        ClientResponse GetByUsername(string username, string email);
+
+        bool ChangePass(PassRequest request);
+
+        ClientResponse GetClientAccount();
+
+        ClientResponse MyUpdateClient(ClientRequestUpdate update);
+
     }
 }

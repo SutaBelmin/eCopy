@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using eCopy.Model.Requests;
+using eCopy.Model.Response;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -44,5 +45,24 @@ namespace eCopy.Services
             context.SaveChanges();
             return user;
         }
+
+        public GetByUsernameOrEmail GetByUsrnameOrEmail(string username, string email)
+        {
+            var normalizedUserName = username.ToUpper();
+            var normalizedEmail = email.ToUpper();
+
+            var user = context.Users
+                .FirstOrDefault(x => x.NormalizedUserName == normalizedUserName);
+
+            var userEmail = context.Users
+                .FirstOrDefault(x => x.NormalizedEmail == normalizedEmail);
+
+            return new GetByUsernameOrEmail
+            {
+                Username = user != null,
+                Email = userEmail != null
+            };
+        }
+
     }
 }

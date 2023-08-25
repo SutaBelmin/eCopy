@@ -36,6 +36,10 @@ namespace eCopy.Services
                 .ForMember(x => x.ClientName, opt => opt.MapFrom(x => x.Client != null && x.Client.Person != null ? string.Concat(x.Client.Person.FirstName, " ", x.Client.Person.LastName) : null));
             CreateMap<PrintRequestUpdate, Request>().ReverseMap();
 
+            CreateMap<Request, UpdateRequest>().ReverseMap();
+            CreateMap<PrintRequestR, UpdateRequest>().ReverseMap();
+
+
 
             CreateMap<CityRequest, City>().ReverseMap();
             CreateMap<CityResponse, City>().ReverseMap();

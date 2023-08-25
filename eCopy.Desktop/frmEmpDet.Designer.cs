@@ -39,13 +39,14 @@
             this.txtCN = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.pbSlika = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbSlika)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(252, 30);
+            this.label1.Location = new System.Drawing.Point(252, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(91, 20);
             this.label1.TabIndex = 0;
@@ -53,7 +54,8 @@
             // 
             // txtFN
             // 
-            this.txtFN.Location = new System.Drawing.Point(365, 29);
+            this.txtFN.Enabled = false;
+            this.txtFN.Location = new System.Drawing.Point(365, 45);
             this.txtFN.Multiline = true;
             this.txtFN.Name = "txtFN";
             this.txtFN.ReadOnly = true;
@@ -62,7 +64,8 @@
             // 
             // txtLN
             // 
-            this.txtLN.Location = new System.Drawing.Point(365, 80);
+            this.txtLN.Enabled = false;
+            this.txtLN.Location = new System.Drawing.Point(365, 96);
             this.txtLN.Multiline = true;
             this.txtLN.Name = "txtLN";
             this.txtLN.ReadOnly = true;
@@ -73,7 +76,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(252, 81);
+            this.label2.Location = new System.Drawing.Point(252, 97);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 18);
             this.label2.TabIndex = 2;
@@ -81,7 +84,8 @@
             // 
             // txtMN
             // 
-            this.txtMN.Location = new System.Drawing.Point(365, 128);
+            this.txtMN.Enabled = false;
+            this.txtMN.Location = new System.Drawing.Point(365, 144);
             this.txtMN.Multiline = true;
             this.txtMN.Name = "txtMN";
             this.txtMN.ReadOnly = true;
@@ -92,7 +96,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(252, 129);
+            this.label3.Location = new System.Drawing.Point(252, 145);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(92, 18);
             this.label3.TabIndex = 4;
@@ -100,7 +104,8 @@
             // 
             // txtGen
             // 
-            this.txtGen.Location = new System.Drawing.Point(365, 178);
+            this.txtGen.Enabled = false;
+            this.txtGen.Location = new System.Drawing.Point(365, 194);
             this.txtGen.Multiline = true;
             this.txtGen.Name = "txtGen";
             this.txtGen.ReadOnly = true;
@@ -111,7 +116,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(252, 179);
+            this.label4.Location = new System.Drawing.Point(252, 195);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 18);
             this.label4.TabIndex = 6;
@@ -119,7 +124,8 @@
             // 
             // txtCN
             // 
-            this.txtCN.Location = new System.Drawing.Point(365, 225);
+            this.txtCN.Enabled = false;
+            this.txtCN.Location = new System.Drawing.Point(365, 241);
             this.txtCN.Multiline = true;
             this.txtCN.Name = "txtCN";
             this.txtCN.ReadOnly = true;
@@ -130,7 +136,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(252, 226);
+            this.label5.Location = new System.Drawing.Point(252, 242);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 18);
             this.label5.TabIndex = 8;
@@ -138,18 +144,28 @@
             // 
             // pbSlika
             // 
-            this.pbSlika.Location = new System.Drawing.Point(12, 29);
+            this.pbSlika.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbSlika.Location = new System.Drawing.Point(12, 45);
             this.pbSlika.Name = "pbSlika";
             this.pbSlika.Size = new System.Drawing.Size(223, 215);
             this.pbSlika.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbSlika.TabIndex = 10;
             this.pbSlika.TabStop = false;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 16);
+            this.label6.TabIndex = 11;
+            // 
             // frmEmpDet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 282);
+            this.ClientSize = new System.Drawing.Size(619, 296);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.pbSlika);
             this.Controls.Add(this.txtCN);
             this.Controls.Add(this.label5);
@@ -184,5 +200,6 @@
         private System.Windows.Forms.TextBox txtCN;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pbSlika;
+        private System.Windows.Forms.Label label6;
     }
 }

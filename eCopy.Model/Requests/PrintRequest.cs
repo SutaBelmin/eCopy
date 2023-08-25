@@ -15,5 +15,6 @@ namespace eCopy.Model.Requests
         public PrintRequestFile PrintRequestFile { get; set; }
         public IFormFile File { get; set; }
         public double Price { get; set; }
+        public string Comment { get; set; }
     }
 }

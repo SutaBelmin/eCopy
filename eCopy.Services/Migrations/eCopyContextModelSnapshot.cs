@@ -701,6 +701,9 @@ namespace eCopy.Services.Migrations
                     b.Property<string>("Collate")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CopierId")
                         .HasColumnType("int");
 

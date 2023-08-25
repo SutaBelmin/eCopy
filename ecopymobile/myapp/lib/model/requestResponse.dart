@@ -21,6 +21,6 @@ class RequestResponse {
   factory RequestResponse.fromJson(Map<String, dynamic> json) =>
       _$RequestResponseFromJson(json);
 
-  /// Connect the generated [_$PrintRequestToJson] function to the `toJson` method.
+  /// Connect the generated [_$RequestResponseToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$RequestResponseToJson(this);
 }

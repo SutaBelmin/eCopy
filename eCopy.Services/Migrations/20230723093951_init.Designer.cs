@@ -12,7 +12,7 @@ using eCopy.Services;
 namespace eCopy.Services.Migrations
 {
     [DbContext(typeof(eCopyContext))]
-    [Migration("20230615160711_init")]
+    [Migration("20230723093951_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -701,6 +701,9 @@ namespace eCopy.Services.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Collate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CopierId")

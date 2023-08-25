@@ -33,7 +33,19 @@ namespace eCopy.Services
             return mapper.Map<IList<PrintRequestR>>(list);
         }
 
+        public override PrintRequestR GetById(int id)
+        {
+            var result = base.GetById(id);
 
+            var files = context.PrintRequestFiles.Where(x=> x.RequestId == id).FirstOrDefault();
+
+            if(files != null)
+            {
+                result.FilePath = files.Name;
+            }
+
+            return result;
+        }
 
 
         public override IEnumerable<PrintRequestR> Get(PrintRequestSearch search = null)
@@ -67,6 +79,8 @@ namespace eCopy.Services
             Request model = mapper.Map<Request>(insert);
             model.ClientId = clientId;
             model.CopierId = 1;
+            model.RequestDate = DateTime.Now;
+            model.CreatedDate= DateTime.Now; 
             context.Requests.Add(model);
             context.SaveChanges();
 
@@ -78,7 +92,7 @@ namespace eCopy.Services
                 string extension = insert.PrintRequestFile?.Extension ?? string.Empty;
                 if (string.IsNullOrEmpty(extension))
                 {
-                    extension = Path.GetExtension(insert.File.Name);
+                    extension = Path.GetExtension(insert.File.FileName);
                 }
 
                 var uploadedFile = fileService.Upload(memoryStream.ToArray(), extension);
@@ -86,9 +100,9 @@ namespace eCopy.Services
                 {
                     Active = true,
                     CreatedDate = DateTime.Now,
-                    Extension = extension,
+                    Extension = uploadedFile.Extension,
                     ModifiedDate = DateTime.Now,
-                    Name = Path.GetFileName(insert.File.Name),
+                    Name = uploadedFile.Name,
                     Path = uploadedFile.Url,
                     RequestId = model.Id,
                 });
@@ -104,6 +118,27 @@ namespace eCopy.Services
             context.SaveChanges();
 
             return mapper.Map<PrintRequestR>(request);
+        }
+
+        public PrintRequestR UpdateRequest(int id, UpdateRequest update)
+        {
+            var request = context.Requests.FirstOrDefault(x => x.Id == id);
+            if (request != null)
+            {
+                mapper.Map(update, request);
+                context.SaveChanges();
+            }
+            return mapper.Map<PrintRequestR>(request);
+        }
+
+        public void CancelRequest(int id)
+        {
+            var request = context.Requests.FirstOrDefault(x => x.Id == id);
+            if(request!=null)
+            {
+                request.Status = "Canceled";
+                context.SaveChanges();
+            }
         }
     }
 }

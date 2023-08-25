@@ -64,7 +64,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Stripe Payment'),
+        backgroundColor: Colors.grey,
+        title: const Text('Stripe Payment',
+            style: TextStyle(fontSize: 25, color: Colors.black)),
+        toolbarHeight: 100,
       ),
       body: Center(
         child: TextButton(

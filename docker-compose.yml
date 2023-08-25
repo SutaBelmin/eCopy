@@ -28,6 +28,22 @@ services:
     depends_on:
       - ecopy-sql
       
+  ecopy-identity-api:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./eCopy.IdentityServer/Dockerfile  
+    environment:
+      - ConnectionStrings:eCopy=Server=ecopy-sql,1433;Database=190053;User=sa;Password=QWElkj132!;ConnectRetryCount=0
+    ports:
+      - 5100:80
+    networks:
+      - ecopynet      
+    links:
+      - ecopy-sql
+    depends_on:
+      - ecopy-sql    
+  
 networks:
   ecopynet:
     driver: bridge      

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:myapp/providers/base_provider.dart';
 
 import '../model/city.dart';

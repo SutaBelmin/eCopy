@@ -10,7 +10,7 @@ namespace eCopy.Model
         public PersonResponse Person { get; set; }
         public int CopierId { get; set; }
         public CopierResponse Copier { get; set; }
-        public ApplicationUserResponse User { get; set; }
+        public ApplicationUserResponse ApplicationUser { get; set; }
         public string ProfilePhotoPath { get; set; }
     }
 }

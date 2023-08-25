@@ -89,7 +89,7 @@ namespace eCopy.Desktop
 
         private async void dgvListEmp_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string message = "Do you want do delete employee";
+            string message = "Do you want to delete the employee?";
             string title = "Delete employee";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
 
@@ -101,9 +101,9 @@ namespace eCopy.Desktop
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                     e.RowIndex >= 0)
                 {
-                    var employeeId = senderGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                    var employeeId = senderGrid.Rows[e.RowIndex].Cells["Id"].Value;
 
-                    if(Convert.ToInt32(employeeId) != 1)
+                    if (employeeId != null && Convert.ToInt32(employeeId) != 1)
                     {
                         await employeeService.Delete(Convert.ToInt32(employeeId)); 
                         btnSearch_Click(null, null);

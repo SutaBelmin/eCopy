@@ -1,4 +1,6 @@
-﻿using System;
+﻿using eCopy.Model.Enum;
+using eCopy.Model.SearchObjects;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -10,35 +12,50 @@ namespace eCopy.Desktop
     {
         public APIServ printRequestService = new APIServ("PrintRequest");
         public bool logout = false;
+        private List<Status> status;
         public frmEmployee()
         {
             InitializeComponent();
+            this.status = Enum.GetValues(typeof(Status)).Cast<Status>().ToList();
         }
 
         private void frmEmployee_Load(object sender, EventArgs e)
         {
-            loadData();
+            loadData("New");
+            loadStatus();
         }
 
-        private async void loadData()
+        private async void loadData(string search=null)
         {
-            var list = await printRequestService.Get<List<PrintReqModel>>();
+            var searchObject = new PrintRequestSearch();
+            searchObject.Status = search;
+
+            var list = await printRequestService.Get<List<PrintReqModel>>(searchObject);
+
 
             dgvReq.DataSource = list.Select(x => new PRDGridModel
             {
                 ID = x.ID,
-                Collate = x.Collate.ToString(),
-                Letter = x.Letter.ToString(),
-                Options = x.Options.ToString(),
-                Orientation = x.Orientation.ToString(),
-                Pages = x.Pages.ToString(),
                 RequestDate = x.RequestDate,
                 Status = x.Status.ToString(),
-                Side = x.Side.ToString(),
                 IsPaid = x.IsPaid,
                 ClientName = x.ClientName,
                 Price = x.Price.ToString("F2") 
             }).ToList();
+
+        }
+
+        void loadStatus()
+        {
+            cmbStatus.DataSource = status.Select(x => new
+            {
+                Name = x.ToString(),
+                Value = x
+            }).ToList();
+
+            cmbStatus.DisplayMember = "Name";
+            cmbStatus.ValueMember = "Value";
+
         }
 
         private void dgvReq_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -53,6 +70,7 @@ namespace eCopy.Desktop
 
                 if (result == DialogResult.OK)
                 {
+                    cmbStatus.SelectedIndex = 0;
                     loadData();
                 }
             }
@@ -79,6 +97,26 @@ namespace eCopy.Desktop
         private void btnRforLY_Click(object sender, EventArgs e)
         {
             frmRevenueForLastYear frm = new frmRevenueForLastYear();
+            frm.ShowDialog();
+        }
+
+        private async void cmbStatus_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Status obj = (Status)cmbStatus.SelectedValue;
+            if (obj != null)
+            {
+                loadData(obj.ToString());
+            }
+        }
+
+        private void btnGetAll_Click(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void btnAccount_Click(object sender, EventArgs e)
+        {
+            frmEmployeeAccount frm = new frmEmployeeAccount();
             frm.ShowDialog();
         }
     }

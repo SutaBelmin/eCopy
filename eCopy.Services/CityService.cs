@@ -11,5 +11,6 @@ namespace eCopy.Services
             : base(context, mapper)
         {
         }
+
     }
 }

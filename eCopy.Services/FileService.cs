@@ -19,7 +19,8 @@ namespace eCopy.Services
 
         public UploadResponse Upload(byte[] file, string extension)
         {
-            var fileName = $"{Guid.NewGuid()}{extension}";
+            var name = Guid.NewGuid();
+            var fileName = $"{name}{extension}";
             if (file.Length > 0)
             {
                 var path = Path.Combine(hostEnvironment.WebRootPath, fileName);
@@ -36,7 +37,10 @@ namespace eCopy.Services
 
             return new UploadResponse
             {
-                Url = $"{request.Scheme}://{request.Host}{request.PathBase}/{fileName}"
+                Url = $"{request.Scheme}://{request.Host}{request.PathBase}/{fileName}",
+                Name = fileName ,
+                Extension = extension
+
             };
         }
 

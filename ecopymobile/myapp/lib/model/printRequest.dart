@@ -16,6 +16,7 @@ class PrintRequest {
   int? pages;
   double? price;
   bool? isPaid;
+  String? comment;
 
   PrintRequest() {}
 

@@ -12,6 +12,6 @@ class AuthenticationResponse {
   factory AuthenticationResponse.fromJson(Map<String, dynamic> json) =>
       _$AuthenticationResponseFromJson(json);
 
-  /// Connect the generated [_$RequestToJson] function to the `toJson` method.
+  /// Connect the generated [_$AuthenticationResponseToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
 }

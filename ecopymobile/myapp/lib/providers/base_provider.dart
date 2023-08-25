@@ -9,6 +9,8 @@ import 'package:flutter/foundation.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import 'package:path/path.dart' as p;
+
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? _baseUrl;
   String? _endpoint;
@@ -40,6 +42,21 @@ abstract class BaseProvider<T> with ChangeNotifier {
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
       return data.map((x) => fromJson(x)).cast<T>().toList();
+    } else {
+      throw Exception("Exception... handle this gracefully");
+    }
+  }
+
+  Future<T> getByMyId(String id, [dynamic additionalData]) async {
+    var url = Uri.parse("$_baseUrl$_endpoint/$id");
+
+    Map<String, String> headers = createHeaders();
+
+    var response = await http!.get(url, headers: headers);
+
+    if (isValidResponseCode(response)) {
+      var data = jsonDecode(response.body);
+      return fromJson(data);
     } else {
       throw Exception("Exception... handle this gracefully");
     }
@@ -98,6 +115,10 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
 
     if (file != null) {
+      final extension = p.extension(file.path);
+      var list = [MapEntry("Extension", extension)];
+      request.fields.addEntries(list);
+
       request.files
           .add(await MultipartFile.fromPath(fileParameterName, file.path));
     }

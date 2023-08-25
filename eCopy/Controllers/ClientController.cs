@@ -18,9 +18,28 @@ namespace eCopy.Controllers
 
         [HttpGet("GetByUsername")]
         [AllowAnonymous]
-        public ClientResponse GetByUsername(string username)
+        public ClientResponse GetByUsername(string username, string email)
         {
-            return service.GetByUsername(username);
+            return service.GetByUsername(username, email);
+        }
+
+
+        [HttpPut("ChangePass")]
+        public bool ChangePass(PassRequest request)
+        {
+            return service.ChangePass(request);
+        }
+
+        [HttpGet("GetClientAccount")]
+        public ClientResponse GetClientAccount()
+        {
+            return service.GetClientAccount();
+        }
+
+        [HttpPut("MyUpdateClient")]
+        public ClientResponse MyUpdateClient(ClientRequestUpdate update)
+        {
+            return service.MyUpdateClient(update);
         }
     }
 }

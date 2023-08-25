@@ -15,6 +15,7 @@ namespace eCopy.Model.Response
         public PagePerSheet Pages { get; set; }
         public CollatedPrintOptions Collate { get; set; }
         public double Price { get; set; }
+        public string Comment { get; set; }
 
         public int ClientId { get; set; }
 

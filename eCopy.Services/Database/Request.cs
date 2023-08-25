@@ -22,6 +22,7 @@ namespace eCopy.Services
         public DateTime RequestDate { get; set; }
         public double Price { get; set; }
         public bool IsPaid { get; set; }
+        public string Comment { get; set; }
 
         public virtual Client Client { get; set; } = null!;
         public virtual Copier Copier { get; set; } = null!;

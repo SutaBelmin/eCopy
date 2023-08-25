@@ -1,4 +1,5 @@
-﻿using eCopy.Model.Response;
+﻿using eCopy.Model.Requests;
+using eCopy.Model.Response;
 using eCopy.Model.SearchObjects;
 using eCopy.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +27,19 @@ namespace eCopy.Controllers
         public PrintRequestR Pay(int id)
         {
             return service.Pay(id);
+        }
+
+        [HttpPut("updateRequest/{id}")]
+        public PrintRequestR UpdateRequest([FromRoute] int id, [FromBody] UpdateRequest update)
+        {
+            return service.UpdateRequest(id, update);
+        }
+
+        [HttpPut("cancelRequest/{id}")]
+        public IActionResult CancelRequest(int id)
+        {
+            service.CancelRequest(id);
+            return Ok();
         }
     }
 }

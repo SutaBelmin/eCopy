@@ -50,6 +50,9 @@ namespace eCopy.Services
 
             var client = context.Clients.FirstOrDefault(x => x.ApplicationUserId == user.Id);
 
+            var employee = context.Employees.FirstOrDefault(x => x.ApplicationUserId == user.Id);
+
+
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -61,7 +64,8 @@ namespace eCopy.Services
                 { 
                     { ClaimTypes.NameIdentifier, user.Id },
                     { ClaimTypes.Role, role.RoleId },
-                    { "ClientId", client?.Id }
+                    { "ClientId", client?.Id },
+                    { "EmployeeId", employee?.Id }
                 },
                 Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"])), SecurityAlgorithms.HmacSha512Signature)

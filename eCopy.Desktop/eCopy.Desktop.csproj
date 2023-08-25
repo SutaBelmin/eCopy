@@ -142,6 +142,12 @@
     <Compile Include="frmAdmin.Designer.cs">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmChangePass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangePass.Designer.cs">
+      <DependentUpon>frmChangePass.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEmpDet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,12 @@
     </Compile>
     <Compile Include="frmEmployee.Designer.cs">
       <DependentUpon>frmEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmployeeAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmployeeAccount.Designer.cs">
+      <DependentUpon>frmEmployeeAccount.cs</DependentUpon>
     </Compile>
     <Compile Include="frmLog.cs">
       <SubType>Form</SubType>
@@ -208,19 +220,26 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="StatusType.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="Validacija.cs" />
+    <Compile Include="Validation.cs" />
     <EmbeddedResource Include="frmAddEmp.resx">
       <DependentUpon>frmAddEmp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAdmin.resx">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmChangePass.resx">
+      <DependentUpon>frmChangePass.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEmpDet.resx">
       <DependentUpon>frmEmpDet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmployee.resx">
       <DependentUpon>frmEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmployeeAccount.resx">
+      <DependentUpon>frmEmployeeAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLog.resx">
       <DependentUpon>frmLog.cs</DependentUpon>
@@ -259,6 +278,7 @@
     <None Include="Properties\DataSources\eCopy.Model.Response.RevenueForLastYearResponse.datasource" />
     <None Include="Properties\DataSources\eCopy.Model.Response.Top5CustomerResponse.datasource" />
     <None Include="Properties\DataSources\EmpModel.datasource" />
+    <None Include="Properties\DataSources\PRDGridModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -42,7 +42,7 @@
             this.label1.Location = new System.Drawing.Point(69, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 24);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 3;
             this.label1.Text = "Username";
             // 
             // txtUserN
@@ -51,7 +51,7 @@
             this.txtUserN.Multiline = true;
             this.txtUserN.Name = "txtUserN";
             this.txtUserN.Size = new System.Drawing.Size(210, 30);
-            this.txtUserN.TabIndex = 1;
+            this.txtUserN.TabIndex = 0;
             // 
             // btnLog
             // 
@@ -71,7 +71,7 @@
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(210, 30);
-            this.txtPass.TabIndex = 4;
+            this.txtPass.TabIndex = 1;
             // 
             // label2
             // 
@@ -80,11 +80,12 @@
             this.label2.Location = new System.Drawing.Point(69, 132);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 24);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 4;
             this.label2.Text = "Password";
             // 
             // frmLog
             // 
+            this.AcceptButton = this.btnLog;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(361, 317);

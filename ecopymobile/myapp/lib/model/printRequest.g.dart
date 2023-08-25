@@ -16,7 +16,8 @@ PrintRequest _$PrintRequestFromJson(Map<String, dynamic> json) => PrintRequest()
   ..collate = json['collate'] as int?
   ..pages = json['pages'] as int?
   ..price = (json['price'] as num?)?.toDouble()
-  ..isPaid = json['isPaid'] as bool?;
+  ..isPaid = json['isPaid'] as bool?
+  ..comment = json['comment'] as String?;
 
 Map<String, dynamic> _$PrintRequestToJson(PrintRequest instance) =>
     <String, dynamic>{
@@ -30,4 +31,5 @@ Map<String, dynamic> _$PrintRequestToJson(PrintRequest instance) =>
       'pages': instance.pages,
       'price': instance.price,
       'isPaid': instance.isPaid,
+      'comment': instance.comment,
     };

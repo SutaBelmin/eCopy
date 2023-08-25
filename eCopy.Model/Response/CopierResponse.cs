@@ -26,8 +26,6 @@ namespace eCopy.Model.Response
 
         public ApplicationUserResponse User { get; set; }
 
-        //public ProfilePhoto ProfilePhoto { get; set; }
-
         public int ApplicationUserId { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using eCopy.Model;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace eCopy.Desktop
@@ -29,6 +30,19 @@ namespace eCopy.Desktop
             txtGen.Text = emp.Person.Gender;
             txtCN.Text = emp.Copier.Name;
             pbSlika.ImageLocation = emp.ProfilePhotoPath;
+
+            if(emp.ProfilePhotoPath == null)
+            {
+                label6.Text = "No profile photo";
+            }
+
+            txtFN.ReadOnly = true; 
+            txtLN.ReadOnly = true; 
+            txtMN.ReadOnly = true; 
+            txtGen.ReadOnly = true; 
+            txtCN.ReadOnly = true;
+
+
         }
     }
 }

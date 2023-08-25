@@ -3,13 +3,17 @@ import 'package:myapp/model/paymentArguments.dart';
 import 'package:myapp/model/storageService.dart';
 import 'package:myapp/providers/authentication_provider.dart';
 import 'package:myapp/providers/city_provider.dart';
+import 'package:myapp/providers/cl_provider.dart';
 import 'package:myapp/providers/practice_page_provider.dart';
 import 'package:myapp/providers/print_list_provider.dart';
 import 'package:myapp/providers/user_provider.dart';
+import 'package:myapp/screens/account_screen.dart';
 import 'package:myapp/screens/new_print_screen.dart';
+import 'package:myapp/screens/pass_screen.dart';
 import 'package:myapp/screens/payment_screen.dart';
 import 'package:myapp/screens/print_list_screen.dart';
 import 'package:myapp/screens/registration_screen.dart';
+import 'package:myapp/screens/request_details_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -19,9 +23,11 @@ void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => PrintListProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => ClProvider()),
         ChangeNotifierProvider(create: (_) => PracticePageProvider()),
         ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
-        ChangeNotifierProvider(create: (_) => CityProvider())
+        ChangeNotifierProvider(create: (_) => CityProvider()),
+        //ChangeNotifierProvider(create: (_) => CityEProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: true,
@@ -31,6 +37,10 @@ void main() => runApp(MultiProvider(
             return MaterialPageRoute(builder: ((context) => PrintListScreen()));
           } else if (settings.name == NewPrintScreen.routeName) {
             return MaterialPageRoute(builder: ((context) => NewPrintScreen()));
+          } else if (settings.name == AccountScreen.routeName) {
+            return MaterialPageRoute(builder: ((context) => AccountScreen()));
+          } else if (settings.name == PassScreen.routeName) {
+            return MaterialPageRoute(builder: ((context) => PassScreen()));
           } else if (settings.name == RegistrationScreen.routeName) {
             return MaterialPageRoute(
                 builder: ((context) => RegistrationScreen()));
@@ -46,6 +56,14 @@ void main() => runApp(MultiProvider(
             );
           } else if (settings.name == HomePage.routeName) {
             return MaterialPageRoute(builder: ((context) => HomePage()));
+          }
+
+          var uri = Uri.parse(settings.name!);
+          if (uri.pathSegments.length == 2 &&
+              "${uri.pathSegments.first}" == RequestDetailsScreen.routeName) {
+            var id = uri.pathSegments[1];
+            return MaterialPageRoute(
+                builder: (context) => RequestDetailsScreen(id));
           }
         },
       ),

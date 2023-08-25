@@ -21,6 +21,5 @@ namespace eCopy.Model.Requests
 
         public bool Active { get; set; }
         public ApplicationUserRequest User { get; set; }
-       // public ProfilePhoto ProfilePhoto { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace eCopy.Desktop
         public frmLog()
         {
             InitializeComponent();
+            this.AcceptButton = btnLog;
         }
 
         private async void btnLog_Click(object sender, EventArgs e)

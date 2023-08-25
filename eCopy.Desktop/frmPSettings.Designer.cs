@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPrintPO = new System.Windows.Forms.TextBox();
             this.txtOrie = new System.Windows.Forms.TextBox();
@@ -44,6 +45,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnUStatus = new System.Windows.Forms.Button();
             this.cmbSt = new System.Windows.Forms.ComboBox();
+            this.txtComment = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnDownload = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -179,8 +186,8 @@
             this.btnUStatus.Location = new System.Drawing.Point(461, 357);
             this.btnUStatus.Name = "btnUStatus";
             this.btnUStatus.Size = new System.Drawing.Size(136, 33);
-            this.btnUStatus.TabIndex = 15;
-            this.btnUStatus.Text = "Update status";
+            this.btnUStatus.TabIndex = 2;
+            this.btnUStatus.Text = "Save";
             this.btnUStatus.UseVisualStyleBackColor = true;
             this.btnUStatus.Click += new System.EventHandler(this.btnUStatus_Click);
             // 
@@ -191,13 +198,48 @@
             this.cmbSt.Location = new System.Drawing.Point(332, 314);
             this.cmbSt.Name = "cmbSt";
             this.cmbSt.Size = new System.Drawing.Size(265, 26);
-            this.cmbSt.TabIndex = 16;
+            this.cmbSt.TabIndex = 1;
+            // 
+            // txtComment
+            // 
+            this.txtComment.Location = new System.Drawing.Point(19, 314);
+            this.txtComment.Multiline = true;
+            this.txtComment.Name = "txtComment";
+            this.txtComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtComment.Size = new System.Drawing.Size(265, 76);
+            this.txtComment.TabIndex = 0;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(16, 292);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(200, 18);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "Add comment (External note)";
+            // 
+            // btnDownload
+            // 
+            this.btnDownload.Location = new System.Drawing.Point(461, 22);
+            this.btnDownload.Name = "btnDownload";
+            this.btnDownload.Size = new System.Drawing.Size(136, 33);
+            this.btnDownload.TabIndex = 19;
+            this.btnDownload.Text = "Download file";
+            this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmPSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 419);
+            this.Controls.Add(this.btnDownload);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtComment);
             this.Controls.Add(this.cmbSt);
             this.Controls.Add(this.btnUStatus);
             this.Controls.Add(this.label8);
@@ -219,6 +261,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmPSettings";
             this.Load += new System.EventHandler(this.frmPSettings_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,5 +285,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnUStatus;
         private System.Windows.Forms.ComboBox cmbSt;
+        private System.Windows.Forms.TextBox txtComment;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnDownload;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

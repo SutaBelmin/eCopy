@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:myapp/model/city.dart';
+import 'package:myapp/model/cityAddModel.dart';
 import 'package:myapp/model/listItem.dart';
 import 'package:myapp/model/registrationModel/applicationUserRequest.dart';
 import 'package:myapp/model/registrationModel/clientRequest.dart';
 import 'package:myapp/model/registrationModel/personRequest.dart';
 import 'package:myapp/providers/city_provider.dart';
+import 'package:myapp/providers/cl_provider.dart';
 import 'package:myapp/providers/user_provider.dart';
+import 'package:myapp/widgets/top_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -18,6 +22,9 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   UserProvider? _userProvider = null;
+
+  ClProvider? _clProvider = null;
+
   ClientRequest _clientData = new ClientRequest();
   CityProvider? _cityProvider = null;
   List<City> data = [];
@@ -31,6 +38,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _usernameController = new TextEditingController();
   TextEditingController _phoneNumberController = new TextEditingController();
+  TextEditingController _cityController = new TextEditingController();
+  TextEditingController _postalController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
   TextEditingController _passwordConfirmController =
       new TextEditingController();
@@ -43,6 +52,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     super.initState();
     _cityProvider = context.read<CityProvider>();
     _userProvider = context.read<UserProvider>();
+
+    _clProvider = context.read<ClProvider>();
+
     loadData();
   }
 
@@ -60,11 +72,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   static List<ListItem> gender = [ListItem(0, "Male"), ListItem(1, "Female")];
   ListItem genderValue = gender.first;
 
+  bool passwordVisible = false;
+  bool passwordConVisible = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-            child: SingleChildScrollView(child: _buildRegisterForm())));
+    return TopNavigationBar(
+        child: SingleChildScrollView(child: _buildRegisterForm()));
   }
 
   Widget _buildRegisterForm() {
@@ -191,51 +205,52 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
           Container(
             padding: EdgeInsets.only(left: 30, top: 30, right: 30),
-            child: Row(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      child: Icon(
-                        Icons.location_city,
-                        size: 35,
-                        color: Colors.grey,
-                      ),
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    Container(
-                      child: Text("    City  ", style: TextStyle(fontSize: 20)),
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    Container(
-                      child: DropdownButton(
-                        style: Theme.of(context).textTheme.titleLarge,
-                        hint: Text("Select City"),
-                        value: _tmpCity,
-                        items: data.map(
-                          (item) {
-                            return DropdownMenuItem<City>(
-                              child: Text("${item.name}"),
-                              value: item,
-                            );
-                          },
-                        ).toList(),
-                        onChanged: (City? value) {
-                          setState(() {
-                            _tmpCity = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                )
+            child: TextFormField(
+              style: Theme.of(context).textTheme.titleLarge,
+              controller: _cityController,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  icon: Icon(
+                    Icons.location_city,
+                    size: 35,
+                  ),
+                  hintText: 'Enter city name',
+                  labelText: 'City',
+                  isDense: true,
+                  contentPadding: EdgeInsets.all(10)),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 30, top: 30, right: 30),
+            child: TextFormField(
+              style: Theme.of(context).textTheme.titleLarge,
+              controller: _postalController,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  icon: Icon(
+                    Icons.location_city,
+                    size: 35,
+                  ),
+                  hintText: 'Enter postal code',
+                  labelText: 'Postal code',
+                  isDense: true,
+                  contentPadding: EdgeInsets.all(10)),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
               ],
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
             ),
           ),
           Container(
@@ -277,8 +292,43 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   isDense: true,
                   contentPadding: EdgeInsets.all(10)),
               validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter some text';
+                if (value != null && value.isNotEmpty) {
+                  try {
+                    var dateParts = value.split("-");
+
+                    var month = int.parse(dateParts[1]);
+                    var day = int.parse(dateParts[2]);
+                    var year = int.parse(dateParts[0]);
+
+                    if (year.toString().length != 4) {
+                      return 'Invalid format';
+                    }
+                    if ((month > 12 || month < 1) && (day > 31 || day < 1)) {
+                      return 'Invalid month and day';
+                    }
+                    if (month > 12 || month < 1) {
+                      return 'Invalid month';
+                    }
+                    if (day > 31 || day < 1) {
+                      return 'Invalid day';
+                    }
+
+                    if (dateParts.length == 3) {
+                      var selectedDate = DateTime(year, month, day);
+                      var currentDate = DateTime.now();
+
+                      if (selectedDate.isAfter(currentDate)) {
+                        return 'Birth date can\'t be in the future';
+                      }
+                    } else {
+                      return 'Invalid format';
+                    }
+                  } catch (e) {
+                    print('Error parsing date: $e');
+                    return 'Invalid format';
+                  }
+                } else {
+                  return 'Please enter a birth date';
                 }
                 return null;
               },
@@ -303,6 +353,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 if (value!.isEmpty) {
                   return 'Please enter some text';
                 }
+                if (!isEmailValid(value)) {
+                  return 'Invalid email';
+                }
                 return null;
               },
             ),
@@ -325,6 +378,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'Please enter some text';
+                }
+                if (!isUsernameValid(value)) {
+                  return 'Min length of 4 characters (letters and numbers)';
                 }
                 return null;
               },
@@ -349,6 +405,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 if (value!.isEmpty) {
                   return 'Please enter some text';
                 }
+                if (!isPhoneValid(value)) {
+                  return '''Enter a valid Bosnian mobile phone number like: 
+                  \n06X/XXX-XXX or 06X/XXX-XXXX
+                  \n06X XXX XXX or 06X XXX XXXX
+                  \n06X-XXX-XXX or 06X-XXX-XXXX''';
+                }
                 return null;
               },
             ),
@@ -356,7 +418,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           Container(
             padding: EdgeInsets.only(left: 30, top: 30, right: 30),
             child: TextFormField(
-              obscureText: true,
+              obscureText: !passwordVisible,
               style: Theme.of(context).textTheme.titleLarge,
               controller: _passwordController,
               decoration: InputDecoration(
@@ -373,14 +435,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 if (value!.isEmpty) {
                   return 'Please enter some text';
                 }
+                if (!isPasswordValid(value)) {
+                  return '''Must contain: 1 digit, 
+                          \n1 special character from !@#%^&*,
+                          \n1 lowercase letter,1 uppercase letter, 
+                          \nMin length of 8 characters''';
+                }
                 return null;
               },
             ),
           ),
           Container(
-            padding: EdgeInsets.only(left: 30, top: 30, right: 30),
+            margin: EdgeInsets.only(left: 280, top: 5),
+            child: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  passwordVisible = !passwordVisible;
+                });
+              },
+              child: Text(passwordVisible ? 'Hide' : 'Show'),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 30, top: 10, right: 30),
             child: TextFormField(
-              obscureText: true,
+              obscureText: !passwordConVisible,
               style: Theme.of(context).textTheme.titleLarge,
               controller: _passwordConfirmController,
               decoration: InputDecoration(
@@ -397,10 +476,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 if (value!.isEmpty) {
                   return 'Please enter some text';
                 } else if (value != _passwordController.text) {
-                  return 'Password confirm is not equal to Password';
+                  return 'Password and Password confirm do not match';
                 }
                 return null;
               },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 280, top: 5),
+            child: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  passwordConVisible = !passwordConVisible;
+                });
+              },
+              child: Text(passwordConVisible ? 'Hide' : 'Show'),
             ),
           ),
           SizedBox(height: 20),
@@ -417,25 +507,49 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 onTap: () async {
                   if (_formKey.currentState!.validate()) {
                     var userna = _usernameController.text;
-                    var client = await _userProvider?.getByUsername(userna);
-                    if (client != null) {
+                    var userem = _emailController.text;
+                    var client =
+                        await _clProvider?.GetByUsrnameOrEmail(userna, userem);
+
+                    if (client?.username == true) {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                                title: Text("User already exist"),
+                                title: Text("Username already exist"),
                                 content: Text(
                                     style:
                                         Theme.of(context).textTheme.subtitle2,
-                                    "User already exist"),
+                                    "Username already exist"),
                                 actions: [
                                   TextButton(
-                                      onPressed: () => Navigator.popUntil(
-                                          context, (route) => route.isFirst),
+                                      onPressed: () {
+                                        Navigator.of(context).pop(false);
+                                      },
                                       child: Text("Ok"))
                                 ],
                               ));
                       return;
                     }
+                    if (client?.email == true) {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                                title: Text("Email already exist"),
+                                content: Text(
+                                    style:
+                                        Theme.of(context).textTheme.subtitle2,
+                                    "Email already exist"),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop(false);
+                                      },
+                                      child: Text("Ok"))
+                                ],
+                              ));
+                      return;
+                    }
+
                     try {
                       PersonRequest _personData = new PersonRequest();
                       _personData.firstName = _firstNameController.text;
@@ -460,6 +574,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       _clientData.active = true;
                       _clientData.person = _personData;
                       _clientData.user = _appUserData;
+
+                      var cityName = _cityController.text;
+                      var postalCode = int.parse(_postalController.text);
+
+                      CityAddModel cmodel = new CityAddModel();
+                      cmodel.name = cityName;
+                      cmodel.shortName = cityName;
+                      cmodel.postalCode = postalCode;
+                      cmodel.countryID = 1;
+                      cmodel.active = true;
+
+                      var cityE = await _cityProvider?.insert(cmodel);
+
+                      if (cityE != null) {
+                        var cityId = cityE.id;
+                        _clientData.person?.cityId = cityId;
+                      }
 
                       var user = await _userProvider!.insert(_clientData);
                       if (user != null) {
@@ -510,5 +641,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ]),
       ),
     );
+  }
+
+  bool isEmailValid(String email) {
+    final pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+    final regExp = RegExp(pattern);
+    return regExp.hasMatch(email);
+  }
+
+  bool isPhoneValid(String phone) {
+    final pattern = r'^06\d{1}([-/ ])?\d{3}([- ])?\d{3,4}$';
+    final regExp = RegExp(pattern);
+    return regExp.hasMatch(phone);
+  }
+
+  bool isUsernameValid(String username) {
+    final pattern = r'^[a-zA-Z0-9]{4,}$';
+
+    final regExp = RegExp(pattern);
+    return regExp.hasMatch(username);
+  }
+
+  bool isPasswordValid(String password) {
+    final pattern = r'^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$';
+
+    final regExp = RegExp(pattern);
+    return regExp.hasMatch(password);
   }
 }

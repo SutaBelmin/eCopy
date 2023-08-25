@@ -13,10 +13,14 @@ namespace eCopy.Model.Enum
 
     public enum Status
     {
-        OnHold = 1,
-        InProgress = 2,
-        Completed = 3,
-        Rejected = 4
+        New = 1,
+        OnHold = 2,
+        InProgress = 3,
+        AwaitingPayment = 4,
+        Completed = 5,
+        Rejected = 6,
+        Canceled = 7,
+        Updated = 8
     }
 
     public enum PrintPagesOptions
