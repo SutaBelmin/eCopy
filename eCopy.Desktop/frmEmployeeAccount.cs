@@ -1,12 +1,9 @@
 ﻿using eCopy.Model.Enum;
 using eCopy.Model.Requests;
 using eCopy.Model.Response;
-using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
