@@ -16,8 +16,12 @@ class ClProvider extends BaseProvider<Clmodel> {
     /*var url =
         "https://10.0.2.2:7284/User/GetByUsrnameOrEmail?username=$username&email=$email";*/
 
-    var url =
-        "http://10.0.2.2:5000/User/GetByUsrnameOrEmail?username=$username&email=$email";
+    /*var url =
+        "http://10.0.2.2:5000/User/GetByUsrnameOrEmail?username=$username&email=$email";*/
+
+    var urlM = const String.fromEnvironment("baseUrl",
+        defaultValue: "http://10.0.2.2:5000/");
+    var url = "${urlM}User/GetByUsrnameOrEmail?username=$username&email=$email";
 
     var uri = Uri.parse(url);
 
