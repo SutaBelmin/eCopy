@@ -16,6 +16,7 @@ namespace eCopy.Desktop
     {
         public APIServ employeeService = new APIServ("Employee");
         public APIServ cityService = new APIServ("City");
+        public APIServ userService = new APIServ("User");
 
         private string imagePath { get; set; }
 
@@ -98,6 +99,24 @@ namespace eCopy.Desktop
         {
             if (fieldsValidation())
             {
+                error.Clear();
+
+                var getUsr = await userService.GetByUsrnameOrEmail(txtUsername.Text, txtEmail.Text);
+
+                if (getUsr.Username == true)
+                {
+                    txtUsername.Focus();
+                    error.SetError(txtUsername, "Username already exist");
+                    return;
+                }
+
+                if (getUsr.Email == true)
+                {
+                    txtEmail.Focus();
+                    error.SetError(txtEmail, "Email already exist");
+                    return;
+                }
+
                 var emp = await employeeService.GetEmployeeAccount();
                 UpdateEmployeeRequest updateModel = new UpdateEmployeeRequest();
 
