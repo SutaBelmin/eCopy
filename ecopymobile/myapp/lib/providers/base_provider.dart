@@ -19,8 +19,10 @@ abstract class BaseProvider<T> with ChangeNotifier {
   IOClient? http;
 
   BaseProvider(String endpoint) {
+    /*_baseUrl = const String.fromEnvironment("baseUrl",
+        defaultValue: "http://10.0.2.2:5000/");*/
     _baseUrl = const String.fromEnvironment("baseUrl",
-        defaultValue: "http://10.0.2.2:5000/");
+        defaultValue: "https://10.0.2.2:7284/");
     print("baseurl: $_baseUrl");
 
     if (_baseUrl!.endsWith("/") == false) {

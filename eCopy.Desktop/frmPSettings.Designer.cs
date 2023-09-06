@@ -50,6 +50,8 @@
             this.btnDownload = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.btnPreviewPrnt = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -232,11 +234,26 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // printDialog1
+            // 
+            this.printDialog1.UseEXDialog = true;
+            // 
+            // btnPreviewPrnt
+            // 
+            this.btnPreviewPrnt.Location = new System.Drawing.Point(287, 22);
+            this.btnPreviewPrnt.Name = "btnPreviewPrnt";
+            this.btnPreviewPrnt.Size = new System.Drawing.Size(151, 33);
+            this.btnPreviewPrnt.TabIndex = 22;
+            this.btnPreviewPrnt.Text = "Preview and Print";
+            this.btnPreviewPrnt.UseVisualStyleBackColor = true;
+            this.btnPreviewPrnt.Click += new System.EventHandler(this.btnPreviewPrnt_Click);
+            // 
             // frmPSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 419);
+            this.Controls.Add(this.btnPreviewPrnt);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtComment);
@@ -290,5 +307,7 @@
         private System.Windows.Forms.Button btnDownload;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Windows.Forms.Button btnPreviewPrnt;
     }
 }

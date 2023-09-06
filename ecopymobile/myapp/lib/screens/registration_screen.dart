@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:myapp/model/city.dart';
-import 'package:myapp/model/cityAddModel.dart';
 import 'package:myapp/model/listItem.dart';
 import 'package:myapp/model/registrationModel/applicationUserRequest.dart';
 import 'package:myapp/model/registrationModel/clientRequest.dart';
@@ -205,52 +203,51 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
           Container(
             padding: EdgeInsets.only(left: 30, top: 30, right: 30),
-            child: TextFormField(
-              style: Theme.of(context).textTheme.titleLarge,
-              controller: _cityController,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  icon: Icon(
-                    Icons.location_city,
-                    size: 35,
-                  ),
-                  hintText: 'Enter city name',
-                  labelText: 'City',
-                  isDense: true,
-                  contentPadding: EdgeInsets.all(10)),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 30, top: 30, right: 30),
-            child: TextFormField(
-              style: Theme.of(context).textTheme.titleLarge,
-              controller: _postalController,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  icon: Icon(
-                    Icons.location_city,
-                    size: 35,
-                  ),
-                  hintText: 'Enter postal code',
-                  labelText: 'Postal code',
-                  isDense: true,
-                  contentPadding: EdgeInsets.all(10)),
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      child: Icon(
+                        Icons.location_city,
+                        size: 35,
+                        color: Colors.grey,
+                      ),
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      child: Text("    City  ", style: TextStyle(fontSize: 20)),
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      child: DropdownButton(
+                        style: Theme.of(context).textTheme.titleLarge,
+                        hint: Text("Select City"),
+                        value: _tmpCity,
+                        items: data.map(
+                          (item) {
+                            return DropdownMenuItem<City>(
+                              child: Text("${item.name}"),
+                              value: item,
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (City? value) {
+                          setState(() {
+                            _tmpCity = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                )
               ],
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
             ),
           ),
           Container(
@@ -574,23 +571,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       _clientData.active = true;
                       _clientData.person = _personData;
                       _clientData.user = _appUserData;
-
-                      var cityName = _cityController.text;
-                      var postalCode = int.parse(_postalController.text);
-
-                      CityAddModel cmodel = new CityAddModel();
-                      cmodel.name = cityName;
-                      cmodel.shortName = cityName;
-                      cmodel.postalCode = postalCode;
-                      cmodel.countryID = 1;
-                      cmodel.active = true;
-
-                      var cityE = await _cityProvider?.insert(cmodel);
-
-                      if (cityE != null) {
-                        var cityId = cityE.id;
-                        _clientData.person?.cityId = cityId;
-                      }
 
                       var user = await _userProvider!.insert(_clientData);
                       if (user != null) {

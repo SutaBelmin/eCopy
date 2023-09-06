@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:myapp/model/city.dart';
-import 'package:myapp/model/cityAddModel.dart';
 import 'package:myapp/model/clientRequestUpdate.dart';
 import 'package:myapp/model/listItem.dart';
 import 'package:myapp/model/registrationModel/clientRequest.dart';
@@ -34,7 +32,7 @@ class _AccountScreenState extends State<AccountScreen> {
   List<City> data = [];
   City? _tmpCity;
 
-  var tmpData = null;
+  //var tmpData = null;
   var tmpclientData = null;
 
   ClientResponse? clientData = null;
@@ -58,6 +56,8 @@ class _AccountScreenState extends State<AccountScreen> {
   static List<ListItem> gender = [ListItem(0, "Male"), ListItem(1, "Female")];
   ListItem genderValue = gender.first;
 
+  var cityValue = null;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -70,6 +70,8 @@ class _AccountScreenState extends State<AccountScreen> {
 
   Future loadData() async {
     tmpclientData = await _userProvider?.getClientAccount();
+
+    var tmpData = await _cityProvider?.get(null);
 
     setState(() {
       clientData = tmpclientData;
@@ -88,8 +90,12 @@ class _AccountScreenState extends State<AccountScreen> {
       _emailController.text = clientData!.applicationUser!.email!;
       _usernameController.text = clientData!.applicationUser!.username!;
       _phoneNumberController.text = clientData!.applicationUser!.phoneNumber!;
+
+      data = tmpData!;
     });
-    _tmpCity = tmpData?.first;
+    //_tmpCity = tmpData?.first;
+    _tmpCity =
+        tmpData?.firstWhere((x) => x.name == clientData!.person!.city!.name);
 
     genderValue =
         gender.firstWhere((x) => x.name == clientData!.person!.gender);
@@ -227,52 +233,52 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 30, top: 30, right: 30),
-                    child: TextFormField(
-                      style: Theme.of(context).textTheme.titleLarge,
-                      controller: _cityController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          icon: Icon(
-                            Icons.location_city,
-                            size: 35,
-                          ),
-                          hintText: 'Enter city name',
-                          labelText: 'City',
-                          isDense: true,
-                          contentPadding: EdgeInsets.all(10)),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 30, top: 30, right: 30),
-                    child: TextFormField(
-                      style: Theme.of(context).textTheme.titleLarge,
-                      controller: _postalController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          icon: Icon(
-                            Icons.location_city,
-                            size: 35,
-                          ),
-                          hintText: 'Enter postal code',
-                          labelText: 'Postal code',
-                          isDense: true,
-                          contentPadding: EdgeInsets.all(10)),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              child: Icon(
+                                Icons.location_city,
+                                size: 35,
+                                color: Colors.grey,
+                              ),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              child: Text("    City  ",
+                                  style: TextStyle(fontSize: 20)),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              child: DropdownButton(
+                                style: Theme.of(context).textTheme.titleLarge,
+                                hint: Text("Select City"),
+                                value: _tmpCity,
+                                items: data.map(
+                                  (item) {
+                                    return DropdownMenuItem<City>(
+                                      child: Text("${item.name}"),
+                                      value: item,
+                                    );
+                                  },
+                                ).toList(),
+                                onChanged: (City? value) {
+                                  setState(() {
+                                    _tmpCity = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        )
                       ],
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
                     ),
                   ),
                   Container(
@@ -509,6 +515,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               updateCl.lastName = _lastNameController.text;
                               updateCl.middleName = _middleNameController.text;
                               updateCl.gender = genderValue.value;
+                              updateCl.cityId = _tmpCity?.id;
                               updateCl.address = _addressController.text;
                               updateCl.birthDate =
                                   DateTime.parse(_birthDateController.text);
@@ -516,29 +523,6 @@ class _AccountScreenState extends State<AccountScreen> {
                               updateCl.username = _usernameController.text;
                               updateCl.phoneNumber =
                                   _phoneNumberController.text;
-
-                              var cityName = _cityController.text;
-                              var postalCode =
-                                  int.parse(_postalController.text);
-
-                              var checkCity = clientData!.person!.city!.name!;
-                              if (checkCity != _cityController.text) {
-                                CityAddModel cmodel = new CityAddModel();
-                                cmodel.name = cityName;
-                                cmodel.shortName = cityName;
-                                cmodel.postalCode = postalCode;
-                                cmodel.countryID = 1;
-                                cmodel.active = true;
-
-                                var cityE = await _cityProvider?.insert(cmodel);
-
-                                if (cityE != null) {
-                                  var cityId = cityE.id;
-                                  updateCl.cityId = cityId;
-                                }
-                              } else {
-                                updateCl.cityId = clientData!.person!.city!.id;
-                              }
 
                               var newCl =
                                   await _userProvider?.updateClient(updateCl);

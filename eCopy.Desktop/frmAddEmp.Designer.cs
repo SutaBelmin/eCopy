@@ -37,7 +37,6 @@
             this.txtMidName = new System.Windows.Forms.TextBox();
             this.cmbGe = new System.Windows.Forms.ComboBox();
             this.cmbGen = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtAdr = new System.Windows.Forms.TextBox();
             this.dtpBD = new System.Windows.Forms.DateTimePicker();
@@ -61,9 +60,8 @@
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.btnShowPass = new System.Windows.Forms.Button();
             this.btnShowPassCon = new System.Windows.Forms.Button();
-            this.txtCity = new System.Windows.Forms.TextBox();
-            this.txtPostalCode = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.cmbCity = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.error)).BeginInit();
             this.SuspendLayout();
@@ -134,19 +132,10 @@
             this.cmbGen.TabIndex = 22;
             this.cmbGen.Text = "Gender";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 287);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 16);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "City";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 378);
+            this.label5.Location = new System.Drawing.Point(17, 341);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 16);
             this.label5.TabIndex = 25;
@@ -154,14 +143,14 @@
             // 
             // txtAdr
             // 
-            this.txtAdr.Location = new System.Drawing.Point(136, 372);
+            this.txtAdr.Location = new System.Drawing.Point(136, 335);
             this.txtAdr.Name = "txtAdr";
             this.txtAdr.Size = new System.Drawing.Size(279, 22);
             this.txtAdr.TabIndex = 6;
             // 
             // dtpBD
             // 
-            this.dtpBD.Location = new System.Drawing.Point(136, 424);
+            this.dtpBD.Location = new System.Drawing.Point(136, 387);
             this.dtpBD.Name = "dtpBD";
             this.dtpBD.Size = new System.Drawing.Size(279, 22);
             this.dtpBD.TabIndex = 7;
@@ -169,7 +158,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 429);
+            this.label3.Location = new System.Drawing.Point(17, 392);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 16);
             this.label3.TabIndex = 26;
@@ -178,7 +167,7 @@
             // cbAct
             // 
             this.cbAct.AutoSize = true;
-            this.cbAct.Location = new System.Drawing.Point(136, 479);
+            this.cbAct.Location = new System.Drawing.Point(136, 442);
             this.cbAct.Name = "cbAct";
             this.cbAct.Size = new System.Drawing.Size(66, 20);
             this.cbAct.TabIndex = 8;
@@ -335,38 +324,31 @@
             this.btnShowPassCon.UseVisualStyleBackColor = true;
             this.btnShowPassCon.Click += new System.EventHandler(this.btnShowPassCon_Click);
             // 
-            // txtCity
+            // cmbCity
             // 
-            this.txtCity.Location = new System.Drawing.Point(136, 281);
-            this.txtCity.Name = "txtCity";
-            this.txtCity.Size = new System.Drawing.Size(279, 22);
-            this.txtCity.TabIndex = 4;
+            this.cmbCity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCity.FormattingEnabled = true;
+            this.cmbCity.Location = new System.Drawing.Point(136, 285);
+            this.cmbCity.Name = "cmbCity";
+            this.cmbCity.Size = new System.Drawing.Size(279, 24);
+            this.cmbCity.TabIndex = 32;
             // 
-            // txtPostalCode
+            // label14
             // 
-            this.txtPostalCode.Location = new System.Drawing.Point(136, 329);
-            this.txtPostalCode.Name = "txtPostalCode";
-            this.txtPostalCode.Size = new System.Drawing.Size(279, 22);
-            this.txtPostalCode.TabIndex = 5;
-            this.txtPostalCode.TextChanged += new System.EventHandler(this.txtPostalCode_TextChanged);
-            this.txtPostalCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPostalCode_KeyPress);
-            // 
-            // label13
-            // 
-            this.label13.Location = new System.Drawing.Point(19, 320);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(106, 40);
-            this.label13.TabIndex = 24;
-            this.label13.Text = "Postal code (numbers only)";
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(19, 293);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 16);
+            this.label14.TabIndex = 33;
+            this.label14.Text = "City";
             // 
             // frmAddEmp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(889, 601);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.txtPostalCode);
-            this.Controls.Add(this.txtCity);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.cmbCity);
             this.Controls.Add(this.btnShowPassCon);
             this.Controls.Add(this.btnShowPass);
             this.Controls.Add(this.btnS);
@@ -388,7 +370,6 @@
             this.Controls.Add(this.dtpBD);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtAdr);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbGen);
             this.Controls.Add(this.cmbGe);
             this.Controls.Add(this.txtMiddleName);
@@ -418,7 +399,6 @@
         private System.Windows.Forms.TextBox txtMidName;
         private System.Windows.Forms.ComboBox cmbGe;
         private System.Windows.Forms.Label cmbGen;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtAdr;
         private System.Windows.Forms.DateTimePicker dtpBD;
@@ -442,8 +422,7 @@
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.Button btnShowPassCon;
         private System.Windows.Forms.Button btnShowPass;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtPostalCode;
-        private System.Windows.Forms.TextBox txtCity;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox cmbCity;
     }
 }

@@ -4,7 +4,6 @@ using eCopy.Model.SearchObjects;
 using eCopy.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace eCopy.Controllers
 {
@@ -34,6 +33,18 @@ namespace eCopy.Controllers
         public EmployeeResponse UpdateEmp(UpdateEmployeeRequest update)
         {
             return service.UpdateEmp(update);
+        }
+
+        [HttpPut("UpdateEmpByAdmin/{id}")] 
+        public EmployeeResponse UpdateEmpByAdmin(int id, UpdateEmployeeRequest update)
+        {
+            return service.UpdateEmpByAdmin(id, update);
+        }
+
+        [HttpPut("ChangePassByAdmin/{id}")]
+        public bool ChangePassByAdmin(int id, PassRequest request)
+        {
+            return service.ChangePassByAdmin(id, request);
         }
     }
 }

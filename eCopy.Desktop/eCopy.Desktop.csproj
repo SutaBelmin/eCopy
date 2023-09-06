@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\eCopy\packages\PdfiumViewer.Native.x86_64.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.v8-xfa.props" Condition="Exists('..\eCopy\packages\PdfiumViewer.Native.x86_64.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.v8-xfa.props')" />
+  <Import Project="..\eCopy\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props" Condition="Exists('..\eCopy\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +37,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Words, Version=23.8.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\eCopy\packages\Aspose.Words.23.8.0\lib\net461\Aspose.Words.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Words.Pdf2Word, Version=23.8.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\eCopy\packages\Aspose.Words.23.8.0\lib\net461\Aspose.Words.Pdf2Word.dll</HintPath>
+    </Reference>
     <Reference Include="Flurl, Version=3.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\eCopy\packages\Flurl.3.0.6\lib\net472\Flurl.dll</HintPath>
     </Reference>
@@ -81,6 +91,21 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\eCopy\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PdfiumViewer, Version=2.13.0.0, Culture=neutral, PublicKeyToken=91e4789cfb0609e0, processorArchitecture=MSIL">
+      <HintPath>..\eCopy\packages\PdfiumViewer.2.13.0.0\lib\net20\PdfiumViewer.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Doc, Version=11.8.9.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\eCopy\packages\Spire.Doc.11.8.11\lib\net40\Spire.Doc.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=9.8.5.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\eCopy\packages\Spire.PDFViewer.7.12.0\lib\net46\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.PdfViewer.Asp, Version=7.12.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\eCopy\packages\Spire.PDFViewer.7.12.0\lib\net46\Spire.PdfViewer.Asp.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.PdfViewer.Forms, Version=7.12.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\eCopy\packages\Spire.PDFViewer.7.12.0\lib\net46\Spire.PdfViewer.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\eCopy\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -128,8 +153,15 @@
   <ItemGroup>
     <Compile Include="ApiIdentityServ.cs" />
     <Compile Include="APIServ.cs" />
+    <Compile Include="CityModel.cs" />
     <Compile Include="EmployeeDetModel.cs" />
     <Compile Include="EmpModel.cs" />
+    <Compile Include="frmAddCity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddCity.Designer.cs">
+      <DependentUpon>frmAddCity.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddEmp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,11 +174,35 @@
     <Compile Include="frmAdmin.Designer.cs">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAdminEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdminEdit.Designer.cs">
+      <DependentUpon>frmAdminEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmChangePass.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmChangePass.Designer.cs">
       <DependentUpon>frmChangePass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangePassByAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangePassByAdmin.Designer.cs">
+      <DependentUpon>frmChangePassByAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCity.Designer.cs">
+      <DependentUpon>frmCity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditCity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditCity.Designer.cs">
+      <DependentUpon>frmEditCity.cs</DependentUpon>
     </Compile>
     <Compile Include="frmEmpDet.cs">
       <SubType>Form</SubType>
@@ -171,6 +227,12 @@
     </Compile>
     <Compile Include="frmLog.Designer.cs">
       <DependentUpon>frmLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPPdf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPPdf.Designer.cs">
+      <DependentUpon>frmPPdf.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPrintTop5Customer.cs">
       <SubType>Form</SubType>
@@ -221,16 +283,32 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="StatusType.cs" />
+    <Compile Include="UpdateCityModel.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Validation.cs" />
+    <EmbeddedResource Include="frmAddCity.resx">
+      <DependentUpon>frmAddCity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAddEmp.resx">
       <DependentUpon>frmAddEmp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAdmin.resx">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAdminEdit.resx">
+      <DependentUpon>frmAdminEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmChangePass.resx">
       <DependentUpon>frmChangePass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangePassByAdmin.resx">
+      <DependentUpon>frmChangePassByAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCity.resx">
+      <DependentUpon>frmCity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditCity.resx">
+      <DependentUpon>frmEditCity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmpDet.resx">
       <DependentUpon>frmEmpDet.cs</DependentUpon>
@@ -243,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLog.resx">
       <DependentUpon>frmLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPPdf.resx">
+      <DependentUpon>frmPPdf.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrintTop5Customer.resx">
       <DependentUpon>frmPrintTop5Customer.cs</DependentUpon>
@@ -275,6 +356,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\CityModel.datasource" />
     <None Include="Properties\DataSources\eCopy.Model.Response.RevenueForLastYearResponse.datasource" />
     <None Include="Properties\DataSources\eCopy.Model.Response.Top5CustomerResponse.datasource" />
     <None Include="Properties\DataSources\EmpModel.datasource" />
@@ -318,4 +400,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\eCopy\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props')" Text="$([System.String]::Format('$(ErrorText)', '..\eCopy\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props'))" />
+    <Error Condition="!Exists('..\eCopy\packages\PdfiumViewer.Native.x86_64.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.v8-xfa.props')" Text="$([System.String]::Format('$(ErrorText)', '..\eCopy\packages\PdfiumViewer.Native.x86_64.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.v8-xfa.props'))" />
+  </Target>
 </Project>

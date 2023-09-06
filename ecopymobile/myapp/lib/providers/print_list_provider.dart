@@ -13,13 +13,13 @@ class PrintListProvider extends BaseProvider<PrintRequest> {
   }
 
   Future<PrintRequest?> pay(String id) async {
-    //var url = "https://10.0.2.2:7284/PrintRequest/Pay/${id}";
+    var url = "https://10.0.2.2:7284/PrintRequest/Pay/${id}";
 
     //var url = "http://10.0.2.2:5000/PrintRequest/Pay/${id}";
 
-    var urlM = const String.fromEnvironment("baseUrl",
+    /*var urlM = const String.fromEnvironment("baseUrl",
         defaultValue: "http://10.0.2.2:5000/");
-    var url = "${urlM}PrintRequest/Pay/${id}";
+    var url = "${urlM}PrintRequest/Pay/${id}";*/
 
     var uri = Uri.parse(url);
 
@@ -35,13 +35,13 @@ class PrintListProvider extends BaseProvider<PrintRequest> {
   }
 
   Future<bool?> cancelRequest(String id) async {
-    //var url = "https://10.0.2.2:7284/PrintRequest/CancelRequest/${id}";
+    var url = "https://10.0.2.2:7284/PrintRequest/CancelRequest/${id}";
 
     //var url = "http://10.0.2.2:5000/PrintRequest/CancelRequest/${id}";
 
-    var urlM = const String.fromEnvironment("baseUrl",
+    /*var urlM = const String.fromEnvironment("baseUrl",
         defaultValue: "http://10.0.2.2:5000/");
-    var url = "${urlM}PrintRequest/CancelRequest/${id}";
+    var url = "${urlM}PrintRequest/CancelRequest/${id}";*/
 
     var uri = Uri.parse(url);
 
@@ -57,13 +57,13 @@ class PrintListProvider extends BaseProvider<PrintRequest> {
   }
 
   Future<PrintRequest?> updateRequest(String id, UpdateRequest update) async {
-    //var url = "https://10.0.2.2:7284/PrintRequest/UpdateRequest/$id";
+    var url = "https://10.0.2.2:7284/PrintRequest/UpdateRequest/$id";
 
     //var url = "http://10.0.2.2:5000/PrintRequest/UpdateRequest/${id}";
 
-    var urlM = const String.fromEnvironment("baseUrl",
+    /*var urlM = const String.fromEnvironment("baseUrl",
         defaultValue: "http://10.0.2.2:5000/");
-    var url = "${urlM}PrintRequest/UpdateRequest/${id}";
+    var url = "${urlM}PrintRequest/UpdateRequest/${id}";*/
 
     var uri = Uri.parse(url);
 

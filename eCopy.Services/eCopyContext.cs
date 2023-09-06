@@ -30,6 +30,8 @@ namespace eCopy.Services
         public virtual DbSet<ProfilePhoto> ProfilePhotos { get; set; } = null!;
         public virtual DbSet<Request> Requests { get; set; } = null!;
         public virtual DbSet<Error> Errors { get; set; } = null!;
+        public virtual DbSet<Payment> Payment { get; set; } = null!;
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

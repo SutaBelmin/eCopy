@@ -41,7 +41,6 @@ namespace eCopy.Desktop
             txtGen.ReadOnly = true; 
             txtCN.ReadOnly = true;
 
-
         }
     }
 }

@@ -477,6 +477,33 @@ namespace eCopy.Services.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("eCopy.Services.Database.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StripePaymentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("Payment");
+                });
+
             modelBuilder.Entity("eCopy.Services.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -932,6 +959,17 @@ namespace eCopy.Services.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("eCopy.Services.Database.Payment", b =>
+                {
+                    b.HasOne("eCopy.Services.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("eCopy.Services.Employee", b =>

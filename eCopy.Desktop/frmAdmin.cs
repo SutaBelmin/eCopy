@@ -69,15 +69,29 @@ namespace eCopy.Desktop
             }).ToList();
         }
 
-        private void dgvListEmp_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private async void dgvListEmp_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var req = dgvListEmp.SelectedRows[0].DataBoundItem as EmpModel;
+            /*var req = dgvListEmp.SelectedRows[0].DataBoundItem as EmpModel;
 
             if (req != null)
             {
                 frmEmpDet frm = new frmEmpDet(req);
 
                 frm.ShowDialog();
+            }*/
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow selectedRow = dgvListEmp.Rows[e.RowIndex];
+
+                // Assuming the ID is in the first column (index 0)
+                int employeeId = Convert.ToInt32(selectedRow.Cells[0].Value);
+
+                var emp = await employeeService.GetById<EmployeeResponse>(employeeId);
+
+                frmAdminEdit frm = new frmAdminEdit(emp);
+                frm.ShowDialog();
+
+                btnSearch_Click(null, null);
             }
         }
 
@@ -115,6 +129,12 @@ namespace eCopy.Desktop
             {
                 return;
             }
+        }
+
+        private void btnCity_Click(object sender, EventArgs e)
+        {
+            frmCity frmCit = new frmCity();
+            frmCit.ShowDialog();
         }
     }
 }

@@ -45,6 +45,7 @@
             this.btnRes = new System.Windows.Forms.Button();
             this.btnAddEm = new System.Windows.Forms.Button();
             this.btnLogO = new System.Windows.Forms.Button();
+            this.btnCity = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListEmp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -204,11 +205,22 @@
             this.btnLogO.UseVisualStyleBackColor = true;
             this.btnLogO.Click += new System.EventHandler(this.btnLogO_Click);
             // 
+            // btnCity
+            // 
+            this.btnCity.Location = new System.Drawing.Point(216, 12);
+            this.btnCity.Name = "btnCity";
+            this.btnCity.Size = new System.Drawing.Size(95, 32);
+            this.btnCity.TabIndex = 9;
+            this.btnCity.Text = "City";
+            this.btnCity.UseVisualStyleBackColor = true;
+            this.btnCity.Click += new System.EventHandler(this.btnCity_Click);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 478);
+            this.Controls.Add(this.btnCity);
             this.Controls.Add(this.btnLogO);
             this.Controls.Add(this.btnAddEm);
             this.Controls.Add(this.btnRes);
@@ -247,5 +259,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn middleNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn genderDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
+        private System.Windows.Forms.Button btnCity;
     }
 }

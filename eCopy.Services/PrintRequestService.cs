@@ -2,6 +2,7 @@
 using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using eCopy.Model.SearchObjects;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -111,10 +112,17 @@ namespace eCopy.Services
             return mapper.Map<PrintRequestR>(model); 
         }
 
-        public PrintRequestR Pay(int id)
+        public PrintRequestR Pay(int id/*, string StripePaymentId*/)
         {
             var request = context.Requests.FirstOrDefault(x => x.Id == id);
             request.IsPaid = true;
+            /*context.Payment.Add(new Database.Payment
+            {
+                RequestId = id,
+                Amount = Convert.ToDecimal(request.Price),
+                Created = DateTime.Now,
+                StripePaymentId = StripePaymentId
+            });*/
             context.SaveChanges();
 
             return mapper.Map<PrintRequestR>(request);

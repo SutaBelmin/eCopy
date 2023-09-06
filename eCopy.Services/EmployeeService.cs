@@ -2,14 +2,12 @@
 using eCopy.Model;
 using eCopy.Model.Enum;
 using eCopy.Model.Requests;
-using eCopy.Model.Response;
 using eCopy.Model.SearchObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 
 namespace eCopy.Services
 {
@@ -269,5 +267,76 @@ namespace eCopy.Services
             return true;
         }
 
+        public EmployeeResponse UpdateEmpByAdmin(int id, UpdateEmployeeRequest update)
+        {
+            var emp = context.Employees
+                .Include(x => x.ApplicationUser)
+                .Include(x => x.Person)
+                .FirstOrDefault(x => x.Id == id);
+
+            emp.Person.FirstName = update.FirstName;
+            emp.Person.LastName = update.LastName;
+            emp.Person.MiddleName = update.MiddleName;
+            emp.Person.Gender = update.Gender.ToString();
+            emp.Person.CityId = update.CityId;
+            emp.Person.Address = update.Address;
+            emp.Person.BirthDate = update.BirthDate;
+
+            emp.ApplicationUser.Active = true;
+            emp.Active = update.Active;
+            emp.ApplicationUser.NormalizedEmail = update.Email.ToUpper();
+            emp.ApplicationUser.Email = update.Email;
+            emp.ApplicationUser.UserName = update.Username;
+            emp.ApplicationUser.NormalizedUserName = update.Username.ToUpper();
+            emp.ApplicationUser.PhoneNumber = update.PhoneNumber;
+
+            ProfilePhoto profilePhoto = null;
+            if (update.ProfilePhoto != null)
+            {
+                var uploadedFile = fileService.Upload(update.ProfilePhoto, update.ProfilePhotoExtension);
+
+                profilePhoto = new ProfilePhoto();
+                profilePhoto.Active = true;
+                profilePhoto.Path = uploadedFile.Url;
+                profilePhoto.Name = uploadedFile.Name;
+                profilePhoto.Extension = uploadedFile.Extension;
+
+                context.ProfilePhotos.Add(profilePhoto);
+                context.SaveChanges();
+            }
+
+            if (profilePhoto != null)
+            {
+                var userProfilePhoto = new ApplicationUserProfilePhoto
+                {
+                    ApplicationUserId = emp.ApplicationUser.Id,
+                    ProfilePhotoId = profilePhoto.Id,
+                    Active = true
+                };
+                context.ApplicationUserProfilePhotos.Add(userProfilePhoto);
+            }
+
+            context.SaveChanges();
+
+            return mapper.Map<EmployeeResponse>(emp);
+        }
+
+        public bool ChangePassByAdmin(int id, PassRequest request)
+        {
+            var employee = context.Employees
+                .Include(x => x.ApplicationUser)
+            .FirstOrDefault(x => x.Id == id);
+
+            if (hasher.VerifyHashedPassword(employee.ApplicationUser, employee.ApplicationUser.PasswordHash, request.oldPass) != PasswordVerificationResult.Success)
+            {
+                return false;
+            }
+
+            employee.ApplicationUser.PasswordHash = hasher.HashPassword(employee.ApplicationUser, request.newPass);
+
+            context.SaveChanges();
+
+            return true;
+        }
     }
 }

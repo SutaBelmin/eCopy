@@ -1,7 +1,4 @@
-﻿using eCopy.Model.Requests;
-using eCopy.Model;
-using eCopy.Model.Response;
-using eCopy.Model.SearchObjects;
+﻿using eCopy.Model.Response;
 using eCopy.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

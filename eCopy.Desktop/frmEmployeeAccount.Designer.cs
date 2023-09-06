@@ -35,7 +35,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbGen = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -53,10 +52,9 @@
             this.btnChPass = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.error = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtCity = new System.Windows.Forms.TextBox();
-            this.txtPostalCode = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.ofd2 = new System.Windows.Forms.OpenFileDialog();
+            this.cmbCity = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.error)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,15 +106,6 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Middle name";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(37, 279);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 16);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "City";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -138,7 +127,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(475, 104);
+            this.label6.Location = new System.Drawing.Point(488, 104);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 16);
             this.label6.TabIndex = 12;
@@ -161,7 +150,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(475, 146);
+            this.label7.Location = new System.Drawing.Point(488, 146);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(63, 16);
             this.label7.TabIndex = 14;
@@ -170,7 +159,7 @@
             // cbActive
             // 
             this.cbActive.AutoSize = true;
-            this.cbActive.Location = new System.Drawing.Point(154, 369);
+            this.cbActive.Location = new System.Drawing.Point(154, 333);
             this.cbActive.Name = "cbActive";
             this.cbActive.Size = new System.Drawing.Size(66, 20);
             this.cbActive.TabIndex = 7;
@@ -259,42 +248,35 @@
             // 
             this.error.ContainerControl = this;
             // 
-            // txtCity
-            // 
-            this.txtCity.Location = new System.Drawing.Point(154, 276);
-            this.txtCity.Name = "txtCity";
-            this.txtCity.Size = new System.Drawing.Size(279, 22);
-            this.txtCity.TabIndex = 33;
-            // 
-            // txtPostalCode
-            // 
-            this.txtPostalCode.Location = new System.Drawing.Point(154, 321);
-            this.txtPostalCode.Name = "txtPostalCode";
-            this.txtPostalCode.Size = new System.Drawing.Size(279, 22);
-            this.txtPostalCode.TabIndex = 34;
-            this.txtPostalCode.TextChanged += new System.EventHandler(this.txtPostalCode_TextChanged);
-            this.txtPostalCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPostalCode_KeyPress);
-            // 
-            // label13
-            // 
-            this.label13.Location = new System.Drawing.Point(38, 321);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(100, 41);
-            this.label13.TabIndex = 35;
-            this.label13.Text = "Postal code (numbers only)";
-            // 
             // ofd2
             // 
             this.ofd2.FileName = "openFileDialog1";
+            // 
+            // cmbCity
+            // 
+            this.cmbCity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCity.FormattingEnabled = true;
+            this.cmbCity.Location = new System.Drawing.Point(154, 276);
+            this.cmbCity.Name = "cmbCity";
+            this.cmbCity.Size = new System.Drawing.Size(279, 24);
+            this.cmbCity.TabIndex = 36;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(38, 284);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 16);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "City";
             // 
             // frmEmployeeAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 455);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.txtPostalCode);
-            this.Controls.Add(this.txtCity);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.cmbCity);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.btnChPass);
             this.Controls.Add(this.btnSave);
@@ -311,7 +293,6 @@
             this.Controls.Add(this.txtAdress);
             this.Controls.Add(this.cmbGen);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -336,7 +317,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbGen;
         private System.Windows.Forms.Label label6;
@@ -354,9 +334,8 @@
         private System.Windows.Forms.Button btnChPass;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ErrorProvider error;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtPostalCode;
-        private System.Windows.Forms.TextBox txtCity;
         private System.Windows.Forms.OpenFileDialog ofd2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmbCity;
     }
 }

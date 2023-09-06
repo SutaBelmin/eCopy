@@ -3,10 +3,12 @@ using eCopy.Model.Enum;
 using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace eCopy.Desktop
@@ -25,30 +27,14 @@ namespace eCopy.Desktop
         public frmAddEmp()
         {
             InitializeComponent();
-            txtPostalCode.KeyPress += txtPostalCode_KeyPress;
-            txtPostalCode.TextChanged += txtPostalCode_TextChanged;
         }
 
         private async void frmAddEmp_Load(object sender, EventArgs e)
         {
-            SetGender();            
+            SetGender();
+            await SetCity();
         }
 
-        private void txtPostalCode_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtPostalCode_TextChanged(object sender, EventArgs e)
-        {
-            if (!int.TryParse(txtPostalCode.Text, out _))
-            {
-                txtPostalCode.Text = "";
-            }
-        }
         void SetGender()
         {
             cmbGe.DataSource = Enum.GetValues(typeof(Gender)).Cast<Gender>().Select(x => new
@@ -60,6 +46,16 @@ namespace eCopy.Desktop
             cmbGe.DisplayMember = "Name";
             cmbGe.ValueMember = "Value";
         }
+
+        private async Task SetCity()
+        {
+            var list = await cityService.Get<List<CityResponse>>();
+
+            cmbCity.DataSource = list;
+
+            cmbCity.DisplayMember = "Name";
+            cmbCity.ValueMember = "ID";
+        }
         private async void btnS_Click(object sender, EventArgs e)
         {
             if (fieldsValidation())
@@ -68,8 +64,6 @@ namespace eCopy.Desktop
 
                 var getUsr = await userService.GetByUsrnameOrEmail(txtUsrnm.Text, txtEm.Text);
 
-                var newCityId = 0;
-                var postalId = 0;
 
                 if (getUsr.Username == true)
                 {
@@ -85,20 +79,6 @@ namespace eCopy.Desktop
                     return;
                 }
 
-                CityRequest newCity = new CityRequest();
-                newCity.Name = txtCity.Text;
-                newCity.ShortName = txtCity.Text;
-                
-                newCity.PostalCode = int.Parse(txtPostalCode.Text);
-
-                newCity.CountryID = 1;
-                newCity.Active = true;
-
-                var cityRes = await cityService.Post<CityResponse>(newCity);
-                if (cityRes != null)
-                {
-                    newCityId = cityRes.ID;
-                }
                 byte[] data = null;
 
                 if (pbPF.Image != null)
@@ -114,7 +94,7 @@ namespace eCopy.Desktop
                         MiddleName = txtMidName.Text,
                         Address = txtAdr.Text,
                         BirthDate = dtpBD.Value,
-                        CityId= newCityId,
+                        CityId = (int)cmbCity.SelectedValue,
                         Gender = (Gender)cmbGe.SelectedValue
                     },
                     Active = cbAct.Checked,
@@ -154,14 +134,11 @@ namespace eCopy.Desktop
 
         private bool fieldsValidation()
         {
-            int len = txtPostalCode.Text.Length;
 
             return Validation.requiredField(txtFirstName, error, "Enter some text") &&
             Validation.requiredField(txtLastName, error, "Enter some text") &&
             Validation.requiredField(txtMidName, error, "Enter some text") &&
             Validation.requiredField(cmbGe, error, "Enter some text") &&
-            Validation.requiredField(txtCity, error, "Enter some text") &&
-            Validation.requiredField(txtPostalCode, error, "Enter some number") &&
             Validation.requiredField(txtAdr, error, "Enter some text") &&
             Validation.requiredField(pbPF, error, "Choose a picture") &&
             Validation.UsernameValidation(txtUsrnm, error) &&

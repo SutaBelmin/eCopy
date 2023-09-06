@@ -15,15 +15,15 @@ class UserProvider extends BaseProvider<ClientResponse> {
   }
 
   Future<ClientResponse?> getByUsername(String username, String email) async {
-    /*var url =
-        "https://10.0.2.2:7284/Client/GetByUsername?username=$username&email=$email";*/
+    var url =
+        "https://10.0.2.2:7284/Client/GetByUsername?username=$username&email=$email";
 
     /*var url =
         "http://10.0.2.2:5000/Client/GetByUsername?username=$username&email=$email";*/
 
-    var urlM = const String.fromEnvironment("baseUrl",
+    /*var urlM = const String.fromEnvironment("baseUrl",
         defaultValue: "http://10.0.2.2:5000/");
-    var url = "${urlM}Client/GetByUsername?username=$username&email=$email";
+    var url = "${urlM}Client/GetByUsername?username=$username&email=$email";*/
 
     var uri = Uri.parse(url);
 
@@ -43,13 +43,13 @@ class UserProvider extends BaseProvider<ClientResponse> {
   }
 
   Future<ClientResponse?> getClientAccount() async {
-    //var url = "https://10.0.2.2:7284/Client/GetClientAccount";
+    var url = "https://10.0.2.2:7284/Client/GetClientAccount";
 
     //var url = "http://10.0.2.2:5000/Client/GetClientAccount";
 
-    var urlM = const String.fromEnvironment("baseUrl",
+    /*var urlM = const String.fromEnvironment("baseUrl",
         defaultValue: "http://10.0.2.2:5000/");
-    var url = "${urlM}Client/GetClientAccount";
+    var url = "${urlM}Client/GetClientAccount";*/
 
     var uri = Uri.parse(url);
 
@@ -69,13 +69,13 @@ class UserProvider extends BaseProvider<ClientResponse> {
   }
 
   Future<bool?> ChangePass(PassRequest update) async {
-    //var url = "https://10.0.2.2:7284/Client/ChangePass";
+    var url = "https://10.0.2.2:7284/Client/ChangePass";
 
     //var url = "http://10.0.2.2:5000/Client/ChangePass";
 
-    var urlM = const String.fromEnvironment("baseUrl",
+    /*var urlM = const String.fromEnvironment("baseUrl",
         defaultValue: "http://10.0.2.2:5000/");
-    var url = "${urlM}Client/ChangePass";
+    var url = "${urlM}Client/ChangePass";*/
 
     var uri = Uri.parse(url);
 
@@ -96,13 +96,13 @@ class UserProvider extends BaseProvider<ClientResponse> {
   }
 
   Future<ClientResponse?> updateClient(ClientRequestUpdate update) async {
-    //var url = "https://10.0.2.2:7284/Client/MyUpdateClient";
+    var url = "https://10.0.2.2:7284/Client/MyUpdateClient";
 
     //var url = "http://10.0.2.2:5000/Client/MyUpdateClient";
 
-    var urlM = const String.fromEnvironment("baseUrl",
+    /*var urlM = const String.fromEnvironment("baseUrl",
         defaultValue: "http://10.0.2.2:5000/");
-    var url = "${urlM}Client/MyUpdateClient";
+    var url = "${urlM}Client/MyUpdateClient";*/
 
     //var url = "http://10.0.2.2:5000/PrintRequest/Update/${id}";
     var uri = Uri.parse(url);

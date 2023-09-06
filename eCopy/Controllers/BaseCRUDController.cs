@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using eCopy.Services;
+﻿using eCopy.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System;
 
 namespace eCopy.Controllers
 {

@@ -12,5 +12,20 @@ namespace eCopy.Services
         {
         }
 
+        public override CityResponse Update(int id, CityRequest update)
+        {
+            var city = context.Cities.Find(id);
+
+            city.Name= update.Name;
+            city.ShortName= update.ShortName;
+            city.PostalCode= update.PostalCode;
+            city.CountryId = 1;
+            city.Active = update.Active;
+
+            context.SaveChanges();
+
+            return mapper.Map<CityResponse>(city);
+        }
+
     }
 }

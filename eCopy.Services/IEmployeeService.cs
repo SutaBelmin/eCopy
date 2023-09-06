@@ -12,5 +12,9 @@ namespace eCopy.Services
         EmployeeResponse GetEmployeeAccount();
 
         EmployeeResponse UpdateEmp(UpdateEmployeeRequest update);
+
+        EmployeeResponse UpdateEmpByAdmin(int id, UpdateEmployeeRequest update);
+
+        bool ChangePassByAdmin(int id, PassRequest request);
     }
 }

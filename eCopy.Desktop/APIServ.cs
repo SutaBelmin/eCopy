@@ -11,8 +11,8 @@ namespace eCopy.Desktop
     public class APIServ
     {
         private string _resource = null;
-        public string _endpoint = "http://localhost:5000/";
-        //public string _endpoint = "https://localhost:7284/";
+        //public string _endpoint = "http://localhost:5000/";
+        public string _endpoint = "https://localhost:7284/";
 
         public APIServ(string resource)
         {
@@ -130,6 +130,26 @@ namespace eCopy.Desktop
                 .WithHeader("Authorization", $"Bearer {User.Token}")
                 .PutJsonAsync(update)
                 .ReceiveJson<EmployeeResponse>();
+
+            return result;
+        }
+
+        public async Task<EmployeeResponse> UpdateEmpByAdmin(int id, UpdateEmployeeRequest update)
+        {
+            var result = await $"{_endpoint}{_resource}/UpdateEmpByAdmin/{id}"
+                .WithHeader("Authorization", $"Bearer {User.Token}")
+                .PutJsonAsync(update)
+                .ReceiveJson<EmployeeResponse>();
+
+            return result;
+        }
+
+        public async Task<bool> ChangePassByAdmin(int id, PassRequest request)
+        {
+            var result = await $"{_endpoint}{_resource}/ChangePassByAdmin/{id}"
+                .WithHeader("Authorization", $"Bearer {User.Token}")
+                .PutJsonAsync(request)
+                .ReceiveJson<bool>();
 
             return result;
         }

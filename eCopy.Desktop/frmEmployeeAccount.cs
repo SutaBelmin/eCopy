@@ -1,7 +1,9 @@
-﻿using eCopy.Model.Enum;
+﻿using eCopy.Model;
+using eCopy.Model.Enum;
 using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,37 +16,20 @@ namespace eCopy.Desktop
         public APIServ employeeService = new APIServ("Employee");
         public APIServ cityService = new APIServ("City");
         public APIServ userService = new APIServ("User");
-
+        EmployeeResponse model;
         private string imagePath { get; set; }
 
 
-        public frmEmployeeAccount()
+        public frmEmployeeAccount(EmployeeResponse model)
         {
             InitializeComponent();
-            txtPostalCode.KeyPress += txtPostalCode_KeyPress;
-            txtPostalCode.TextChanged += txtPostalCode_TextChanged;
+            this.model = model;
         }
 
         private async void frmEmployeeAccount_Load(object sender, EventArgs e)
         {
             SetGender();
             await setAccountData();
-        }
-
-        private void txtPostalCode_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtPostalCode_TextChanged(object sender, EventArgs e)
-        {
-            if (!int.TryParse(txtPostalCode.Text, out _))
-            {
-                txtPostalCode.Text = "";
-            }
         }
 
         void SetGender()
@@ -60,29 +45,31 @@ namespace eCopy.Desktop
         }
 
         private async Task setAccountData()
-        {
-            var emp = await employeeService.GetEmployeeAccount();
+        {   
+            var list = await cityService.Get<List<CityResponse>>();
 
-            txtFirst.Text = emp.Person.FirstName;
-            txtLast.Text = emp.Person.LastName;
-            txtMiddle.Text = emp.Person.MiddleName;
+            cmbCity.DataSource = list;
+            cmbCity.DisplayMember = "Name";
+            cmbCity.ValueMember = "ID";
 
-            string genderString = emp.Person.Gender; 
-            if (Enum.TryParse<Gender>(genderString, out var gender)) 
-            { 
-                cmbGen.SelectedValue = gender; 
+            txtFirst.Text = model.Person.FirstName;
+            txtLast.Text = model.Person.LastName;
+            txtMiddle.Text = model.Person.MiddleName;
+
+            string genderString = model.Person.Gender;
+            if (Enum.TryParse<Gender>(genderString, out var gender))
+            {
+                cmbGen.SelectedValue = gender;
             }
 
-            cbActive.Checked = emp.Active;
-            dtpBirthD.Value = emp.Person.BirthDate;
+            cbActive.Checked = model.Active;
+            dtpBirthD.Value = model.Person.BirthDate;
+            txtAdress.Text = model.Person.Address;
+            cmbCity.SelectedValue = model.Person.City.ID;
 
-            txtCity.Text = emp.Person.City.Name;
-            txtPostalCode.Text = emp.Person.City.PostalCode.ToString();
-            txtAdress.Text = emp.Person.Address;
-            
-            txtUsername.Text = emp.ApplicationUser.Username;
-            txtEmail.Text = emp.ApplicationUser.Email;
-            txtPhone.Text = emp.ApplicationUser.PhoneNumber;
+            txtUsername.Text = model.ApplicationUser.Username;
+            txtEmail.Text = model.ApplicationUser.Email;
+            txtPhone.Text = model.ApplicationUser.PhoneNumber;
 
         }
 
@@ -114,38 +101,14 @@ namespace eCopy.Desktop
                     return;
                 }
 
-                var emp = await employeeService.GetEmployeeAccount();
                 UpdateEmployeeRequest updateModel = new UpdateEmployeeRequest();
 
-
-                if (emp.Person.City.Name != txtCity.Text)
-                {
-                    var newCityId = 0;
-                    var postalId = 0;
-
-
-                    CityRequest newCity = new CityRequest();
-                    newCity.Name = txtCity.Text;
-                    newCity.ShortName = txtCity.Text;
-                    newCity.PostalCode = int.Parse(txtPostalCode.Text);
-                    newCity.CountryID = 1;
-                    newCity.Active = true;
-
-                    var cityRes = await cityService.Post<CityResponse>(newCity);
-                    if (cityRes != null)
-                    {
-                        updateModel.CityId = cityRes.ID;
-                    }
-                }
-                else
-                {
-                    updateModel.CityId = emp.Person.CityId;
-                }
                 updateModel.FirstName = txtFirst.Text;
                 updateModel.LastName = txtLast.Text;
                 updateModel.MiddleName = txtMiddle.Text;
                 updateModel.Gender = (Gender)cmbGen.SelectedValue;
                 updateModel.Address = txtAdress.Text;
+                updateModel.CityId = (int)cmbCity.SelectedValue;
                 updateModel.BirthDate = dtpBirthD.Value;
                 updateModel.Active = cbActive.Checked;
                 updateModel.Email = txtEmail.Text;

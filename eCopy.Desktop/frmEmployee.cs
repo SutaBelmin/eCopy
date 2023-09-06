@@ -11,6 +11,7 @@ namespace eCopy.Desktop
     public partial class frmEmployee : Form
     {
         public APIServ printRequestService = new APIServ("PrintRequest");
+        public APIServ employeeService = new APIServ("Employee");
         public bool logout = false;
         private List<Status> status;
         public frmEmployee()
@@ -114,9 +115,11 @@ namespace eCopy.Desktop
             loadData();
         }
 
-        private void btnAccount_Click(object sender, EventArgs e)
+        private async void btnAccount_Click(object sender, EventArgs e)
         {
-            frmEmployeeAccount frm = new frmEmployeeAccount();
+            var emp = await employeeService.GetEmployeeAccount();
+
+            frmEmployeeAccount frm = new frmEmployeeAccount(emp);
             frm.ShowDialog();
         }
     }

@@ -9,6 +9,8 @@ using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 
+
+
 namespace eCopy.Desktop
 {
     public partial class frmPSettings : Form
@@ -71,7 +73,7 @@ namespace eCopy.Desktop
         {
             var oldStatus = model.Status;
 
-            if(oldStatus == "Completed" || oldStatus == "Rejected" || oldStatus == "Canceled")
+            if (oldStatus == "Completed" || oldStatus == "Rejected" || oldStatus == "Canceled")
             {
                 MessageBox.Show("Can't update request when Status is Completed, Rejected or Canceled", "Message", MessageBoxButtons.OK);
                 cmbSt.SelectedIndex = status.IndexOf((Status)Enum.Parse(typeof(Status), model.Status));
@@ -101,40 +103,40 @@ namespace eCopy.Desktop
         {
             try
             {
-                if(model.ID < 8)
+                if (model.ID < 8)
                 {
                     MessageBox.Show("This is a test request so it has no file for download.\n " +
-                        "Please choose a request that contains a file (Id > 7)", "Message", 
+                        "Please choose a request that contains a file (Id > 7)", "Message",
                         MessageBoxButtons.OK);
                     return;
                 }
 
                 using (SaveFileDialog saveDialog = new SaveFileDialog())
                 {
-                    string extension = Path.GetExtension(filePath).ToLower(); 
-                    string defaultExt = ".docx"; 
-                    string filter = "Word Documents (*.docx)|*.docx|PDF Files (*.pdf)|*.pdf|All Files (*.*)|*.*"; 
-                    int filterIndex = 1; 
+                    string extension = Path.GetExtension(filePath).ToLower();
+                    string defaultExt = ".docx";
+                    string filter = "Word Documents (*.docx)|*.docx|PDF Files (*.pdf)|*.pdf|All Files (*.*)|*.*";
+                    int filterIndex = 1;
 
                     if (!string.IsNullOrEmpty(extension))
                     {
                         if (extension == ".docx" || extension == ".doc")
                         {
                             defaultExt = extension;
-                            filterIndex = 1; 
+                            filterIndex = 1;
                         }
                         else if (extension == ".pdf")
                         {
                             defaultExt = extension;
-                            filterIndex = 2; 
+                            filterIndex = 2;
                         }
                     }
 
                     saveDialog.FileName = Path.GetFileNameWithoutExtension(filePath);
-                    saveDialog.DefaultExt = defaultExt; 
-                    saveDialog.Filter = filter; 
-                    saveDialog.FilterIndex = filterIndex; 
-                    saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads"; 
+                    saveDialog.DefaultExt = defaultExt;
+                    saveDialog.Filter = filter;
+                    saveDialog.FilterIndex = filterIndex;
+                    saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
 
                     if (saveDialog.ShowDialog() == DialogResult.OK)
                     {
@@ -151,6 +153,12 @@ namespace eCopy.Desktop
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void btnPreviewPrnt_Click(object sender, EventArgs e)
+        {  
+            frmPPdf frm = new frmPPdf(filePath);
+            frm.ShowDialog();
         }
 
     }
