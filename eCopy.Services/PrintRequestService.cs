@@ -2,7 +2,6 @@
 using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using eCopy.Model.SearchObjects;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -27,7 +26,15 @@ namespace eCopy.Services
 
         public IEnumerable<PrintRequestR> GetAllR()
         {
-            var entity = context.Requests.AsQueryable();
+            var entity = context.Requests
+                .Include(x=>x.CollatedPrintOption)
+                .Include(x=>x.SidePrintOption)
+                .Include(x=>x.PagePerSheet)
+                .Include(x=>x.Letter)
+                .Include(x=> x.Orientation)
+                .Include(x=> x.PrintPageOption)
+                .AsQueryable();
+
 
             var list = entity.ToList();
 
@@ -43,6 +50,19 @@ namespace eCopy.Services
             if(files != null)
             {
                 result.FilePath = files.Name;
+            }
+
+            var payment = context.Payment.FirstOrDefault(x => x.RequestId == id);
+            if (payment != null)
+            {
+                result.PaymentId = payment.Id;
+
+                result.PaymentInfo = new PaymentResponse
+                {
+                    Amount = payment.Amount,
+                    Created = payment.Created,
+                    StripePaymentId = payment.StripePaymentId
+                };
             }
 
             return result;
@@ -112,17 +132,17 @@ namespace eCopy.Services
             return mapper.Map<PrintRequestR>(model); 
         }
 
-        public PrintRequestR Pay(int id/*, string StripePaymentId*/)
+        public PrintRequestR Pay(int id, PaymentRequest model)
         {
             var request = context.Requests.FirstOrDefault(x => x.Id == id);
             request.IsPaid = true;
-            /*context.Payment.Add(new Database.Payment
+            context.Payment.Add(new Database.Payment
             {
                 RequestId = id,
                 Amount = Convert.ToDecimal(request.Price),
                 Created = DateTime.Now,
-                StripePaymentId = StripePaymentId
-            });*/
+                StripePaymentId = model.StripePaymentId
+            });
             context.SaveChanges();
 
             return mapper.Map<PrintRequestR>(request);
@@ -148,5 +168,6 @@ namespace eCopy.Services
                 context.SaveChanges();
             }
         }
+
     }
 }

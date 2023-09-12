@@ -25,16 +25,17 @@ namespace eCopy.Desktop
 
                     if (loginForm.Role == Model.Enum.Role.Employee)
                     {
-                        frm = new frmEmployee();
+                        frm = new mdiMainEmployee();
                     }
                     if (loginForm.Role == Model.Enum.Role.Administrator)
                     {
-                        frm = new frmAdmin();
+                        frm = new mdiMainAdmin();
                     }
 
                     Application.Run(frm);
 
-                    logout = (frm is frmEmployee frmEmpl && frmEmpl.logout) || (frm is frmAdmin frmAdm && frmAdm.logout);
+                    logout = (frm is mdiMainEmployee mdiEmp && mdiEmp.logout) || (frm is mdiMainAdmin mdiAdmin && mdiAdmin.logout);
+
                 }
             } while (logout);
         }

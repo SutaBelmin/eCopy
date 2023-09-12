@@ -42,7 +42,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(156, 69);
+            this.txtName.Location = new System.Drawing.Point(168, 58);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(257, 22);
             this.txtName.TabIndex = 0;
@@ -50,7 +50,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(47, 74);
+            this.label1.Location = new System.Drawing.Point(37, 58);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 16);
             this.label1.TabIndex = 4;
@@ -58,7 +58,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(329, 215);
+            this.btnSave.Location = new System.Drawing.Point(341, 204);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(84, 30);
             this.btnSave.TabIndex = 3;
@@ -68,16 +68,15 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 169);
+            this.label2.Location = new System.Drawing.Point(37, 153);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 16);
+            this.label2.Size = new System.Drawing.Size(114, 39);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Postal code";
+            this.label2.Text = "Postal code (numbers only)";
             // 
             // txtPCode
             // 
-            this.txtPCode.Location = new System.Drawing.Point(156, 164);
+            this.txtPCode.Location = new System.Drawing.Point(168, 153);
             this.txtPCode.Name = "txtPCode";
             this.txtPCode.Size = new System.Drawing.Size(257, 22);
             this.txtPCode.TabIndex = 2;
@@ -91,7 +90,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(47, 123);
+            this.label3.Location = new System.Drawing.Point(37, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 16);
             this.label3.TabIndex = 5;
@@ -99,7 +98,7 @@
             // 
             // txtShortN
             // 
-            this.txtShortN.Location = new System.Drawing.Point(156, 117);
+            this.txtShortN.Location = new System.Drawing.Point(168, 106);
             this.txtShortN.Name = "txtShortN";
             this.txtShortN.Size = new System.Drawing.Size(257, 22);
             this.txtShortN.TabIndex = 1;
@@ -118,7 +117,7 @@
             this.Controls.Add(this.txtName);
             this.Name = "frmEditCity";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmEditCity";
+            this.Text = "Edit city";
             this.Load += new System.EventHandler(this.frmEditCity_Load);
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);

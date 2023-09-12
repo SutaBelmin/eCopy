@@ -35,18 +35,6 @@ namespace eCopy.Desktop
             }).ToList();
         }
 
-        private void btnNewCity_Click(object sender, EventArgs e)
-        {
-            frmAddCity frmACi = new frmAddCity();
-            var result = frmACi.ShowDialog();
-
-
-            if (result == DialogResult.OK)
-            {
-                loadCity();
-            }
-        }
-
         private void dgvCity_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var req = dgvCity.SelectedRows[0].DataBoundItem as CityModel;

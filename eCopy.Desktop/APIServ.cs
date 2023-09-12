@@ -2,17 +2,15 @@
 using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using Flurl.Http;
-using System.Collections;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace eCopy.Desktop
 {
     public class APIServ
     {
         private string _resource = null;
-        //public string _endpoint = "http://localhost:5000/";
-        public string _endpoint = "https://localhost:7284/";
+        public string _endpoint = "http://localhost:5000/";
+        //public string _endpoint = "https://localhost:7284/";
 
         public APIServ(string resource)
         {
@@ -153,5 +151,6 @@ namespace eCopy.Desktop
 
             return result;
         }
+
     }
 }

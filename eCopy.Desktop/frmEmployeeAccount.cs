@@ -5,6 +5,8 @@ using eCopy.Model.Response;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,7 +20,6 @@ namespace eCopy.Desktop
         public APIServ userService = new APIServ("User");
         EmployeeResponse model;
         private string imagePath { get; set; }
-
 
         public frmEmployeeAccount(EmployeeResponse model)
         {
@@ -71,6 +72,12 @@ namespace eCopy.Desktop
             txtEmail.Text = model.ApplicationUser.Email;
             txtPhone.Text = model.ApplicationUser.PhoneNumber;
 
+            pbPicture.ImageLocation = model.ProfilePhotoPath;
+            if(model.ProfilePhotoPath == null)
+            {
+                lblPictureMess.Text = "No profile photo";
+            }
+
         }
 
         private void btnChPass_Click(object sender, EventArgs e)
@@ -101,6 +108,13 @@ namespace eCopy.Desktop
                     return;
                 }
 
+                byte[] data = null;
+
+                if (pbPicture.Image != null)
+                {
+                    data = ImageHelp.FromImageToByte(pbPicture.Image);
+                }
+
                 UpdateEmployeeRequest updateModel = new UpdateEmployeeRequest();
 
                 updateModel.FirstName = txtFirst.Text;
@@ -115,6 +129,10 @@ namespace eCopy.Desktop
                 updateModel.Username = txtUsername.Text;
                 updateModel.PhoneNumber = txtPhone.Text;
 
+                updateModel.ProfilePhoto = data;
+                updateModel.ProfilePhotoExtension = Path.GetExtension(imagePath);
+                updateModel.ProfilePhotoName = Path.GetFileNameWithoutExtension(imagePath);
+
                 var resp = await employeeService.UpdateEmp(updateModel);
 
                 if (resp != null)
@@ -125,7 +143,14 @@ namespace eCopy.Desktop
                     this.Close();
                 }
             }
-
+        }
+        private void pbPicture_DoubleClick(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                imagePath = ofd.FileName;
+                pbPicture.Image = Image.FromFile(imagePath);
+            }
         }
 
         private bool fieldsValidation()

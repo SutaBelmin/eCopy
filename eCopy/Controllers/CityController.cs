@@ -2,6 +2,7 @@
 using eCopy.Model.Response;
 using eCopy.Model.SearchObjects;
 using eCopy.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace eCopy.Controllers
 {
@@ -12,6 +13,12 @@ namespace eCopy.Controllers
         public CityController(ICityService service) : base(service)
         {
             this.service = service;
+        }
+
+        [HttpGet("CityExist")]
+        public CityEResponse CityExist(string name, int postalCode)
+        {
+            return service.CityExist(name, postalCode);
         }
 
     }

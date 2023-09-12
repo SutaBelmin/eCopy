@@ -286,6 +286,25 @@ namespace eCopy.Services.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("eCopy.Services.Database.CollatedPrintOption", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CollatedPrintOption");
+                });
+
             modelBuilder.Entity("eCopy.Services.Database.Error", b =>
                 {
                     b.Property<int>("Id")
@@ -477,6 +496,63 @@ namespace eCopy.Services.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("eCopy.Services.Database.Letter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Letter");
+                });
+
+            modelBuilder.Entity("eCopy.Services.Database.Orientation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orientation");
+                });
+
+            modelBuilder.Entity("eCopy.Services.Database.PagePerSheet", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PagePerSheet");
+                });
+
             modelBuilder.Entity("eCopy.Services.Database.Payment", b =>
                 {
                     b.Property<int>("Id")
@@ -502,6 +578,44 @@ namespace eCopy.Services.Migrations
                     b.HasIndex("RequestId");
 
                     b.ToTable("Payment");
+                });
+
+            modelBuilder.Entity("eCopy.Services.Database.PrintPageOption", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PrintPageOption");
+                });
+
+            modelBuilder.Entity("eCopy.Services.Database.SidePrintOption", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SidePrintOption");
                 });
 
             modelBuilder.Entity("eCopy.Services.Employee", b =>
@@ -725,8 +839,8 @@ namespace eCopy.Services.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Collate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CollatedPrintOptionId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
@@ -743,29 +857,29 @@ namespace eCopy.Services.Migrations
                     b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Letter")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LetterId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Options")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("OrientationId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Orientation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Pages")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PagePerSheetId")
+                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<int>("PrintPageOptionId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Side")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SidePrintOptionId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -774,7 +888,19 @@ namespace eCopy.Services.Migrations
 
                     b.HasIndex("ClientId");
 
+                    b.HasIndex("CollatedPrintOptionId");
+
                     b.HasIndex("CopierId");
+
+                    b.HasIndex("LetterId");
+
+                    b.HasIndex("OrientationId");
+
+                    b.HasIndex("PagePerSheetId");
+
+                    b.HasIndex("PrintPageOptionId");
+
+                    b.HasIndex("SidePrintOptionId");
 
                     b.ToTable("Requests");
                 });
@@ -1038,15 +1164,63 @@ namespace eCopy.Services.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("eCopy.Services.Database.CollatedPrintOption", "CollatedPrintOption")
+                        .WithMany()
+                        .HasForeignKey("CollatedPrintOptionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("eCopy.Services.Copier", "Copier")
                         .WithMany("Requests")
                         .HasForeignKey("CopierId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("eCopy.Services.Database.Letter", "Letter")
+                        .WithMany()
+                        .HasForeignKey("LetterId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("eCopy.Services.Database.Orientation", "Orientation")
+                        .WithMany()
+                        .HasForeignKey("OrientationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("eCopy.Services.Database.PagePerSheet", "PagePerSheet")
+                        .WithMany()
+                        .HasForeignKey("PagePerSheetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("eCopy.Services.Database.PrintPageOption", "PrintPageOption")
+                        .WithMany()
+                        .HasForeignKey("PrintPageOptionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("eCopy.Services.Database.SidePrintOption", "SidePrintOption")
+                        .WithMany()
+                        .HasForeignKey("SidePrintOptionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Client");
 
+                    b.Navigation("CollatedPrintOption");
+
                     b.Navigation("Copier");
+
+                    b.Navigation("Letter");
+
+                    b.Navigation("Orientation");
+
+                    b.Navigation("PagePerSheet");
+
+                    b.Navigation("PrintPageOption");
+
+                    b.Navigation("SidePrintOption");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

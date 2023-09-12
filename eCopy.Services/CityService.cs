@@ -2,6 +2,7 @@
 using eCopy.Model.Requests;
 using eCopy.Model.Response;
 using eCopy.Model.SearchObjects;
+using System.Linq;
 
 namespace eCopy.Services
 {
@@ -25,6 +26,19 @@ namespace eCopy.Services
             context.SaveChanges();
 
             return mapper.Map<CityResponse>(city);
+        }
+
+        public CityEResponse CityExist(string name, int postalCode)
+        {
+            var cityName = context.Cities.FirstOrDefault(x => x.Name == name);
+
+            var posCode = context.Cities.FirstOrDefault(x => x.PostalCode == postalCode);
+
+            return new CityEResponse
+            {
+                Name = cityName != null,
+                PostalCode = posCode != null
+            };
         }
 
     }

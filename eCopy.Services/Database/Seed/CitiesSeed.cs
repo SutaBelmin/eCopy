@@ -18,8 +18,8 @@ namespace eCopy.Services.Database.Seed
                     CreatedDate = DateTime.Now,
                     ModifiedDate = null,
                     Active = true,
-                    ShortName = "Cap",
-                    PostalCode = 88300,
+                    ShortName = "Sa",
+                    PostalCode = 71000,
                     CountryId = 1
                 });
                 
@@ -32,7 +32,7 @@ namespace eCopy.Services.Database.Seed
                     CreatedDate = DateTime.Now,
                     ModifiedDate = null,
                     Active = true,
-                    ShortName = "Cap",
+                    ShortName = "Mo",
                     PostalCode = 88300,
                     CountryId = 1
                 });

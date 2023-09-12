@@ -4,8 +4,14 @@ import 'package:myapp/model/storageService.dart';
 import 'package:myapp/providers/authentication_provider.dart';
 import 'package:myapp/providers/city_provider.dart';
 import 'package:myapp/providers/cl_provider.dart';
+import 'package:myapp/providers/collatedPrintOptionProvider.dart';
+import 'package:myapp/providers/letter_provider.dart';
+import 'package:myapp/providers/orientation_provider.dart';
+import 'package:myapp/providers/pagePerSheet_provider.dart';
 import 'package:myapp/providers/practice_page_provider.dart';
-import 'package:myapp/providers/print_list_provider.dart';
+import 'package:myapp/providers/printPageOptionProvider.dart';
+import 'package:myapp/providers/request_provider.dart';
+import 'package:myapp/providers/sidePrintOptionProvider.dart';
 import 'package:myapp/providers/user_provider.dart';
 import 'package:myapp/screens/account_screen.dart';
 import 'package:myapp/screens/new_print_screen.dart';
@@ -21,13 +27,18 @@ import 'package:jwt_decode/jwt_decode.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => PrintListProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => ClProvider()),
         ChangeNotifierProvider(create: (_) => PracticePageProvider()),
         ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
         ChangeNotifierProvider(create: (_) => CityProvider()),
-        //ChangeNotifierProvider(create: (_) => CityEProvider())
+        ChangeNotifierProvider(create: (_) => LetterProvider()),
+        ChangeNotifierProvider(create: (_) => OrientationProvider()),
+        ChangeNotifierProvider(create: (_) => PagePerSheetProvider()),
+        ChangeNotifierProvider(create: (_) => PrintPageOptionProvider()),
+        ChangeNotifierProvider(create: (_) => SidePrintOptionProvider()),
+        ChangeNotifierProvider(create: (_) => CollatedPrintOptionProvider()),
+        ChangeNotifierProvider(create: (_) => RequestProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: true,

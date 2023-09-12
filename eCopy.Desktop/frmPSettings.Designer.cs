@@ -52,6 +52,9 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.btnPreviewPrnt = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.txtPayment = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -167,7 +170,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(328, 292);
+            this.label7.Location = new System.Drawing.Point(328, 349);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 18);
             this.label7.TabIndex = 12;
@@ -185,7 +188,7 @@
             // 
             // btnUStatus
             // 
-            this.btnUStatus.Location = new System.Drawing.Point(461, 357);
+            this.btnUStatus.Location = new System.Drawing.Point(461, 414);
             this.btnUStatus.Name = "btnUStatus";
             this.btnUStatus.Size = new System.Drawing.Size(136, 33);
             this.btnUStatus.TabIndex = 2;
@@ -197,14 +200,14 @@
             // 
             this.cmbSt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSt.FormattingEnabled = true;
-            this.cmbSt.Location = new System.Drawing.Point(332, 314);
+            this.cmbSt.Location = new System.Drawing.Point(332, 371);
             this.cmbSt.Name = "cmbSt";
             this.cmbSt.Size = new System.Drawing.Size(265, 26);
             this.cmbSt.TabIndex = 1;
             // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(19, 314);
+            this.txtComment.Location = new System.Drawing.Point(19, 371);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
             this.txtComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -214,7 +217,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 292);
+            this.label9.Location = new System.Drawing.Point(16, 349);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(200, 18);
             this.label9.TabIndex = 18;
@@ -240,19 +243,50 @@
             // 
             // btnPreviewPrnt
             // 
-            this.btnPreviewPrnt.Location = new System.Drawing.Point(287, 22);
+            this.btnPreviewPrnt.Location = new System.Drawing.Point(214, 21);
             this.btnPreviewPrnt.Name = "btnPreviewPrnt";
-            this.btnPreviewPrnt.Size = new System.Drawing.Size(151, 33);
+            this.btnPreviewPrnt.Size = new System.Drawing.Size(110, 33);
             this.btnPreviewPrnt.TabIndex = 22;
-            this.btnPreviewPrnt.Text = "Preview and Print";
+            this.btnPreviewPrnt.Text = "Preview";
             this.btnPreviewPrnt.UseVisualStyleBackColor = true;
             this.btnPreviewPrnt.Click += new System.EventHandler(this.btnPreviewPrnt_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(332, 21);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(110, 33);
+            this.btnPrint.TabIndex = 23;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // txtPayment
+            // 
+            this.txtPayment.Location = new System.Drawing.Point(19, 287);
+            this.txtPayment.Name = "txtPayment";
+            this.txtPayment.ReadOnly = true;
+            this.txtPayment.Size = new System.Drawing.Size(265, 24);
+            this.txtPayment.TabIndex = 25;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.Location = new System.Drawing.Point(16, 266);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(144, 18);
+            this.label10.TabIndex = 24;
+            this.label10.Text = "Payment information";
             // 
             // frmPSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 419);
+            this.ClientSize = new System.Drawing.Size(620, 474);
+            this.Controls.Add(this.txtPayment);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnPreviewPrnt);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.label9);
@@ -276,7 +310,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Name = "frmPSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmPSettings";
+            this.Text = "Print settings";
             this.Load += new System.EventHandler(this.frmPSettings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -309,5 +343,8 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.PrintDialog printDialog1;
         private System.Windows.Forms.Button btnPreviewPrnt;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.TextBox txtPayment;
+        private System.Windows.Forms.Label label10;
     }
 }

@@ -49,7 +49,7 @@
             this.Controls.Add(this.reportViewer1);
             this.Name = "frmPrintRevenueForLastYear";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmPrintRevenueLYear";
+            this.Text = "Revenue for last year";
             this.Load += new System.EventHandler(this.frmPrintRevenueForLastYear_Load);
             this.ResumeLayout(false);
 

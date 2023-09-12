@@ -62,6 +62,33 @@ namespace eCopy.Services
             CreateMap<ErrorRequest, Error>().ReverseMap();
 
 
+
+
+            CreateMap<LetterRequest, Letter>().ReverseMap();
+            CreateMap<LetterResponse, Letter>().ReverseMap();
+            CreateMap<LetterRequestUpdate, Letter>().ReverseMap();
+
+            CreateMap<OrientationRequest, Orientation>().ReverseMap();
+            CreateMap<OrientationResponse, Orientation>().ReverseMap();
+            CreateMap<OrientationRequestUpdate, Orientation>().ReverseMap();
+
+            CreateMap<CollatedRequest, CollatedPrintOption>().ReverseMap();
+            CreateMap<CollatedResponse, CollatedPrintOption>().ReverseMap();
+            CreateMap<CollatedRequestUpdate, CollatedPrintOption>().ReverseMap();
+
+            CreateMap<SideRequest, SidePrintOption>().ReverseMap();
+            CreateMap<SideResponse, SidePrintOption>().ReverseMap();
+            CreateMap<SideRequestUpdate, SidePrintOption>().ReverseMap();
+
+            CreateMap<PrintPageOptionRequest, PrintPageOption>().ReverseMap();
+            CreateMap<PrintPageOptionResponse, PrintPageOption>().ReverseMap();
+            CreateMap<PrintPageOptionRequestUpdate, PrintPageOption>().ReverseMap();
+
+            CreateMap<PagePerSheetRequest, PagePerSheet>().ReverseMap();
+            CreateMap<PagePerSheetResponse, PagePerSheet>().ReverseMap();
+            CreateMap<PagePerSheetRequestUpdate, PagePerSheet>().ReverseMap();
+
+
         }
     }
 }

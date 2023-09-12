@@ -42,7 +42,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(153, 74);
+            this.txtName.Location = new System.Drawing.Point(164, 62);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(257, 22);
             this.txtName.TabIndex = 0;
@@ -50,7 +50,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 80);
+            this.label1.Location = new System.Drawing.Point(37, 62);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 16);
             this.label1.TabIndex = 4;
@@ -58,16 +58,15 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(57, 171);
+            this.label2.Location = new System.Drawing.Point(37, 153);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 16);
+            this.label2.Size = new System.Drawing.Size(108, 37);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Postal code";
+            this.label2.Text = "Postal code (numbers only)";
             // 
             // txtPCode
             // 
-            this.txtPCode.Location = new System.Drawing.Point(153, 165);
+            this.txtPCode.Location = new System.Drawing.Point(164, 153);
             this.txtPCode.Name = "txtPCode";
             this.txtPCode.Size = new System.Drawing.Size(257, 22);
             this.txtPCode.TabIndex = 2;
@@ -76,7 +75,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(326, 220);
+            this.btnSave.Location = new System.Drawing.Point(337, 208);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(84, 29);
             this.btnSave.TabIndex = 3;
@@ -91,7 +90,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(57, 123);
+            this.label3.Location = new System.Drawing.Point(37, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 16);
             this.label3.TabIndex = 5;
@@ -99,7 +98,7 @@
             // 
             // txtShortN
             // 
-            this.txtShortN.Location = new System.Drawing.Point(153, 117);
+            this.txtShortN.Location = new System.Drawing.Point(164, 105);
             this.txtShortN.Name = "txtShortN";
             this.txtShortN.Size = new System.Drawing.Size(257, 22);
             this.txtShortN.TabIndex = 1;

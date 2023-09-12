@@ -9,7 +9,7 @@ namespace eCopy.Services
 
     {
         IEnumerable<PrintRequestR> GetAllR();
-        PrintRequestR Pay(int id);
+        PrintRequestR Pay(int id, PaymentRequest model);
         PrintRequestR UpdateRequest(int id, UpdateRequest update);
         void CancelRequest(int id);
 

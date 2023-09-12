@@ -43,9 +43,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.btnRes = new System.Windows.Forms.Button();
-            this.btnAddEm = new System.Windows.Forms.Button();
-            this.btnLogO = new System.Windows.Forms.Button();
-            this.btnCity = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListEmp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -62,7 +60,7 @@
             this.genderDataGridViewTextBoxColumn,
             this.Delete});
             this.dgvListEmp.DataSource = this.empModelBindingSource;
-            this.dgvListEmp.Location = new System.Drawing.Point(12, 146);
+            this.dgvListEmp.Location = new System.Drawing.Point(12, 143);
             this.dgvListEmp.Name = "dgvListEmp";
             this.dgvListEmp.ReadOnly = true;
             this.dgvListEmp.RowHeadersWidth = 51;
@@ -135,7 +133,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(408, 86);
+            this.btnSearch.Location = new System.Drawing.Point(408, 50);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(89, 38);
             this.btnSearch.TabIndex = 1;
@@ -146,7 +144,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 61);
+            this.label1.Location = new System.Drawing.Point(12, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 16);
             this.label1.TabIndex = 2;
@@ -154,7 +152,7 @@
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Location = new System.Drawing.Point(12, 94);
+            this.txtFirstName.Location = new System.Drawing.Point(12, 58);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(170, 22);
             this.txtFirstName.TabIndex = 3;
@@ -162,7 +160,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(202, 61);
+            this.label2.Location = new System.Drawing.Point(202, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 16);
             this.label2.TabIndex = 4;
@@ -170,14 +168,14 @@
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(205, 94);
+            this.txtLastName.Location = new System.Drawing.Point(205, 58);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(170, 22);
             this.txtLastName.TabIndex = 5;
             // 
             // btnRes
             // 
-            this.btnRes.Location = new System.Drawing.Point(503, 86);
+            this.btnRes.Location = new System.Drawing.Point(503, 50);
             this.btnRes.Name = "btnRes";
             this.btnRes.Size = new System.Drawing.Size(89, 38);
             this.btnRes.TabIndex = 6;
@@ -185,44 +183,22 @@
             this.btnRes.UseVisualStyleBackColor = true;
             this.btnRes.Click += new System.EventHandler(this.btnRes_Click);
             // 
-            // btnAddEm
+            // label3
             // 
-            this.btnAddEm.Location = new System.Drawing.Point(12, 12);
-            this.btnAddEm.Name = "btnAddEm";
-            this.btnAddEm.Size = new System.Drawing.Size(184, 32);
-            this.btnAddEm.TabIndex = 7;
-            this.btnAddEm.Text = "Add employee";
-            this.btnAddEm.UseVisualStyleBackColor = true;
-            this.btnAddEm.Click += new System.EventHandler(this.btnAddEm_Click);
-            // 
-            // btnLogO
-            // 
-            this.btnLogO.Location = new System.Drawing.Point(670, 12);
-            this.btnLogO.Name = "btnLogO";
-            this.btnLogO.Size = new System.Drawing.Size(118, 32);
-            this.btnLogO.TabIndex = 8;
-            this.btnLogO.Text = "Logout";
-            this.btnLogO.UseVisualStyleBackColor = true;
-            this.btnLogO.Click += new System.EventHandler(this.btnLogO_Click);
-            // 
-            // btnCity
-            // 
-            this.btnCity.Location = new System.Drawing.Point(216, 12);
-            this.btnCity.Name = "btnCity";
-            this.btnCity.Size = new System.Drawing.Size(95, 32);
-            this.btnCity.TabIndex = 9;
-            this.btnCity.Text = "City";
-            this.btnCity.UseVisualStyleBackColor = true;
-            this.btnCity.Click += new System.EventHandler(this.btnCity_Click);
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(12, 111);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(320, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Double click on a row to edit an employee";
             // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 478);
-            this.Controls.Add(this.btnCity);
-            this.Controls.Add(this.btnLogO);
-            this.Controls.Add(this.btnAddEm);
+            this.ClientSize = new System.Drawing.Size(800, 471);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnRes);
             this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.label2);
@@ -232,7 +208,7 @@
             this.Controls.Add(this.dgvListEmp);
             this.Name = "frmAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmAdmin";
+            this.Text = "eCopy-Admin";
             this.Load += new System.EventHandler(this.frmAdmin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListEmp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.empModelBindingSource)).EndInit();
@@ -250,8 +226,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Button btnRes;
-        private System.Windows.Forms.Button btnAddEm;
-        private System.Windows.Forms.Button btnLogO;
         private System.Windows.Forms.BindingSource empModelBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
@@ -259,6 +233,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn middleNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn genderDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
-        private System.Windows.Forms.Button btnCity;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgvCity = new System.Windows.Forms.DataGridView();
-            this.btnNewCity = new System.Windows.Forms.Button();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shortNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.postalCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cityModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +50,7 @@
             this.shortNameDataGridViewTextBoxColumn,
             this.postalCodeDataGridViewTextBoxColumn});
             this.dgvCity.DataSource = this.cityModelBindingSource;
-            this.dgvCity.Location = new System.Drawing.Point(12, 92);
+            this.dgvCity.Location = new System.Drawing.Point(12, 52);
             this.dgvCity.Name = "dgvCity";
             this.dgvCity.RowHeadersWidth = 51;
             this.dgvCity.RowTemplate.Height = 24;
@@ -58,16 +58,6 @@
             this.dgvCity.Size = new System.Drawing.Size(745, 321);
             this.dgvCity.TabIndex = 0;
             this.dgvCity.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCity_CellDoubleClick);
-            // 
-            // btnNewCity
-            // 
-            this.btnNewCity.Location = new System.Drawing.Point(12, 34);
-            this.btnNewCity.Name = "btnNewCity";
-            this.btnNewCity.Size = new System.Drawing.Size(133, 35);
-            this.btnNewCity.TabIndex = 1;
-            this.btnNewCity.Text = "Add new city";
-            this.btnNewCity.UseVisualStyleBackColor = true;
-            this.btnNewCity.Click += new System.EventHandler(this.btnNewCity_Click);
             // 
             // iDDataGridViewTextBoxColumn
             // 
@@ -105,12 +95,22 @@
             // 
             this.cityModelBindingSource.DataSource = typeof(eCopy.Desktop.CityModel);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(9, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(266, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Double click on a row to edit a city";
+            // 
             // frmCity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 449);
-            this.Controls.Add(this.btnNewCity);
+            this.ClientSize = new System.Drawing.Size(769, 385);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvCity);
             this.Name = "frmCity";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -119,6 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cityModelBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -130,6 +131,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn shortNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn postalCodeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button btnNewCity;
+        private System.Windows.Forms.Label label1;
     }
 }

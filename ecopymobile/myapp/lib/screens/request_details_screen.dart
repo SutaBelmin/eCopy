@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myapp/model/enum/collate.dart';
-import 'package:myapp/model/enum/letter.dart';
-import 'package:myapp/model/enum/orien.dart';
-import 'package:myapp/model/enum/pagePerSheet.dart';
-import 'package:myapp/model/enum/printPagesOptions.dart';
-import 'package:myapp/model/enum/sidePrintOption.dart';
-import 'package:myapp/model/listItem.dart';
-import 'package:myapp/model/printRequest.dart';
-import 'package:myapp/model/updateRequest.dart';
-import 'package:myapp/providers/print_list_provider.dart';
+import 'package:myapp/model/print_options/collatedResponse.dart';
+import 'package:myapp/model/print_options/letterResponse.dart';
+import 'package:myapp/model/print_options/orientationResponse.dart';
+import 'package:myapp/model/print_options/pagePerSheetResponse.dart';
+import 'package:myapp/model/print_options/printPageOptionResponse.dart';
+import 'package:myapp/model/print_options/sideResponse.dart';
+import 'package:myapp/model/request.dart';
+import 'package:myapp/model/requestUpd.dart';
+import 'package:myapp/providers/collatedPrintOptionProvider.dart';
+import 'package:myapp/providers/letter_provider.dart';
+import 'package:myapp/providers/orientation_provider.dart';
+import 'package:myapp/providers/pagePerSheet_provider.dart';
+import 'package:myapp/providers/printPageOptionProvider.dart';
+import 'package:myapp/providers/request_provider.dart';
+import 'package:myapp/providers/sidePrintOptionProvider.dart';
 import 'package:myapp/screens/loading_screen.dart';
 import 'package:myapp/screens/print_list_screen.dart';
 import 'package:myapp/widgets/top_navigation_bar.dart';
@@ -26,65 +31,83 @@ class RequestDetailsScreen extends StatefulWidget {
 }
 
 class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
-  PrintListProvider? _printProvider = null;
+  RequestProvider? _reqProvider = null;
 
-  UpdateRequest _updateData = new UpdateRequest();
+  RequestUpd _updateData = new RequestUpd();
 
-  PrintRequest? data = null;
-  ListItem? _selectedLetterOption;
-  ListItem? _selectedPagePerSheet;
-  ListItem? _selectedPrintPagesOptions;
-  ListItem? _selectedSidePrintOption;
-  ListItem? _selectedCollatedPrintOptions;
-  ListItem? _selectedOrientation;
+  Request? data = null;
+
   var numberOfPages;
 
   var tData = null;
+  var tmpReq = null;
+
+  LetterProvider? _letterProvider = null;
+  List<LetterResponse> letterData = [];
+  LetterResponse? _fLetter;
+
+  OrientationProvider? _orientationProvider = null;
+  List<OrientationResponse> orientationData = [];
+  OrientationResponse? _forientation;
+
+  PagePerSheetProvider? _pagePerSheetProvider = null;
+  List<PagePerSheetResponse> pagePerSheetData = [];
+  PagePerSheetResponse? _fPagePerSheet;
+
+  PrintPageOptionProvider? _printPageOptionProvider = null;
+  List<PrintPageOptionResponse> printPageOptionData = [];
+  PrintPageOptionResponse? _fPrintPageOption;
+
+  SidePrintOptionProvider? _sidePrintOptionProvider = null;
+  List<SideResponse> sidePrintOptionData = [];
+  SideResponse? _fSidePrintOption;
+
+  CollatedPrintOptionProvider? _collatedPrintOptionProvider = null;
+  List<CollatedResponse> collatedPrintOptionData = [];
+  CollatedResponse? _fCollatedPrintOption;
+
+  var tmpLetter = null;
+  var tmpOrientation = null;
+  var tmpPagePerSheet = null;
+  var tmpPrintPageOption = null;
+  var tmpSidePrintOption = null;
+  var tmpCollatedPrintOption = null;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _printProvider = context.read<PrintListProvider>();
+    _reqProvider = context.read<RequestProvider>();
+
+    _letterProvider = context.read<LetterProvider>();
+    _orientationProvider = context.read<OrientationProvider>();
+    _pagePerSheetProvider = context.read<PagePerSheetProvider>();
+    _printPageOptionProvider = context.read<PrintPageOptionProvider>();
+    _sidePrintOptionProvider = context.read<SidePrintOptionProvider>();
+    _collatedPrintOptionProvider = context.read<CollatedPrintOptionProvider>();
+
     loadData();
   }
 
   Future loadData() async {
-    //var tData = await _printProvider?.getByMyId(this.widget.id);
-    tData = await _printProvider?.getByMyId(this.widget.id);
+    tmpReq = await _reqProvider?.getByMyId(this.widget.id);
+
+    tmpLetter = await _letterProvider?.GetActive();
+    tmpOrientation = await _orientationProvider?.GetActive();
+    tmpPagePerSheet = await _pagePerSheetProvider?.GetActive();
+    tmpPrintPageOption = await _printPageOptionProvider?.GetActive();
+    tmpSidePrintOption = await _sidePrintOptionProvider?.GetActive();
+    tmpCollatedPrintOption = await _collatedPrintOptionProvider?.GetActive();
 
     setState(() {
-      this.data = tData;
+      this.data = tmpReq;
 
-      _selectedLetterOption = letter.firstWhere(
-        (item) => item.name == Letter.map[data?.letter],
-        orElse: () => letter.first,
-      );
-
-      _selectedPagePerSheet = pagePerSheet.firstWhere(
-        (item) => item.name == PagePerSheet.map[data?.pages],
-        orElse: () => pagePerSheet.first,
-      );
-
-      _selectedPrintPagesOptions = printPagesOptions.firstWhere(
-        (item) => item.name == PrintPagesOptions.map[data?.options],
-        orElse: () => printPagesOptions.first,
-      );
-
-      _selectedSidePrintOption = sidePrintOption.firstWhere(
-        (item) => item.name == SidePrintOption.map[data?.side],
-        orElse: () => sidePrintOption.first,
-      );
-
-      _selectedCollatedPrintOptions = collatedPrintOptions.firstWhere(
-        (item) => item.name == Collated.map[data?.collate],
-        orElse: () => collatedPrintOptions.first,
-      );
-
-      _selectedOrientation = orientation.firstWhere(
-        (item) => item.name == Orien.map[data?.orientation],
-        orElse: () => orientation.first,
-      );
+      letterData = tmpLetter!;
+      orientationData = tmpOrientation!;
+      pagePerSheetData = tmpPagePerSheet!;
+      printPageOptionData = tmpPrintPageOption!;
+      sidePrintOptionData = tmpSidePrintOption!;
+      collatedPrintOptionData = tmpCollatedPrintOption!;
 
       numberOfPages = (data?.price)! * 10;
 
@@ -94,57 +117,27 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
         data?.comment = "There is no comment yet";
       }
     });
+
+    _fLetter = tmpLetter?.firstWhere((x) => x.id == data?.letterId);
+    _forientation =
+        tmpOrientation?.firstWhere((x) => x.id == data?.orientationId);
+    _fPagePerSheet =
+        tmpPagePerSheet?.firstWhere((x) => x.id == data?.pagePerSheetId);
+    _fPrintPageOption =
+        tmpPrintPageOption?.firstWhere((x) => x.id == data?.printPageOptionId);
+    _fSidePrintOption =
+        tmpSidePrintOption?.firstWhere((x) => x.id == data?.sidePrintOptionId);
+    _fCollatedPrintOption = tmpCollatedPrintOption
+        ?.firstWhere((x) => x.id == data?.collatedPrintOptionId);
   }
 
   TextEditingController _nmbrPageController = new TextEditingController();
-
-  static List<ListItem> sidePrintOption = [
-    ListItem(1, "PrintOneSided"),
-    ListItem(2, "PrintBothSides")
-  ];
-  ListItem sidePrintOptionValue = sidePrintOption.first;
-
-  static List<ListItem> printPagesOptions = [
-    ListItem(1, "All"),
-    ListItem(2, "Even"),
-    ListItem(3, "Odd"),
-    ListItem(4, "Custom")
-  ];
-  ListItem printPagesOptionsValue = printPagesOptions.first;
-
-  static List<ListItem> orientation = [
-    ListItem(1, "Portrait"),
-    ListItem(2, "Landscape")
-  ];
-  ListItem orientationValue = orientation.first;
-
-  static List<ListItem> letter = [
-    ListItem(1, "A1"),
-    ListItem(2, "A2"),
-    ListItem(3, "A3"),
-    ListItem(4, "A4"),
-    ListItem(5, "A5"),
-    ListItem(6, "A6")
-  ];
-  ListItem letterValue = letter.first;
-
-  static List<ListItem> collatedPrintOptions = [
-    ListItem(1, "Collated"),
-    ListItem(2, "Uncollated")
-  ];
-  ListItem collatedPrintOptionsValue = collatedPrintOptions.first;
-
-  static List<ListItem> pagePerSheet = [
-    ListItem(1, "OnePage"),
-    ListItem(2, "TwoPages")
-  ];
-  ListItem pagePerSheetValue = pagePerSheet.first;
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    if (tData == null) {
+    if (tmpReq == null) {
       loadData();
       return LoadingScreen();
     } else {
@@ -177,7 +170,7 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
                       ),
                       Container(
                           color: Color.fromARGB(255, 204, 201, 201),
-                          height: 250,
+                          height: 350,
                           width: 340,
                           child: Column(
                             children: [
@@ -209,208 +202,140 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 30),
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: 10),
-                                    Container(
-                                      child: Row(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Container(
-                                                width: 130,
-                                                child: DropdownButton(
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge,
-                                                  value: _selectedLetterOption,
-                                                  onChanged: (ListItem? value) {
-                                                    setState(() {
-                                                      _selectedLetterOption =
-                                                          value!;
-                                                    });
-                                                  },
-                                                  items: letter.map<
-                                                          DropdownMenuItem<
-                                                              ListItem>>(
-                                                      (ListItem value) {
-                                                    return DropdownMenuItem<
-                                                        ListItem>(
-                                                      value: value,
-                                                      child: Text(value.name!),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            children: [
-                                              Container(
-                                                child: DropdownButton(
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge,
-                                                  value: _selectedPagePerSheet,
-                                                  onChanged: (ListItem? value) {
-                                                    setState(() {
-                                                      _selectedPagePerSheet =
-                                                          value!;
-                                                    });
-                                                  },
-                                                  items: pagePerSheet.map<
-                                                          DropdownMenuItem<
-                                                              ListItem>>(
-                                                      (ListItem value) {
-                                                    return DropdownMenuItem<
-                                                        ListItem>(
-                                                      value: value,
-                                                      child: Text(value.name!),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(height: 5),
-                                    Container(
-                                      child: Row(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Container(
-                                                width: 130,
-                                                child: DropdownButton(
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge,
-                                                  value:
-                                                      _selectedPrintPagesOptions,
-                                                  onChanged: (ListItem? value) {
-                                                    setState(() {
-                                                      _selectedPrintPagesOptions =
-                                                          value!;
-                                                    });
-                                                  },
-                                                  items: printPagesOptions.map<
-                                                          DropdownMenuItem<
-                                                              ListItem>>(
-                                                      (ListItem value) {
-                                                    return DropdownMenuItem<
-                                                        ListItem>(
-                                                      value: value,
-                                                      child: Text(value.name!),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            children: [
-                                              Container(
-                                                child: DropdownButton(
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge,
-                                                  value:
-                                                      _selectedSidePrintOption,
-                                                  onChanged: (ListItem? value) {
-                                                    setState(() {
-                                                      _selectedSidePrintOption =
-                                                          value!;
-                                                    });
-                                                  },
-                                                  items: sidePrintOption.map<
-                                                          DropdownMenuItem<
-                                                              ListItem>>(
-                                                      (ListItem value) {
-                                                    return DropdownMenuItem<
-                                                        ListItem>(
-                                                      value: value,
-                                                      child: Text(value.name!),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(height: 5),
-                                    Container(
-                                      child: Row(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Container(
-                                                width: 130,
-                                                child: DropdownButton(
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge,
-                                                  value:
-                                                      _selectedCollatedPrintOptions,
-                                                  onChanged: (ListItem? value) {
-                                                    setState(() {
-                                                      _selectedCollatedPrintOptions =
-                                                          value!;
-                                                    });
-                                                  },
-                                                  items: collatedPrintOptions
-                                                      .map<
-                                                              DropdownMenuItem<
-                                                                  ListItem>>(
-                                                          (ListItem value) {
-                                                    return DropdownMenuItem<
-                                                        ListItem>(
-                                                      value: value,
-                                                      child: Text(value.name!),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            children: [
-                                              Container(
-                                                child: DropdownButton(
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge,
-                                                  value: _selectedOrientation,
-                                                  onChanged: (ListItem? value) {
-                                                    setState(() {
-                                                      _selectedOrientation =
-                                                          value!;
-                                                    });
-                                                  },
-                                                  items: orientation.map<
-                                                          DropdownMenuItem<
-                                                              ListItem>>(
-                                                      (ListItem value) {
-                                                    return DropdownMenuItem<
-                                                        ListItem>(
-                                                      value: value,
-                                                      child: Text(value.name!),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                                child: DropdownButton(
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                  hint: Text("Select Letter"),
+                                  value: _fLetter,
+                                  isExpanded: true,
+                                  items: letterData.map(
+                                    (item) {
+                                      return DropdownMenuItem<LetterResponse>(
+                                        child: Text("${item.name}"),
+                                        value: item,
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (LetterResponse? value) {
+                                    setState(() {
+                                      _fLetter = value;
+                                    });
+                                  },
                                 ),
-                              )
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                                child: DropdownButton(
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                  hint: Text("Select Pages"),
+                                  value: _fPagePerSheet,
+                                  isExpanded: true,
+                                  items: pagePerSheetData.map(
+                                    (item) {
+                                      return DropdownMenuItem<
+                                          PagePerSheetResponse>(
+                                        child: Text("${item.name}"),
+                                        value: item,
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (PagePerSheetResponse? value) {
+                                    setState(() {
+                                      _fPagePerSheet = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                                child: DropdownButton(
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                  hint: Text("Select Page option"),
+                                  value: _fPrintPageOption,
+                                  isExpanded: true,
+                                  items: printPageOptionData.map(
+                                    (item) {
+                                      return DropdownMenuItem<
+                                          PrintPageOptionResponse>(
+                                        child: Text("${item.name}"),
+                                        value: item,
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (PrintPageOptionResponse? value) {
+                                    setState(() {
+                                      _fPrintPageOption = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                                child: DropdownButton(
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                  hint: Text("Select Side option"),
+                                  value: _fSidePrintOption,
+                                  isExpanded: true,
+                                  items: sidePrintOptionData.map(
+                                    (item) {
+                                      return DropdownMenuItem<SideResponse>(
+                                        child: Text("${item.name}"),
+                                        value: item,
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (SideResponse? value) {
+                                    setState(() {
+                                      _fSidePrintOption = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                                child: DropdownButton(
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                  hint: Text("Select Collate option"),
+                                  value: _fCollatedPrintOption,
+                                  isExpanded: true,
+                                  items: collatedPrintOptionData.map(
+                                    (item) {
+                                      return DropdownMenuItem<CollatedResponse>(
+                                        child: Text("${item.name}"),
+                                        value: item,
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (CollatedResponse? value) {
+                                    setState(() {
+                                      _fCollatedPrintOption = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                                child: DropdownButton(
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                  hint: Text("Select Orientation"),
+                                  value: _forientation,
+                                  isExpanded: true,
+                                  items: orientationData.map(
+                                    (item) {
+                                      return DropdownMenuItem<
+                                          OrientationResponse>(
+                                        child: Text("${item.name}"),
+                                        value: item,
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (OrientationResponse? value) {
+                                    setState(() {
+                                      _forientation = value;
+                                    });
+                                  },
+                                ),
+                              ),
                             ],
                           )),
                       Container(
@@ -450,71 +375,31 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
                           ],
                         ),
                       ),
-                      Container(
-                        height: 40,
-                        margin: EdgeInsets.fromLTRB(100, 15, 100, 0),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(colors: [
-                              Color.fromARGB(255, 65, 108, 235),
-                              Color.fromARGB(153, 77, 11, 220)
-                            ])),
-                        child: InkWell(
-                          onTap: () async {
-                            if (data?.status != 1 && data?.status != 2) {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      AlertDialog(
-                                        title: Text(
-                                            "Update request isn't possible!"),
-                                        content: Text(
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle2,
-                                            "You can update request only when Status is New or OnHold"),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () =>
-                                                  Navigator.pushNamed(
-                                                      context,
-                                                      PrintListScreen
-                                                          .rotueName),
-                                              child: Text("Ok"))
-                                        ],
-                                      ));
-                            } else {
-                              try {
-                                _updateData.status = 8;
-                                _updateData.letter =
-                                    _selectedLetterOption?.value;
-                                _updateData.pages =
-                                    _selectedPagePerSheet?.value;
-                                _updateData.side =
-                                    _selectedSidePrintOption?.value;
-                                _updateData.orientation =
-                                    _selectedOrientation?.value;
-                                _updateData.collate =
-                                    _selectedCollatedPrintOptions?.value;
-                                _updateData.options =
-                                    _selectedPrintPagesOptions?.value;
-
-                                var reqId = int.parse(widget.id);
-                                var updateReq = await _printProvider
-                                    ?.updateRequest(widget.id, _updateData);
-
-                                if (updateReq != null) {
+                      Visibility(
+                          visible: !(data?.status != 1 && data?.status != 2),
+                          child: Container(
+                            height: 40,
+                            margin: EdgeInsets.fromLTRB(100, 15, 100, 0),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(colors: [
+                                  Color.fromARGB(255, 65, 108, 235),
+                                  Color.fromARGB(153, 77, 11, 220)
+                                ])),
+                            child: InkWell(
+                              onTap: () async {
+                                if (data?.status != 1 && data?.status != 2) {
                                   showDialog(
                                       context: context,
                                       builder: (BuildContext context) =>
                                           AlertDialog(
                                             title: Text(
-                                                "Print request updated successful!"),
+                                                "Update request isn't possible!"),
                                             content: Text(
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .subtitle2,
-                                                "Successfully updated print request"),
+                                                "You can update request only when Status is New or OnHold"),
                                             actions: [
                                               TextButton(
                                                   onPressed: () =>
@@ -525,108 +410,153 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
                                                   child: Text("Ok"))
                                             ],
                                           ));
+                                } else {
+                                  try {
+                                    _updateData.status = 8;
+                                    _updateData.letterId = _fLetter?.id;
+                                    _updateData.printPageOptionId =
+                                        _fPrintPageOption?.id;
+                                    _updateData.pagePerSheetId =
+                                        _fPagePerSheet?.id;
+                                    _updateData.sidePrintOptionId =
+                                        _fSidePrintOption?.id;
+                                    _updateData.collatedPrintOptionId =
+                                        _fCollatedPrintOption?.id;
+                                    _updateData.orientationId =
+                                        _forientation?.id;
+
+                                    var reqId = int.parse(widget.id);
+                                    var updateReq = await _reqProvider
+                                        ?.updateRequest(widget.id, _updateData);
+
+                                    if (updateReq != null) {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              AlertDialog(
+                                                title: Text(
+                                                    "Print request updated successful!"),
+                                                content: Text(
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .subtitle2,
+                                                    "Successfully updated print request"),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pushNamed(
+                                                              context,
+                                                              PrintListScreen
+                                                                  .rotueName),
+                                                      child: Text("Ok"))
+                                                ],
+                                              ));
+                                    }
+                                  } catch (e) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                              title: Text("Error"),
+                                              content: Text(
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle2,
+                                                  e.toString()),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(context),
+                                                    child: Text("Ok"))
+                                              ],
+                                            ));
+                                  }
                                 }
-                              } catch (e) {
+                              },
+                              child: Center(
+                                  child: Text(
+                                "Save updated changes",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              )),
+                            ),
+                          )),
+                      SizedBox(height: 20),
+                      Visibility(
+                        visible: !(data?.status != 1 && data?.status != 2),
+                        child: Container(
+                          height: 40,
+                          margin: EdgeInsets.fromLTRB(100, 15, 100, 0),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: LinearGradient(colors: [
+                                Color.fromARGB(255, 65, 108, 235),
+                                Color.fromARGB(153, 77, 11, 220)
+                              ])),
+                          child: InkWell(
+                            onTap: () async {
+                              if (data?.status != 1 && data?.status != 2) {
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) =>
                                         AlertDialog(
-                                          title: Text("Error"),
+                                          title: Text(
+                                              "Cancel request isn't possible!"),
                                           content: Text(
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .subtitle2,
-                                              e.toString()),
+                                              "You can cancel request only when Status is New or OnHold"),
                                           actions: [
                                             TextButton(
                                                 onPressed: () =>
-                                                    Navigator.pop(context),
+                                                    Navigator.pushNamed(
+                                                        context,
+                                                        PrintListScreen
+                                                            .rotueName),
                                                 child: Text("Ok"))
                                           ],
                                         ));
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                          title: Text('Confirmation'),
+                                          content: Text(
+                                              'Are you sure you want to cancel this print request?'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: Text('No'),
+                                              onPressed: () {
+                                                Navigator.of(context)
+                                                    .pop(false);
+                                              },
+                                            ),
+                                            ElevatedButton(
+                                              child: Text('Yes'),
+                                              onPressed: () async {
+                                                await _reqProvider
+                                                    ?.cancelRequest(widget.id);
+                                                Navigator.pushNamed(context,
+                                                    PrintListScreen.rotueName);
+                                              },
+                                            ),
+                                          ],
+                                        ));
                               }
-                            }
-                          },
-                          child: Center(
-                              child: Text(
-                            "Save updated changes",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          )),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Container(
-                        height: 40,
-                        margin: EdgeInsets.fromLTRB(100, 15, 100, 0),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(colors: [
-                              Color.fromARGB(255, 65, 108, 235),
-                              Color.fromARGB(153, 77, 11, 220)
-                            ])),
-                        child: InkWell(
-                          onTap: () async {
-                            if (data?.status != 1 && data?.status != 2) {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      AlertDialog(
-                                        title: Text(
-                                            "Cancel request isn't possible!"),
-                                        content: Text(
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle2,
-                                            "You can cancel request only when Status is New or OnHold"),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () =>
-                                                  Navigator.pushNamed(
-                                                      context,
-                                                      PrintListScreen
-                                                          .rotueName),
-                                              child: Text("Ok"))
-                                        ],
-                                      ));
-                            } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      AlertDialog(
-                                        title: Text('Confirmation'),
-                                        content: Text(
-                                            'Are you sure you want to cancel this print request?'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: Text('No'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop(false);
-                                            },
-                                          ),
-                                          ElevatedButton(
-                                            child: Text('Yes'),
-                                            onPressed: () async {
-                                              await _printProvider
-                                                  ?.cancelRequest(widget.id);
-                                              Navigator.pushNamed(context,
-                                                  PrintListScreen.rotueName);
-                                            },
-                                          ),
-                                        ],
-                                      ));
-                            }
-                          },
-                          child: Center(
-                              child: Text(
-                            "Cancel request",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          )),
+                            },
+                            child: Center(
+                                child: Text(
+                              "Cancel request",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            )),
+                          ),
                         ),
                       ),
                     ],

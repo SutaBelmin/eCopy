@@ -24,6 +24,8 @@ namespace eCopy.Desktop
         {
             loadData("New");
             loadStatus();
+
+            dgvReq.Columns[0].Visible = false;
         }
 
         private async void loadData(string search=null)
@@ -76,31 +78,6 @@ namespace eCopy.Desktop
                 }
             }
         }
-        
-        private void btnLogO_Click(object sender, EventArgs e)
-        {
-            this.logout = true;
-            this.Close();
-        }
-
-        private void btnRevenue_Click(object sender, EventArgs e)
-        {
-            frmRevenueForPeriod frm = new frmRevenueForPeriod();
-            frm.ShowDialog();
-        }
-        
-        private void btnTopC_Click(object sender, EventArgs e)
-        {
-            frmTop5Customers frm = new frmTop5Customers();
-            frm.ShowDialog();
-        }
-
-        private void btnRforLY_Click(object sender, EventArgs e)
-        {
-            frmRevenueForLastYear frm = new frmRevenueForLastYear();
-            frm.ShowDialog();
-        }
-
         private async void cmbStatus_SelectionChangeCommitted(object sender, EventArgs e)
         {
             Status obj = (Status)cmbStatus.SelectedValue;
@@ -115,12 +92,5 @@ namespace eCopy.Desktop
             loadData();
         }
 
-        private async void btnAccount_Click(object sender, EventArgs e)
-        {
-            var emp = await employeeService.GetEmployeeAccount();
-
-            frmEmployeeAccount frm = new frmEmployeeAccount(emp);
-            frm.ShowDialog();
-        }
     }
 }

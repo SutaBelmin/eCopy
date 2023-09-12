@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:myapp/.env';
+import 'package:myapp/model/paymentModel.dart';
 import 'package:myapp/screens/print_list_screen.dart';
 import 'package:provider/provider.dart';
-
-import '../providers/print_list_provider.dart';
+import 'package:myapp/providers/request_provider.dart';
 
 class PaymentScreen extends StatefulWidget {
   static const String routeName = "paymentscreen";
@@ -35,7 +35,7 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  PrintListProvider? _printProvider = null;
+  RequestProvider? _reqProvider = null;
   Map<String, dynamic>? paymentIntent;
   String payAmount = (15).toString();
 
@@ -45,7 +45,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _printProvider = context.read<PrintListProvider>();
+    _reqProvider = context.read<RequestProvider>();
     loadData();
   }
 
@@ -100,7 +100,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     }
     try {
       String price = this.widget.amount.toString();
-      paymentIntent = await createPaymentIntent(price, 'BAM');
+      paymentIntent = await createPaymentIntent(price, 'BAM', stripe_sk);
 
       await Stripe.instance
           .initPaymentSheet(
@@ -108,7 +108,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   paymentIntentClientSecret: paymentIntent!['client_secret'],
                   style: ThemeMode.dark,
                   merchantDisplayName: 'Name'))
-          .then((value) {});
+          .then((value) {})
+          .onError((error, stackTrace) {
+        print('Exception/DISPLAYPAYMENTSHEET==> $error $stackTrace');
+        showDialog(
+            context: context,
+            builder: (_) => const AlertDialog(
+                  content: Text("Ponistena transakcija"),
+                ));
+        throw Exception("Payment declined");
+      });
 
       displayPaymentSheet();
     } catch (e, s) {
@@ -119,7 +128,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
   displayPaymentSheet() async {
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
-        _printProvider?.pay(this.widget.id).then((value) => {
+        PaymentModel paymentModel = new PaymentModel();
+        paymentModel.stripePaymentId = paymentIntent!['id'];
+        _reqProvider?.pay(this.widget.id, paymentModel).then((value) => {
               showDialog(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
@@ -136,7 +147,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ))
             });
 
-        paymentIntent = null;
+        setState(() {
+          paymentIntent = null;
+        });
       }).onError((error, stackTrace) {
         print('Error is:--->$error $stackTrace');
       });
@@ -152,7 +165,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     }
   }
 
-  createPaymentIntent(String amount, String currency) async {
+  createPaymentIntent(String amount, String currency, String? stripe_sk) async {
     try {
       Map<String, dynamic> body = {
         'amount': calculateAmount(amount),

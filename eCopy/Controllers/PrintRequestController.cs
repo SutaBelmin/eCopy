@@ -24,9 +24,9 @@ namespace eCopy.Controllers
         }
 
         [HttpPost("pay/{id}")]
-        public PrintRequestR Pay(int id)
+        public PrintRequestR Pay(int id, PaymentRequest model)
         {
-            return service.Pay(id);
+            return service.Pay(id, model);
         }
 
         [HttpPut("updateRequest/{id}")]
@@ -41,5 +41,6 @@ namespace eCopy.Controllers
             service.CancelRequest(id);
             return Ok();
         }
+
     }
 }

@@ -49,7 +49,7 @@
             this.Controls.Add(this.reportViewer1);
             this.Name = "frmPrintTop5Customer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmPrintTop5Customer";
+            this.Text = "Top 5 customer";
             this.Load += new System.EventHandler(this.frmPrintTop5Customer_Load);
             this.ResumeLayout(false);
 

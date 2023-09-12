@@ -111,6 +111,7 @@
       <HintPath>..\eCopy\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.25.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\eCopy\packages\System.IdentityModel.Tokens.Jwt.6.25.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
@@ -154,6 +155,8 @@
     <Compile Include="ApiIdentityServ.cs" />
     <Compile Include="APIServ.cs" />
     <Compile Include="CityModel.cs" />
+    <Compile Include="CollatedGridModel.cs" />
+    <Compile Include="CollatedModel.cs" />
     <Compile Include="EmployeeDetModel.cs" />
     <Compile Include="EmpModel.cs" />
     <Compile Include="frmAddCity.cs">
@@ -198,17 +201,17 @@
     <Compile Include="frmCity.Designer.cs">
       <DependentUpon>frmCity.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCollated.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCollated.Designer.cs">
+      <DependentUpon>frmCollated.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEditCity.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmEditCity.Designer.cs">
       <DependentUpon>frmEditCity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmEmpDet.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmEmpDet.Designer.cs">
-      <DependentUpon>frmEmpDet.cs</DependentUpon>
     </Compile>
     <Compile Include="frmEmployee.cs">
       <SubType>Form</SubType>
@@ -222,17 +225,47 @@
     <Compile Include="frmEmployeeAccount.Designer.cs">
       <DependentUpon>frmEmployeeAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLetter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLetter.Designer.cs">
+      <DependentUpon>frmLetter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoading.Designer.cs">
+      <DependentUpon>frmLoading.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLog.Designer.cs">
       <DependentUpon>frmLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmOrientation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrientation.Designer.cs">
+      <DependentUpon>frmOrientation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPagePerSheet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPagePerSheet.Designer.cs">
+      <DependentUpon>frmPagePerSheet.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPPdf.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPPdf.Designer.cs">
       <DependentUpon>frmPPdf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrintPageOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintPageOption.Designer.cs">
+      <DependentUpon>frmPrintPageOption.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPrintTop5Customer.cs">
       <SubType>Form</SubType>
@@ -258,6 +291,12 @@
     <Compile Include="frmPSettings.Designer.cs">
       <DependentUpon>frmPSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSide.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSide.Designer.cs">
+      <DependentUpon>frmSide.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTop5Customers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -277,11 +316,34 @@
       <DependentUpon>frmRevenueForLastYear.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageHelp.cs" />
+    <Compile Include="LetterGridModel.cs" />
+    <Compile Include="LetterModel.cs" />
+    <Compile Include="mdiMainAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mdiMainAdmin.Designer.cs">
+      <DependentUpon>mdiMainAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mdiMainEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mdiMainEmployee.Designer.cs">
+      <DependentUpon>mdiMainEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrientationGridModel.cs" />
+    <Compile Include="OrientationModel.cs" />
+    <Compile Include="PPOGridModel.cs" />
+    <Compile Include="PPOModel.cs" />
+    <Compile Include="PPSGridModel.cs" />
+    <Compile Include="PPSModel.cs" />
     <Compile Include="PRDGridModel.cs" />
     <Compile Include="PrintReqModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SideGridModel.cs" />
+    <Compile Include="SideModel.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="StatusStateMachine.cs" />
     <Compile Include="StatusType.cs" />
     <Compile Include="UpdateCityModel.cs" />
     <Compile Include="User.cs" />
@@ -307,11 +369,11 @@
     <EmbeddedResource Include="frmCity.resx">
       <DependentUpon>frmCity.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCollated.resx">
+      <DependentUpon>frmCollated.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditCity.resx">
       <DependentUpon>frmEditCity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmEmpDet.resx">
-      <DependentUpon>frmEmpDet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmployee.resx">
       <DependentUpon>frmEmployee.cs</DependentUpon>
@@ -319,11 +381,26 @@
     <EmbeddedResource Include="frmEmployeeAccount.resx">
       <DependentUpon>frmEmployeeAccount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLetter.resx">
+      <DependentUpon>frmLetter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoading.resx">
+      <DependentUpon>frmLoading.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLog.resx">
       <DependentUpon>frmLog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmOrientation.resx">
+      <DependentUpon>frmOrientation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPagePerSheet.resx">
+      <DependentUpon>frmPagePerSheet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPPdf.resx">
       <DependentUpon>frmPPdf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintPageOption.resx">
+      <DependentUpon>frmPrintPageOption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrintTop5Customer.resx">
       <DependentUpon>frmPrintTop5Customer.cs</DependentUpon>
@@ -337,6 +414,9 @@
     <EmbeddedResource Include="frmPSettings.resx">
       <DependentUpon>frmPSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSide.resx">
+      <DependentUpon>frmSide.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTop5Customers.resx">
       <DependentUpon>frmTop5Customers.cs</DependentUpon>
     </EmbeddedResource>
@@ -345,6 +425,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRevenueForLastYear.resx">
       <DependentUpon>frmRevenueForLastYear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mdiMainAdmin.resx">
+      <DependentUpon>mdiMainAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mdiMainEmployee.resx">
+      <DependentUpon>mdiMainEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -357,10 +443,16 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\CityModel.datasource" />
+    <None Include="Properties\DataSources\CollatedGridModel.datasource" />
     <None Include="Properties\DataSources\eCopy.Model.Response.RevenueForLastYearResponse.datasource" />
     <None Include="Properties\DataSources\eCopy.Model.Response.Top5CustomerResponse.datasource" />
     <None Include="Properties\DataSources\EmpModel.datasource" />
+    <None Include="Properties\DataSources\LetterGridModel.datasource" />
+    <None Include="Properties\DataSources\OrientationGridModel.datasource" />
+    <None Include="Properties\DataSources\PPOGridModel.datasource" />
+    <None Include="Properties\DataSources\PPSGridModel.datasource" />
     <None Include="Properties\DataSources\PRDGridModel.datasource" />
+    <None Include="Properties\DataSources\SideGridModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

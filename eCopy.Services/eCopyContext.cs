@@ -31,6 +31,12 @@ namespace eCopy.Services
         public virtual DbSet<Request> Requests { get; set; } = null!;
         public virtual DbSet<Error> Errors { get; set; } = null!;
         public virtual DbSet<Payment> Payment { get; set; } = null!;
+        public virtual DbSet<Letter> Letter { get; set; } = null!;
+        public virtual DbSet<PagePerSheet> PagePerSheet { get; set; } = null!;
+        public virtual DbSet<CollatedPrintOption> CollatedPrintOption { get; set; } = null!;
+        public virtual DbSet<Orientation> Orientation { get; set; } = null!;
+        public virtual DbSet<SidePrintOption> SidePrintOption { get; set; } = null!;
+        public virtual DbSet<PrintPageOption> PrintPageOption { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder builder)

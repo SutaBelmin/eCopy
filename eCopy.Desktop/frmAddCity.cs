@@ -16,8 +16,26 @@ namespace eCopy.Desktop
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            if(fieldsValidation())
+            if (fieldsValidation())
             {
+                err.Clear();
+
+                var getCity = await cityService.CityExist(txtName.Text, int.Parse(txtPCode.Text));
+                if (getCity.Name == true)
+                {
+                    txtName.Focus();
+                    err.SetError(txtName, "Name already exist");
+                    return;
+                }
+
+                if (getCity.PostalCode == true)
+                {
+                    txtPCode.Focus();
+                    err.SetError(txtPCode, "Postal code already exist");
+                    return;
+
+                }
+
                 CityRequest newCity = new CityRequest();
                 newCity.Name = txtName.Text;
                 newCity.ShortName = txtShortN.Text;

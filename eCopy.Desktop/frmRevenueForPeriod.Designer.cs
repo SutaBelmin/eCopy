@@ -116,7 +116,7 @@
             this.Controls.Add(this.dgvTurnoverForPeriod);
             this.Name = "frmRevenueForPeriod";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmRevenueForPeriod";
+            this.Text = "Revenue for period";
             this.Load += new System.EventHandler(this.frmRevenueForPeriod_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnoverForPeriod)).EndInit();
             this.ResumeLayout(false);

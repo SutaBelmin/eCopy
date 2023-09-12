@@ -64,6 +64,13 @@ builder.Services.AddScoped<IErrorService, ErrorService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddScoped<ILetterService, LetterService>();
+builder.Services.AddScoped<IOrientationService, OrientationService>();
+builder.Services.AddScoped<ICollatedService, CollatedService>();
+builder.Services.AddScoped<ISideService, SideService>();
+builder.Services.AddScoped<IPrintPageOptService, PrintPageOptService>();
+builder.Services.AddScoped<IPagePerSheetService, PagePerSheetService>();
+
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -108,6 +115,12 @@ using (var scope = app.Services.CreateScope())
     ClientsSeed.Seed(context);
     EmployeesSeed.Seed(context);
     AdministratorsSeed.Seed(context);
+    CollatedPrintOptionSeed.Seed(context);
+    LetterSeed.Seed(context);
+    OrientationSeed.Seed(context);
+    PagePerSheetSeed.Seed(context);
+    PrintPageOptionSeed.Seed(context);
+    SidePrintOptionSeed.Seed(context);
     RequestsSeed.Seed(context);
 }
 

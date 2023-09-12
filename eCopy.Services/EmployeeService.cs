@@ -197,6 +197,11 @@ namespace eCopy.Services
             ProfilePhoto profilePhoto = null;
             if (update.ProfilePhoto != null)
             {
+                var photoToRemove = context.ApplicationUserProfilePhotos
+                   .Where(x => x.ApplicationUserId == emp.ApplicationUserId)
+                   .ToList();
+                context.ApplicationUserProfilePhotos.RemoveRange(photoToRemove);
+
                 var uploadedFile = fileService.Upload(update.ProfilePhoto, update.ProfilePhotoExtension);
 
                 profilePhoto = new ProfilePhoto();
@@ -293,6 +298,12 @@ namespace eCopy.Services
             ProfilePhoto profilePhoto = null;
             if (update.ProfilePhoto != null)
             {
+                var photoToRemove = context.ApplicationUserProfilePhotos
+                    .Where(x => x.ApplicationUserId == emp.ApplicationUserId)
+                    .ToList();
+                context.ApplicationUserProfilePhotos.RemoveRange(photoToRemove);
+
+
                 var uploadedFile = fileService.Upload(update.ProfilePhoto, update.ProfilePhotoExtension);
 
                 profilePhoto = new ProfilePhoto();

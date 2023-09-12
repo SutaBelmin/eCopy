@@ -19,6 +19,7 @@ namespace eCopy.Desktop
         {
             InitializeComponent();
             this.filePath = filePath;
+            pdfViewer1.CanPrint= false;
         }
 
         private void frmPPdf_Load(object sender, EventArgs e)
@@ -46,6 +47,27 @@ namespace eCopy.Desktop
                     MessageBox.Show("Failed to download or load the .docx file.");
                 }
             }
+            else if (extension == ".doc")
+            {
+                tempFilePath = Path.GetTempFileName() + ".doc";
+                tempSaveFilePath = Path.GetTempFileName() + ".pdf";
+
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadFile(printRequestService._endpoint + filePath, tempFilePath);
+                }
+
+                Document doc = new Document(tempFilePath);
+                doc.Save(tempSaveFilePath);
+                if (File.Exists(tempSaveFilePath))
+                {
+                    pdfViewer1.LoadFromFile(tempSaveFilePath);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to download or load the .doc file.");
+                }
+            }
             else if (extension == ".pdf")
             {
                 tempPdfFilePath = Path.GetTempFileName() + ".pdf";
@@ -64,6 +86,7 @@ namespace eCopy.Desktop
                     MessageBox.Show("Failed to download or load the PDF file.");
                 }
             }
+
         }
 
         private void frmTest_FormClosing(object sender, FormClosingEventArgs e)

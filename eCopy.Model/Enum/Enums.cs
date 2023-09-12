@@ -23,48 +23,6 @@ namespace eCopy.Model.Enum
         Updated = 8
     }
 
-    public enum PrintPagesOptions
-    {
-        All = 1,
-        Even = 2,
-        Odd = 3,
-        Custom = 4
-    }
-
-    public enum SidePrintOption
-    {
-        PrintOneSided = 1,
-        PrintBothSides = 2
-    }
-
-    public enum Orientation
-    {
-        Portrait = 1,
-        Landscape = 2
-    }
-
-    public enum Letter
-    {
-        A1 = 1,
-        A2 = 2,
-        A3 = 3,
-        A4 = 4,
-        A5 = 5,
-        A6 = 6
-    }
-
-    public enum PagePerSheet
-    {
-        OnePage = 1,
-        TwoPages = 2
-    }
-
-    public enum CollatedPrintOptions
-    {
-        Collated = 1,
-        Uncollated = 2
-    }
-
     public enum Gender
     {
         Male,

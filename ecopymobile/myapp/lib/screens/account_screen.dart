@@ -32,7 +32,6 @@ class _AccountScreenState extends State<AccountScreen> {
   List<City> data = [];
   City? _tmpCity;
 
-  //var tmpData = null;
   var tmpclientData = null;
 
   ClientResponse? clientData = null;
@@ -93,7 +92,6 @@ class _AccountScreenState extends State<AccountScreen> {
 
       data = tmpData!;
     });
-    //_tmpCity = tmpData?.first;
     _tmpCity =
         tmpData?.firstWhere((x) => x.name == clientData!.person!.city!.name);
 

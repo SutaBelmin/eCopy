@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:myapp/model/enum/status.dart';
 import 'package:myapp/model/listItem.dart';
 import 'package:myapp/model/paymentArguments.dart';
-import 'package:myapp/model/printRequest.dart';
+import 'package:myapp/model/request.dart';
 import 'package:myapp/model/storageService.dart';
-import 'package:myapp/providers/print_list_provider.dart';
+import 'package:myapp/providers/request_provider.dart';
 import 'package:myapp/screens/loading_screen.dart';
 import 'package:myapp/screens/new_print_screen.dart';
 import 'package:myapp/screens/payment_screen.dart';
@@ -22,9 +22,9 @@ class PrintListScreen extends StatefulWidget {
 }
 
 class _PrintListScreenState extends State<PrintListScreen> {
-  PrintListProvider? _printProvider = null;
+  RequestProvider? _reqProvider = null;
 
-  List<PrintRequest> data = [];
+  List<Request> data = [];
 
   String payAmount = (45).toString();
 
@@ -46,13 +46,13 @@ class _PrintListScreenState extends State<PrintListScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _printProvider = context.read<PrintListProvider>();
+    _reqProvider = context.read<RequestProvider>();
+
     loadData();
   }
 
   Future loadData() async {
-    //var tmpData = await _printProvider?.get(null);
-    tmpData = await _printProvider?.get(null);
+    tmpData = await _reqProvider?.get(null);
 
     setState(() {
       data = tmpData!;
@@ -61,7 +61,6 @@ class _PrintListScreenState extends State<PrintListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //print("called build $data");
     if (tmpData == null) {
       loadData();
       return LoadingScreen();
@@ -136,7 +135,7 @@ class _PrintListScreenState extends State<PrintListScreen> {
                           setState(() {
                             statusValue = value!;
                           });
-                          var tmpData = await _printProvider
+                          var tmpData = await _reqProvider
                               ?.get({'Status': statusValue.name});
                           setState(() {
                             data = tmpData!;
@@ -163,7 +162,7 @@ class _PrintListScreenState extends State<PrintListScreen> {
                             ])),
                         child: InkWell(
                           onTap: () async {
-                            var tmpData = await _printProvider?.get();
+                            var tmpData = await _reqProvider?.get();
                             setState(() {
                               data = tmpData!;
                             });
@@ -183,16 +182,12 @@ class _PrintListScreenState extends State<PrintListScreen> {
                 child: SingleChildScrollView(
                   child: DataTable(
                     columns: [
-                      DataColumn(label: Text('Id')),
                       DataColumn(label: Text('Status')),
                       DataColumn(label: Text('Payment')),
                       DataColumn(label: Text('Details')),
                     ],
                     rows: data
                         .map<DataRow>((data) => DataRow(cells: [
-                              DataCell(Center(
-                                child: Text(data.id ?? ""),
-                              )),
                               DataCell(Center(
                                 child: Text(Status.map[data.status] ?? ""),
                               )),

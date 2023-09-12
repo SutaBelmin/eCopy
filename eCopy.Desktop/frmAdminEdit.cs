@@ -5,6 +5,8 @@ using eCopy.Model.Response;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +20,8 @@ namespace eCopy.Desktop
         public APIServ userService = new APIServ("User");
 
         EmployeeResponse model;
+        private string imagePath { get; set; }
+
         public frmAdminEdit(EmployeeResponse model)
         {
             InitializeComponent();
@@ -62,15 +66,18 @@ namespace eCopy.Desktop
 
             cbActive.Checked = model.Active;
             dtpBirthDate.Value = model.Person.BirthDate;
-
             txtAdress.Text = model.Person.Address;
-
-            //cmbCity.SelectedValue = model.Person.City.ID;
             cmbCity.SelectedValue = model.Person.CityId;
 
             txtUsername.Text = model.ApplicationUser.Username;
             txtEmail.Text = model.ApplicationUser.Email;
             txtPhone.Text = model.ApplicationUser.PhoneNumber;
+
+            pbPicture.ImageLocation = model.ProfilePhotoPath;
+            if (model.ProfilePhotoPath == null)
+            {
+                lblPictureMessage.Text = "No profile photo";
+            }
 
         }
 
@@ -96,6 +103,13 @@ namespace eCopy.Desktop
                     return;
                 }
 
+                byte[] data = null;
+
+                if (pbPicture.Image != null)
+                {
+                    data = ImageHelp.FromImageToByte(pbPicture.Image);
+                }
+
                 UpdateEmployeeRequest updateModel = new UpdateEmployeeRequest();
                 
                 updateModel.FirstName = txtFName.Text;
@@ -110,6 +124,10 @@ namespace eCopy.Desktop
                 updateModel.Username = txtUsername.Text;
                 updateModel.PhoneNumber = txtPhone.Text;
 
+                updateModel.ProfilePhoto = data;
+                updateModel.ProfilePhotoExtension = Path.GetExtension(imagePath);
+                updateModel.ProfilePhotoName = Path.GetFileNameWithoutExtension(imagePath);
+
                 var resp = await employeeService.UpdateEmpByAdmin(model.Id, updateModel);
 
                 if (resp != null)
@@ -119,6 +137,15 @@ namespace eCopy.Desktop
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
+            }
+        }
+
+        private void pbPicture_DoubleClick(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                imagePath = ofd.FileName;
+                pbPicture.Image = Image.FromFile(imagePath);
             }
         }
 

@@ -6,6 +6,6 @@ namespace eCopy.Services
 {
     public interface ICityService : ICRUDService<CityResponse, CitySearch, CityRequest, CityRequest>
     {
-        
+        CityEResponse CityExist(string name, int postalCode);
     }
 }
