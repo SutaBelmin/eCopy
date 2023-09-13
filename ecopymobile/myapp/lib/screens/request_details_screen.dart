@@ -483,7 +483,7 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
                               )),
                             ),
                           )),
-                      SizedBox(height: 20),
+                      SizedBox(height: 10),
                       Visibility(
                         visible: !(data?.status != 1 && data?.status != 2),
                         child: Container(
@@ -559,6 +559,7 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
                           ),
                         ),
                       ),
+                      SizedBox(height: 20),
                     ],
                   ))));
     }
